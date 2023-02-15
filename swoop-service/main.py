@@ -27,3 +27,7 @@ def launch_details():
             "tz:": "PST"
         }
     }
+
+@app.post("/api/users")
+def create_users():
+    pass
