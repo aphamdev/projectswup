@@ -1,7 +1,7 @@
 from pydantic import BaseModel
-from typing import Optional
-from typing import Union, List
+from typing import Optional, List, Union
 from queries.pool import pool
+
 
 class Error(BaseModel):
     message: str
@@ -13,6 +13,7 @@ class SwoopsIn(BaseModel):
     hazards: Optional[str]
     size: int
     weight: int
+    status: int
 
 class SwoopsOut(BaseModel):
     pickup_id: int
@@ -22,7 +23,7 @@ class SwoopsOut(BaseModel):
     hazards: Optional[str]
     size: int
     weight: int
-
+    status: int
 
 class SwoopsRepository:
     def get_swooper_history(self) -> Union[Error,List[SwoopsOut]]:
@@ -80,10 +81,45 @@ class SwoopsRepository:
                         pickup.picture_url,
                         pickup.hazards,
                         pickup.size,
-                        pickup.weight
+                        pickup.weight,
+
                     ]
                 )
                 pickup_id = result.fetchone()[0]
                 # Return new data
                 old_data = pickup.dict()
                 return SwoopsOut(pickup_id=pickup_id, **old_data)
+
+    def get_all_available(self) -> Union[Error, List[SwoopsOut]]:
+        try:
+            # Connect the database
+            with pool.connection() as conn:
+                # Get a cursor (something to run SQL with)
+                with conn.cursor() as db:
+                    # Run our INSERT statement
+                    db.execute(
+                        '''
+                        SELECT pickup_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
+                        FROM swoops
+                        WHERE status = 0
+                        ORDER BY pickup_id
+                        '''
+                    )
+                    result = []
+                    for post in db:
+                        swoop = SwoopsOut(
+                            pickup_id=post[0],
+                            customer_id=post[1],
+                            trash_type=post[2],
+                            description=post[3],
+                            picture_url=post[4],
+                            hazards=post[5],
+                            size=post[6],
+                            weight=post[7],
+                            status=post[8],
+                        )
+                        result.append(swoop)
+                    return result
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all available swoops"}
