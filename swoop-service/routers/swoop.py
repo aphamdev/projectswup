@@ -9,6 +9,12 @@ router = APIRouter()
 def create_pickups(pickup: SwoopsIn, repo: SwoopsRepository = Depends()):
     return repo.create(pickup)
 
+
+@router.get("/pickups", response_model=Union[Error, List[SwoopsOut]])
+def get_all(
+    repo: SwoopsRepository = Depends(),
+):
+    return repo.get_all()
 @router.get("/listings", response_model=Union[Error, List[SwoopsOut]])
 def get_all_available_swoops(repo: SwoopsRepository = Depends()):
     return repo.get_all_available()
