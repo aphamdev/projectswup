@@ -123,3 +123,36 @@ class SwoopsRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get all available swoops"}
+
+
+
+    def get_all(self) -> Union[Error,List[SwoopsOut]]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                            SELECT pickup_id, customer_id, trash_type, description, picture_url, hazards, size, weight
+                            FROM swoops
+                            WHERE customer_id = 1
+                            ORDER BY pickup_id DESC
+
+                        """
+                    )
+                    result = []
+                    for record in db:
+                        swoop = SwoopsOut(
+                            pickup_id=record[0],
+                            customer_id=record[1],
+                            trash_type=record[2],
+                            description=record[3],
+                            picture_url=record[4],
+                            hazards=record[5],
+                            size=record[6],
+                            weight=record[7]
+                            )
+                        result.append(swoop)
+                    return result
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all swoops"}
