@@ -132,7 +132,7 @@ class SwoopsRepository:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                            SELECT pickup_id, customer_id, trash_type, description, picture_url, hazards, size, weight
+                            SELECT pickup_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
                             FROM swoops
                             WHERE customer_id = 1
                             ORDER BY pickup_id DESC
@@ -149,7 +149,8 @@ class SwoopsRepository:
                             picture_url=record[4],
                             hazards=record[5],
                             size=record[6],
-                            weight=record[7]
+                            weight=record[7],
+                            status=record[8]
                             )
                         result.append(swoop)
                     return result

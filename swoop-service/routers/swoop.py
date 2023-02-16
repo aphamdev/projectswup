@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, Error
-from typing import Union, List, SwoopsOut, Error
+from typing import Union, List
 
 router = APIRouter()
 
