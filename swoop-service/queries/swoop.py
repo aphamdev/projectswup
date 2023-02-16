@@ -1,7 +1,10 @@
 from pydantic import BaseModel
 from typing import Optional
+from typing import Union, List
 from queries.pool import pool
 
+class Error(BaseModel):
+    message: str
 
 class SwoopsIn(BaseModel):
     trash_type: str
@@ -22,6 +25,41 @@ class SwoopsOut(BaseModel):
 
 
 class SwoopsRepository:
+    def get_swooper_history(self) -> Union[Error,List[SwoopsOut]]:
+        # connect to the database
+        try:
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with which is PG-admin in our case)
+                with conn.cursor() as db:
+                    # execute the SELECT statement
+                    db.execute(
+                        """
+                        SELECT pickup_id, trash_type, description, picture_url, hazards, size, weight
+                        FROM swoops
+                        WHERE status = 2 AND customer_id = %s
+                        """
+                    )
+                    # process the query result
+                    result = []
+                    for record in db:
+                        swoop = SwoopsOut(
+                            pickup_id=record[0],
+                            trash_type=record[1],
+                            description=record[2],
+                            picture_url=record[3],
+                            hazards=record[4],
+                            size=record[5],
+                            weight=record[6],
+                        )
+                        result.append(swoop)
+
+                    return result
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get list of swoops"}
+
+
     def create(self, pickup: SwoopsIn) -> SwoopsOut:
         # Connect the database
         with pool.connection() as conn:
