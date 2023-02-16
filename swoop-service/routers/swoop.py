@@ -18,3 +18,9 @@ def get_swooper_history(
     repo: SwoopsRepository = Depends()
 ):
     return repo.get_swooper_history()
+
+@router.get("/pickups", response_model=Union[Error, List[SwoopsOut]])
+def get_all(
+    repo: SwoopsRepository = Depends(),
+):
+    return repo.get_all()
