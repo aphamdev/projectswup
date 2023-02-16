@@ -21,7 +21,7 @@ services:
         volumes:
             - postgres-data:/var/lib/postgresql/data
         environment:
-            - POSTGRES_MULTIPLE_DATABASES= users, swoops
+            - POSTGRES_MULTIPLE_DATABASES=users,swoops
             - POSTGRES_PASSWORD=test-databases
         ports:
             - 15432:5432
@@ -34,7 +34,7 @@ services:
     volumes:
         - ./user-service:/app
     environment:
-      DATABASE_URL: postgresql://user-service:password@postgres/user-service
+      DATABASE_URL: postgresql://users:password@postgres/users
       WAIT_HOSTS: postgres:5432
   swoop-service:
     build:
@@ -45,7 +45,7 @@ services:
     volumes:
         - ./swoop-service:/app
     environment:
-      DATABASE_URL: postgresql://swoop-service:password@postgres/swoop-service
+      DATABASE_URL: postgresql://swoops:password@postgres/swoops
       WAIT_HOSTS: postgres:5432
   ghi:
     image: node:lts-bullseye

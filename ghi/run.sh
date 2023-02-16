@@ -1,2 +1,2 @@
-npm install
-npm start
+npm install -g
+npm start -g
