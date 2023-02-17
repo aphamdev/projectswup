@@ -20,7 +20,23 @@ def get_swooper_history(
     return repo.get_swooper_history()
 
 @router.get("/pickups", response_model=Union[Error, List[SwoopsOut]])
-def get_all(
+def get_all_customer_posts(
     repo: SwoopsRepository = Depends(),
 ):
-    return repo.get_all()
+    return repo.get_all_customer_posts()
+
+@router.put("/swoops/accept/{pickup_id}", response_model=Union[Error, SwoopsOut])
+def update_swoop_to_accepted(
+    pickup_id: int,
+    swoops: SwoopsIn,
+    repo: SwoopsRepository = Depends()
+) -> Union[Error, SwoopsOut]:
+    return repo.accept_job_swoop(pickup_id, swoops)
+
+@router.put("/swoops/complete/{pickup_id}", response_model=Union[Error, SwoopsOut])
+def complete_swoop_job(
+    pickup_id: int,
+    swoops: SwoopsIn,
+    repo: SwoopsRepository = Depends()
+) -> Union[Error, SwoopsOut]:
+    return repo.complete_swoop_job(pickup_id, swoops)
