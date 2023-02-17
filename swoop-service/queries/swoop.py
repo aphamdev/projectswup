@@ -26,6 +26,43 @@ class SwoopsOut(BaseModel):
     status: int
 
 class SwoopsRepository:
+    def get_one_swoop(self, pickup_id: int) -> Optional[SwoopsOut]:
+    # connect to the database
+        print(pickup_id)
+        try:
+            with pool.connection() as conn:
+                # get a cursor (something to run SQL with which is PG-admin in our case)
+                with conn.cursor() as db:
+                    # execute the SELECT statement
+                    db.execute(
+                        """
+                        SELECT pickup_id, trash_type, description, picture_url, hazards, size, weight, status
+                        FROM swoops
+                        WHERE pickup_id = %s
+                        """,
+                        [pickup_id]
+                    )
+                    # process the query result
+                    record = db.fetchone()
+                    print(record)
+                    if record is not None:
+                        swoop = SwoopsOut(
+                            pickup_id=record[0],
+                            trash_type=record[1],
+                            description=record[2],
+                            picture_url=record[3],
+                            hazards=record[4],
+                            size=record[5],
+                            weight=record[6],
+                            status=record[7]
+                        )
+                        return swoop
+                    else:
+                        return None
+
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get that swoop"}
     def get_swooper_history(self) -> Union[Error,List[SwoopsOut]]:
         # connect to the database
         try:

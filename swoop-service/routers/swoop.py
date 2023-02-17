@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, Error
-from typing import Union, List
+from typing import Union, List, Optional
 
 router = APIRouter()
 
@@ -40,3 +40,10 @@ def complete_swoop_job(
     repo: SwoopsRepository = Depends()
 ) -> Union[Error, SwoopsOut]:
     return repo.complete_swoop_job(pickup_id, swoops)
+
+@router.get("/swoops/{pickup_id}", response_model=Optional[SwoopsOut])
+def get_one_swoop(
+    pickup_id: int,
+    repo: SwoopsRepository = Depends(),
+) -> SwoopsOut:
+    return repo.get_one_swoop(pickup_id)
