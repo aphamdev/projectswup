@@ -1,13 +1,18 @@
 from fastapi import APIRouter, Depends
 from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, Error
 from typing import Union, List, Optional
+from authenticator import authenticator
 
 router = APIRouter()
 
 
 @router.post("/pickups")
-def create_pickups(pickup: SwoopsIn, repo: SwoopsRepository = Depends()):
-    return repo.create(pickup)
+def create_pickups(
+    pickup: SwoopsIn,
+    repo: SwoopsRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return repo.create(pickup, account_data)
 
 @router.get("/listings", response_model=Union[Error, List[SwoopsOut]])
 def get_all_available_swoops(repo: SwoopsRepository = Depends()):

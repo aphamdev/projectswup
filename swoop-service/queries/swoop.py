@@ -1,10 +1,14 @@
 from pydantic import BaseModel
 from typing import Optional, List, Union
+from fastapi.security import OAuth2PasswordBearer
+from queries.user import UsersIn
 from queries.pool import pool
+from fastapi import APIRouter, Depends
 
 
 class Error(BaseModel):
     message: str
+
 
 class SwoopsIn(BaseModel):
     trash_type: str
@@ -13,10 +17,12 @@ class SwoopsIn(BaseModel):
     hazards: Optional[str]
     size: int
     weight: int
-    status: int
+
 
 class SwoopsOut(BaseModel):
     pickup_id: int
+    customer_id: int
+    swooper_id: Optional[int]
     trash_type: str
     description: str
     picture_url: str
@@ -24,6 +30,7 @@ class SwoopsOut(BaseModel):
     size: int
     weight: int
     status: int
+
 
 class SwoopsRepository:
     def get_one_swoop(self, pickup_id: int) -> Optional[SwoopsOut]:
@@ -98,8 +105,8 @@ class SwoopsRepository:
             print(e)
             return {"message": "Could not get list of swoops"}
 
-
-    def create(self, pickup: SwoopsIn) -> SwoopsOut:
+    # Creating a pickup as a regular customer.
+    def create(self, pickup: SwoopsIn, account_data: dict) -> SwoopsOut:
         # Connect the database
         with pool.connection() as conn:
             # Get a cursor (something to run SQL with)
@@ -108,9 +115,9 @@ class SwoopsRepository:
                 result = db.execute(
                     """
                     INSERT INTO swoops
-                        (customer_id, trash_type, description, picture_url, hazards, size, weight)
+                        (trash_type, description, picture_url, hazards, size, weight)
                     VALUES
-                        (1, %s, %s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s)
                     RETURNING pickup_id;
                     """,
                     [
@@ -126,7 +133,12 @@ class SwoopsRepository:
                 pickup_id = result.fetchone()[0]
                 # Return new data
                 old_data = pickup.dict()
-                return SwoopsOut(pickup_id=pickup_id, **old_data)
+                return SwoopsOut(
+                    pickup_id=pickup_id,
+                    **old_data,
+                    customer_id=account_data["user_id"],
+                    status=0
+                )
 
     def get_all_available(self) -> Union[Error, List[SwoopsOut]]:
         try:

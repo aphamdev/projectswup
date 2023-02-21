@@ -38,11 +38,7 @@ async def create_account(
     response: Response,
     accounts: UserRepo = Depends(),
 ):
-    print(info,"this is info")
-    print(info.password, "this is the password")
-    print(accounts,"this is accounts")
     hashed_password = authenticator.hash_password(info.password)
-    print(hashed_password, "this is the hashed pwd")
     try:
         account = accounts.create(info, hashed_password)
     except DuplicateAccountError:
@@ -51,8 +47,5 @@ async def create_account(
             detail="Cannot create an account with those credentials",
         )
     form = AccountForm(username=info.email, password=info.password)
-    print(form, "this is the form")
-    print(request, response, "this is reequest and response")
     token = await authenticator.login(response, request, form, accounts)
-    print(token, "this is the token")
     return AccountToken(account=account, **token.dict())
