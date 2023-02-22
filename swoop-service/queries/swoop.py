@@ -43,7 +43,7 @@ class SwoopsRepository:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT pickup_id, trash_type, description, picture_url, hazards, size, weight, status
+                        SELECT pickup_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
                         FROM swoops
                         WHERE pickup_id = %s AND swooper_id = %s
                         """,
@@ -180,33 +180,37 @@ class SwoopsRepository:
 
 
 
-    def get_all_customer_posts(self) -> Union[Error,List[SwoopsOut]]:
+    def get_all_customer_posts(self, user_id) -> Union[Error,List[SwoopsOut]]:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
-                            SELECT pickup_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
+                            SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
                             FROM swoops
-                            WHERE customer_id = 6
+                            WHERE customer_id = %s
                             ORDER BY pickup_id DESC
 
-                        """
+
+                        """,
+                        [user_id]
                     )
                     result = []
                     for record in db:
                         swoop = SwoopsOut(
                             pickup_id=record[0],
                             customer_id=record[1],
-                            trash_type=record[2],
-                            description=record[3],
-                            picture_url=record[4],
-                            hazards=record[5],
-                            size=record[6],
-                            weight=record[7],
-                            status=record[8]
+                            swooper_id=record[2],
+                            trash_type=record[3],
+                            description=record[4],
+                            picture_url=record[5],
+                            hazards=record[6],
+                            size=record[7],
+                            weight=record[8],
+                            status=record[9]
                             )
                         result.append(swoop)
+                    print(result)
                     return result
         except Exception as e:
             print(e)
@@ -259,3 +263,39 @@ class SwoopsRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not complete pickup"}
+
+
+
+    def get_one_customerpost(self, pickup_id: int) -> Optional[SwoopsOut]:
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as db:
+                        result = db.execute(
+                            """
+                            SELECT pickup_id, swooper_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
+                            FROM swoops
+                            WHERE pickup_id = %s
+                            """,
+                            [pickup_id]
+                        )
+                        record = result.fetchone()
+                        if record is None:
+                            return None
+                        return self.record_to_swoopsout(record)
+            except Exception as e:
+                print(e)
+                return {"message": "Could not get post"}
+
+    def record_to_swoopsout(self, record):
+        return SwoopsOut(
+            pickup_id=record[0],
+            swooper_id=record[1],
+            customer_id=record[2],
+            trash_type=record[3],
+            description=record[4],
+            picture_url=record[5],
+            hazards=record[6],
+            size=record[7],
+            weight=record[8],
+            status=record[9]
+        )

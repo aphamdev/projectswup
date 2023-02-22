@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Response
 from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, Error
 from typing import Union, List, Optional
 from authenticator import authenticator
@@ -31,8 +31,10 @@ def get_swooper_history(
 @router.get("/pickups", response_model=Union[Error, List[SwoopsOut]])
 def get_all_customer_posts(
     repo: SwoopsRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_all_customer_posts()
+    user_id = account_data["user_id"]
+    return repo.get_all_customer_posts(user_id)
 
 @router.put("/swoops/accept/{pickup_id}", response_model=Union[Error, SwoopsOut])
 def update_swoop_to_accepted(
@@ -60,3 +62,10 @@ def get_one_swoop(
 ) -> SwoopsOut:
     user_id = user_data["user_id"]
     return repo.get_one_swoop(pickup_id, user_id)
+
+@router.get("/pickups/{pickup_id}", response_model=Optional[SwoopsOut])
+def get_one_customerpost(
+    pickup_id: int,
+    repo: SwoopsRepository = Depends(),
+) -> SwoopsOut:
+    return repo.get_one_customerpost(pickup_id)
