@@ -67,5 +67,7 @@ def get_one_swoop(
 def get_one_customerpost(
     pickup_id: int,
     repo: SwoopsRepository = Depends(),
-) -> SwoopsOut:
-    return repo.get_one_customerpost(pickup_id)
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    user_id = account_data["user_id"]
+    return repo.get_one_customerpost(pickup_id, user_id)

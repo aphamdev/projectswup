@@ -266,7 +266,7 @@ class SwoopsRepository:
 
 
 
-    def get_one_customerpost(self, pickup_id: int) -> Optional[SwoopsOut]:
+    def get_one_customerpost(self, pickup_id: int, user_id: int) -> Optional[SwoopsOut]:
             try:
                 with pool.connection() as conn:
                     with conn.cursor() as db:
@@ -274,9 +274,9 @@ class SwoopsRepository:
                             """
                             SELECT pickup_id, swooper_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
                             FROM swoops
-                            WHERE pickup_id = %s
+                            WHERE pickup_id = %s AND customer_id = %s
                             """,
-                            [pickup_id]
+                            [pickup_id, user_id]
                         )
                         record = result.fetchone()
                         if record is None:
