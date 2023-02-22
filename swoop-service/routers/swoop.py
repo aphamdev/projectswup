@@ -38,17 +38,19 @@ def get_all_customer_posts(
 def update_swoop_to_accepted(
     pickup_id: int,
     swoops: SwoopsIn,
-    repo: SwoopsRepository = Depends()
+    repo: SwoopsRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data)
 ) -> Union[Error, SwoopsOut]:
-    return repo.accept_job_swoop(pickup_id, swoops)
+    return repo.accept_job_swoop(pickup_id, swoops, account_data)
 
 @router.put("/swoops/complete/{pickup_id}", response_model=Union[Error, SwoopsOut])
 def complete_swoop_job(
     pickup_id: int,
     swoops: SwoopsIn,
-    repo: SwoopsRepository = Depends()
+    repo: SwoopsRepository = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
 ) -> Union[Error, SwoopsOut]:
-    return repo.complete_swoop_job(pickup_id, swoops)
+    return repo.complete_swoop_job(pickup_id, swoops, account_data)
 
 @router.get("/swoops/{pickup_id}", response_model=Optional[SwoopsOut])
 def get_one_swoop(
