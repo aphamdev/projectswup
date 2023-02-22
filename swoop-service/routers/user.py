@@ -9,10 +9,9 @@ from fastapi import (
 )
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
-
 from pydantic import BaseModel
-
-from queries.user import UsersOut, UsersIn, UserRepo, DuplicateAccountError
+from queries.user import UsersOut, UsersIn, UserRepo, DuplicateAccountError, UserUpdate
+from typing import Union, List, Optional
 
 
 class AccountForm(BaseModel):
@@ -49,3 +48,22 @@ async def create_account(
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
+
+#####################################################################################################
+
+@router.get("/accounts/{user_id}", response_model=UsersOut)
+def get_user(
+    email: str,
+    repo: UserRepo = Depends(),
+) -> UsersOut:
+    return repo.get(email)
+
+#####################################################################################################
+
+@router.put("/accounts/{user_id}", response_model=UserUpdate)
+def update_user_form_swoop(
+    user_id: int,
+    users: UserUpdate,
+    repo: UserRepo = Depends(),
+) -> UsersIn:
+    return repo.update(user_id, users)

@@ -115,12 +115,13 @@ class SwoopsRepository:
                 result = db.execute(
                     """
                     INSERT INTO swoops
-                        (trash_type, description, picture_url, hazards, size, weight)
+                        (customer_id, trash_type, description, picture_url, hazards, size, weight)
                     VALUES
-                        (%s, %s, %s, %s, %s, %s)
+                        (%s, %s, %s, %s, %s, %s, %s)
                     RETURNING pickup_id;
                     """,
                     [
+                        account_data["user_id"],
                         pickup.trash_type,
                         pickup.description,
                         pickup.picture_url,

@@ -28,11 +28,15 @@ class UsersOut(BaseModel):
     license_number: Optional[str]
     username: str
     hashed_password: str
+    is_swooper: Optional[bool]
 
 
 class UsersOutWithPassword(UsersOut):
     hashed_password: str
 
+class UserUpdate(BaseModel):
+    car: str
+    license_number: str
 
 class UserRepo:
     def get(self, email: str) -> UsersOutWithPassword:
@@ -91,3 +95,28 @@ class UserRepo:
                 user_id = result.fetchone()[0]
                 old_data = users.dict()
                 return UsersOutWithPassword(user_id=user_id, **old_data, hashed_password=hashed_password)
+
+
+    def update(self, user_id: int, users: UserUpdate) -> UsersOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE users
+                        SET car = %s
+                            , license_number = %s
+                            , is_swooper = true
+                        WHERE user_id = %s
+                        """,
+                        [
+                            users.car,
+                            users.license_number,
+                            user_id
+                        ]
+                    )
+                    old_data = users.dict()
+                    return UserUpdate(**old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update user information"}
