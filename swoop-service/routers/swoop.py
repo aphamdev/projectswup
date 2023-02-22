@@ -18,11 +18,15 @@ def create_pickups(
 def get_all_available_swoops(repo: SwoopsRepository = Depends()):
     return repo.get_all_available()
 
+
 @router.get("/swoops", response_model=Union[List[SwoopsOut], Error])
 def get_swooper_history(
-    repo: SwoopsRepository = Depends()
+    repo: SwoopsRepository = Depends(),
+    user_data: dict = Depends(authenticator.get_current_account_data),
 ):
-    return repo.get_swooper_history()
+    user_id = user_data["user_id"]
+    return repo.get_swooper_history(user_id)
+
 
 @router.get("/pickups", response_model=Union[Error, List[SwoopsOut]])
 def get_all_customer_posts(
@@ -50,5 +54,7 @@ def complete_swoop_job(
 def get_one_swoop(
     pickup_id: int,
     repo: SwoopsRepository = Depends(),
+    user_data: dict = Depends(authenticator.get_current_account_data),
 ) -> SwoopsOut:
-    return repo.get_one_swoop(pickup_id)
+    user_id = user_data["user_id"]
+    return repo.get_one_swoop(pickup_id, user_id)

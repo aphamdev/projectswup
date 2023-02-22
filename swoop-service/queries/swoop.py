@@ -33,7 +33,7 @@ class SwoopsOut(BaseModel):
 
 
 class SwoopsRepository:
-    def get_one_swoop(self, pickup_id: int) -> Optional[SwoopsOut]:
+    def get_one_swoop(self, pickup_id: int, user_id) -> Optional[SwoopsOut]:
     # connect to the database
         print(pickup_id)
         try:
@@ -45,9 +45,9 @@ class SwoopsRepository:
                         """
                         SELECT pickup_id, trash_type, description, picture_url, hazards, size, weight, status
                         FROM swoops
-                        WHERE pickup_id = %s
+                        WHERE pickup_id = %s AND swooper_id = %s
                         """,
-                        [pickup_id]
+                        [pickup_id, user_id]
                     )
                     # process the query result
                     record = db.fetchone()
@@ -55,13 +55,14 @@ class SwoopsRepository:
                     if record is not None:
                         swoop = SwoopsOut(
                             pickup_id=record[0],
-                            trash_type=record[1],
-                            description=record[2],
-                            picture_url=record[3],
-                            hazards=record[4],
-                            size=record[5],
-                            weight=record[6],
-                            status=record[7]
+                            swooper_id=record[1],
+                            trash_type=record[2],
+                            description=record[3],
+                            picture_url=record[4],
+                            hazards=record[5],
+                            size=record[6],
+                            weight=record[7],
+                            status=record[8]
                         )
                         return swoop
                     else:
@@ -70,7 +71,7 @@ class SwoopsRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get that swoop"}
-    def get_swooper_history(self) -> Union[Error,List[SwoopsOut]]:
+    def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOut]]:
         # connect to the database
         try:
             with pool.connection() as conn:
@@ -79,23 +80,25 @@ class SwoopsRepository:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT pickup_id, trash_type, description, picture_url, hazards, size, weight, status
+                        SELECT pickup_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
                         FROM swoops
-                        WHERE status = 2
-                        """
+                        WHERE swooper_id = %s
+                        """,
+                        [user_id]
                     )
                     # process the query result
                     result = []
                     for record in db:
                         swoop = SwoopsOut(
                             pickup_id=record[0],
-                            trash_type=record[1],
-                            description=record[2],
-                            picture_url=record[3],
-                            hazards=record[4],
-                            size=record[5],
-                            weight=record[6],
-                            status=record[7]
+                            swooper_id = record[1],
+                            trash_type=record[2],
+                            description=record[3],
+                            picture_url=record[4],
+                            hazards=record[5],
+                            size=record[6],
+                            weight=record[7],
+                            status=record[8]
                         )
                         result.append(swoop)
 
@@ -103,7 +106,8 @@ class SwoopsRepository:
 
         except Exception as e:
             print(e)
-            return {"message": "Could not get list of swoops"}
+            return e
+            # return {"message": "Could not get list of swoops"}
 
     # Creating a pickup as a regular customer.
     def create(self, pickup: SwoopsIn, account_data: dict) -> SwoopsOut:
