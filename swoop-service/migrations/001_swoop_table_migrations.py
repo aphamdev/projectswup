@@ -10,7 +10,7 @@ steps = [
             description VARCHAR(100) NOT NULL,
             picture_url VARCHAR(100) NOT NULL,
             hazards VARCHAR(100),
-            size INTEGER NOT NULL,
+            size VARCHAR(20) NOT NULL,
             weight INTEGER NOT NULL,
             status INT DEFAULT 0
         );

@@ -6,7 +6,7 @@ steps = [
             user_id serial not null primary key,
             first_name varchar(100) not null,
             last_name varchar(100) not null,
-            phone_number int not null,
+            phone_number varchar(20) not null,
             email varchar(50) not null,
             address varchar(50) not null,
             hashed_password varchar(200) not null,

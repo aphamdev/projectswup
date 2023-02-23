@@ -10,7 +10,7 @@ class DuplicateAccountError(ValueError):
 class UsersIn(BaseModel):
     first_name: str
     last_name: str
-    phone_number: int
+    phone_number: str
     email: str
     address: str
     password: str
@@ -21,7 +21,7 @@ class UsersOut(BaseModel):
     user_id: int
     first_name: str
     last_name: str
-    phone_number: int
+    phone_number: str
     email: str
     address: str
     car: Optional[str]

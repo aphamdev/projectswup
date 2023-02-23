@@ -15,24 +15,30 @@ class SwoopsIn(BaseModel):
     description: str
     picture_url: str
     hazards: Optional[str]
-    size: int
+    size: str
     weight: int
 
 
 class SwoopsOut(BaseModel):
     pickup_id: int
-    customer_id: int
+    customer_id: Optional[int]
     swooper_id: Optional[int]
     trash_type: str
     description: str
     picture_url: str
     hazards: Optional[str]
-    size: int
+    size: str
     weight: int
     status: int
 
+class SwoopsAccept(BaseModel):
+    pickup_id: int
+    status: int
+    swooper_id: int
+
 
 class SwoopsRepository:
+
     def get_one_swoop(self, pickup_id: int, user_id) -> Optional[SwoopsOut]:
     # connect to the database
         print(pickup_id)
@@ -71,6 +77,7 @@ class SwoopsRepository:
         except Exception as e:
             print(e)
             return {"message": "Could not get that swoop"}
+
     def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOut]]:
         # connect to the database
         try:
@@ -83,6 +90,7 @@ class SwoopsRepository:
                         SELECT pickup_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
                         FROM swoops
                         WHERE swooper_id = %s
+                        ORDER BY status
                         """,
                         [user_id]
                     )
@@ -216,7 +224,7 @@ class SwoopsRepository:
             print(e)
             return {"message": "Could not get all swoops"}
 
-    def accept_job_swoop(self, pickup_id: int, pickup: SwoopsIn, account_data: dict) -> Union[Error, SwoopsOut]:
+    def accept_job_swoop(self, pickup_id: int, pickup: SwoopsIn, account_data: dict) -> Union[Error, SwoopsAccept]:
         try:
             # Connect the database
             with pool.connection() as conn:
@@ -234,13 +242,12 @@ class SwoopsRepository:
                             pickup_id
                         ]
                     )
-                    old_data = pickup.dict()
-                    return SwoopsOut(pickup_id=pickup_id, **old_data, swooper_id=account_data["user_id"], customer_id=account_data["user_id"], status=1)
+                    return SwoopsAccept(pickup_id=pickup_id, swooper_id=account_data["user_id"], status=1)
         except Exception as e:
             print(e)
             return {"message": "Could not accept available pickup"}
 
-    def complete_swoop_job(self, pickup_id: int, swoops: SwoopsIn,  account_data: dict) -> Union[Error, SwoopsOut]:
+    def complete_swoop_job(self, pickup_id: int, swoops: SwoopsIn,  account_data: dict) -> Union[Error, SwoopsAccept]:
         try:
             # Connect the database
             with pool.connection() as conn:
@@ -258,8 +265,7 @@ class SwoopsRepository:
                             pickup_id
                         ]
                     )
-                    old_data = swoops.dict()
-                    return SwoopsOut(pickup_id=pickup_id, **old_data, swooper_id=account_data["user_id"], customer_id=account_data["user_id"], status=2)
+                    return SwoopsAccept(pickup_id=pickup_id, swooper_id=account_data["user_id"], status=2)
         except Exception as e:
             print(e)
             return {"message": "Could not complete pickup"}

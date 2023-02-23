@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, Error
+from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, SwoopsAccept, Error
 from typing import Union, List, Optional
 from authenticator import authenticator
 
@@ -36,22 +36,22 @@ def get_all_customer_posts(
     user_id = account_data["user_id"]
     return repo.get_all_customer_posts(user_id)
 
-@router.put("/swoops/accept/{pickup_id}", response_model=Union[Error, SwoopsOut])
+@router.put("/swoops/accept/{pickup_id}", response_model=Union[Error, SwoopsAccept])
 def update_swoop_to_accepted(
     pickup_id: int,
     swoops: SwoopsIn,
     repo: SwoopsRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data)
-) -> Union[Error, SwoopsOut]:
+) -> Union[Error, SwoopsAccept]:
     return repo.accept_job_swoop(pickup_id, swoops, account_data)
 
-@router.put("/swoops/complete/{pickup_id}", response_model=Union[Error, SwoopsOut])
+@router.put("/swoops/complete/{pickup_id}", response_model=Union[Error, SwoopsAccept])
 def complete_swoop_job(
     pickup_id: int,
     swoops: SwoopsIn,
     repo: SwoopsRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
-) -> Union[Error, SwoopsOut]:
+) -> Union[Error, SwoopsAccept]:
     return repo.complete_swoop_job(pickup_id, swoops, account_data)
 
 @router.get("/swoops/{pickup_id}", response_model=Optional[SwoopsOut])
