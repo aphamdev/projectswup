@@ -10,7 +10,7 @@ from fastapi import (
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from pydantic import BaseModel
-from queries.user import UsersOut, UsersIn, UserRepo, DuplicateAccountError, UserUpdate
+from queries.user import UsersOut, UsersIn, UserRepo, DuplicateAccountError, UserUpdate, UsersOutWithPassword
 from typing import Union, List, Optional
 
 
@@ -67,3 +67,17 @@ def update_user_form_swoop(
     repo: UserRepo = Depends(),
 ) -> UsersIn:
     return repo.update(user_id, users)
+
+
+@router.get("/token", response_model=AccountToken | None)
+async def get_token(
+    request: Request,
+    account: UsersOutWithPassword = Depends(authenticator.try_get_current_account_data)
+) -> AccountToken | None:
+    if account and authenticator.cookie_name in request.cookies:
+        print(account, " TTTHHHHHISSSS ISSS ACCCOUUUNNTTT FROM TOKEEEENNNNNN")
+        return {
+            "access_token": request.cookies[authenticator.cookie_name],
+            "type": "Bearer",
+            "account": account,
+        }
