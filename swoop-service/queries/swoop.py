@@ -49,7 +49,7 @@ class SwoopsRepository:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT pickup_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
+                        SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
                         FROM swoops
                         WHERE pickup_id = %s AND swooper_id = %s
                         """,
@@ -61,14 +61,15 @@ class SwoopsRepository:
                     if record is not None:
                         swoop = SwoopsOut(
                             pickup_id=record[0],
-                            swooper_id=record[1],
-                            trash_type=record[2],
-                            description=record[3],
-                            picture_url=record[4],
-                            hazards=record[5],
-                            size=record[6],
-                            weight=record[7],
-                            status=record[8]
+                            customer_id=record[1],
+                            swooper_id=record[2],
+                            trash_type=record[3],
+                            description=record[4],
+                            picture_url=record[5],
+                            hazards=record[6],
+                            size=record[7],
+                            weight=record[8],
+                            status=record[9]
                         )
                         return swoop
                     else:
@@ -87,7 +88,7 @@ class SwoopsRepository:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT pickup_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
+                        SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
                         FROM swoops
                         WHERE swooper_id = %s
                         ORDER BY status
@@ -99,14 +100,15 @@ class SwoopsRepository:
                     for record in db:
                         swoop = SwoopsOut(
                             pickup_id=record[0],
-                            swooper_id = record[1],
-                            trash_type=record[2],
-                            description=record[3],
-                            picture_url=record[4],
-                            hazards=record[5],
-                            size=record[6],
-                            weight=record[7],
-                            status=record[8]
+                            customer_id=record[1],
+                            swooper_id=record[2],
+                            trash_type=record[3],
+                            description=record[4],
+                            picture_url=record[5],
+                            hazards=record[6],
+                            size=record[7],
+                            weight=record[8],
+                            status=record[9]
                         )
                         result.append(swoop)
 
