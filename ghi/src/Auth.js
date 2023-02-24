@@ -103,16 +103,18 @@ export function useToken() {
     return handleErrorMessage(error);
   }
 
-  async function signup(username, password, email, firstName, lastName) {
+  async function signup(username, password, email, firstName, lastName, address, phoneNumber) {
     const url = `http://localhost:8080/api/accounts`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
-        username,
-        password,
-        email,
         first_name: firstName,
         last_name: lastName,
+        phone_number: phoneNumber,
+        email,
+        address,
+        password,
+        username
       }),
       headers: {
         "Content-Type": "application/json",

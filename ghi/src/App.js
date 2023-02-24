@@ -5,6 +5,7 @@ import './App.css';
 import { useToken } from "./Auth";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogInForm from "./LoginForm"
+import SignupForm from "./SignupForm"
 
 function GetToken() {
   useToken();
@@ -41,7 +42,9 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/login" element={<LogInForm/>} />
+            <Route path="/signup" element={<SignupForm/>} />
         </Routes>
+
       </BrowserRouter>
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}
