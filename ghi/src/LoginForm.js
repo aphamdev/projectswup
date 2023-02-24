@@ -1,7 +1,7 @@
 import { useToken } from "./Auth";
 import React, {useState} from 'react'
 
-export default function LogInForm() {
+function LogInForm() {
   const { token, login } = useToken();
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
@@ -39,3 +39,5 @@ export default function LogInForm() {
     </form>
   );
 }
+
+export default LogInForm

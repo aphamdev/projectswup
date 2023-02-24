@@ -8,7 +8,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `http://localhost:8080//token`;
+  const url = `http://localhost:8080/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
