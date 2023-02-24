@@ -103,7 +103,7 @@ export function useToken() {
     return handleErrorMessage(error);
   }
 
-  async function signup(username, password, email, firstName, lastName, address, phoneNumber) {
+  async function signup(firstName, lastName, phoneNumber, email, address, password, username) {
     const url = `http://localhost:8080/api/accounts`;
     const response = await fetch(url, {
       method: "post",
@@ -121,7 +121,7 @@ export function useToken() {
       },
     });
     if (response.ok) {
-      await login(username, password);
+      await login(email, password);
     }
     return false;
   }
