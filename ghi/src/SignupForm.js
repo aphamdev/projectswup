@@ -50,7 +50,6 @@ function SignupForm() {
     e.preventDefault()
     const response = await signup(first_name, last_name, phone_number,
         email, address, password, username)
-        console.log(response)
   }
 
 

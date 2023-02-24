@@ -26,7 +26,7 @@ function LogInForm() {
    return (
     <form onSubmit={handleSubmit}>
       <label>
-        Username:
+        Email:
         <input type="text" value={username} onChange={handleUserNameChange} />
       </label>
       <br />

@@ -122,8 +122,13 @@ export function useToken() {
     });
     if (response.ok) {
       await login(email, password);
+      console.log("Signup Successful")
+    } else {
+      return false;
     }
-    return false;
+
+
+
   }
 
   async function update(username, password, email, firstName, lastName) {
