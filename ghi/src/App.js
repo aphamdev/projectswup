@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { AuthProvider, useToken } from "./Auth";
-
+import { useToken } from "./Auth";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LogInForm from "./LoginForm"
 
 function GetToken() {
   useToken();
@@ -35,8 +36,13 @@ function App() {
   }, [])
 
 
-  return (
+  return(
     <div>
+    <BrowserRouter>
+      <Routes>
+          <Route path="/login" element={<LogInForm/>} />
+      </Routes>
+    </BrowserRouter>
       <ErrorNotification error={error} />
       <Construct info={launch_info} />
     </div>

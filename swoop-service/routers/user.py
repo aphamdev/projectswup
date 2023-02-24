@@ -51,7 +51,7 @@ async def create_account(
 
 #####################################################################################################
 
-@router.get("/accounts/{user_id}", response_model=UsersOut)
+@router.get("/accounts/", response_model=UsersOut)
 def get_user(
     email: str,
     repo: UserRepo = Depends(),
