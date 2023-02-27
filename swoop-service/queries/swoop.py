@@ -58,11 +58,6 @@ class SwoopsOutWithUsers(UsersOut):
     username: Optional[str]
     hashed_password: Optional[str]
     is_swooper: Optional[bool]
-<<<<<<< HEAD
-
-class SwoopsRepository:
-
-=======
 
 
 class SwoopsRepository:
@@ -107,7 +102,6 @@ class SwoopsRepository:
     #         print(e)
     #         return {"message": "Could not get that swoop"}
 
->>>>>>> main
     def get_one_swoop(self, pickup_id: int, user_id: int) -> Optional[SwoopsOutWithUsers]:
     # connect to the database
         try:
@@ -159,10 +153,6 @@ class SwoopsRepository:
         except Exception as e:
             print(str(e))
             return None
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 
     def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOutWithUsers]]:
         # connect to the database

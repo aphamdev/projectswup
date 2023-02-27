@@ -11,13 +11,13 @@ import SwooperUpdateForm from './SwooperUpdateForm.js';
 import SwooperHistoryList from './SwooperHistoryList.js';
 import { AuthProvider } from "./Auth";
 import AvailableSwoops from './AvailableSwoops.js';
+import CustomerPostList from './CustomerPostList.js';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
     useToken();
     return null
 }
-
 
 function App() {
   // const [launch_info, setLaunchInfo] = useState([]);
@@ -53,6 +53,7 @@ function App() {
         <Routes>
             <Route path="/login" element={<LogInForm/>} />
             <Route path="/signup" element={<SignupForm/>} />
+            <Route path="/pickups" element={<CustomerPostList />} />
             <Route path="/swoopers/signup" element={<SwooperUpdateForm/>}/>
             <Route path="/pickups/new" element={<PickupForm/>} />
             <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
@@ -64,6 +65,8 @@ function App() {
       <Construct info={launch_info} /> */}
     </div>
   );
+
 }
+
 
 export default App;
