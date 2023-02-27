@@ -10,6 +10,7 @@ function SignupForm() {
   const [phone_number, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
+  const [submitted, setSubmitted] = useState(false);
 
   const handleUserNameChange = (e) => {
     const value = e.target.value;
@@ -50,11 +51,15 @@ function SignupForm() {
     e.preventDefault()
     const response = await signup(first_name, last_name, phone_number,
         email, address, password, username)
+    if (response.ok) {
+      setSubmitted(true);
+    }
   }
 
 
    return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      <form onSubmit={handleSubmit}>
       <label>
         Username:
         <input type="text" value={username} onChange={handleUserNameChange} />
@@ -93,6 +98,14 @@ function SignupForm() {
       <button type="submit">Sign Up!</button>
 
     </form>
+    {submitted && (
+						<div
+							className="alert alert-success mb-0 p-4 mt-4"
+							id="success-message">
+							Successful!
+						</div>
+					)}
+    </div>
   );
 }
 

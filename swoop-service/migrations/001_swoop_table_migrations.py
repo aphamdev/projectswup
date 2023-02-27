@@ -8,7 +8,7 @@ steps = [
             customer_id INT NULL,
             trash_type VARCHAR(100) NOT NULL,
             description VARCHAR(100) NOT NULL,
-            picture_url VARCHAR(100) NOT NULL,
+            picture_url VARCHAR(10000) NOT NULL,
             hazards VARCHAR(100),
             size VARCHAR(20) NOT NULL,
             weight INTEGER NOT NULL,
