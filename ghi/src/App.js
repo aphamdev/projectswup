@@ -6,6 +6,8 @@ import { useToken } from "./Auth";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogInForm from "./LoginForm"
 import SignupForm from "./SignupForm"
+import SwooperUpdateForm from './SwooperUpdateForm.js';
+import { AuthProvider } from "./Auth";
 
 function GetToken() {
   useToken();
@@ -40,11 +42,14 @@ function App() {
   return(
     <div>
       <BrowserRouter>
+      <AuthProvider>
+        <GetToken />
         <Routes>
             <Route path="/login" element={<LogInForm/>} />
             <Route path="/signup" element={<SignupForm/>} />
+            <Route path="/swooper_sign_up" element={<SwooperUpdateForm/>}/>
         </Routes>
-
+      </AuthProvider>
       </BrowserRouter>
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}

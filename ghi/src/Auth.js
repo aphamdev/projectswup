@@ -131,16 +131,18 @@ export function useToken() {
 
   }
 
-  async function update(username, password, email, firstName, lastName) {
-    const url = `http://localhost:8080/accounts`;
+  async function update(username, password, email, firstName, lastName, car, licenseNumber) {
+    const url = `http://localhost:8080/api/accounts`;
     const response = await fetch(url, {
-      method: "patch",
+      method: "put",
       body: JSON.stringify({
         username,
         password,
         email,
         first_name: firstName,
         last_name: lastName,
+        car: car,
+        license_number: licenseNumber
       }),
       headers: {
         "Content-Type": "application/json",
@@ -164,7 +166,7 @@ export const useUser = (token) => {
     }
 
     async function getUser() {
-      const url = `http://localhost:8080/accounts`;
+      const url = `http://localhost:8080/api/accounts/`;
       const response = await fetch(url, {
         credentials: "include",
       });

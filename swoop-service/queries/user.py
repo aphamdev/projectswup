@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from queries.pool import pool
-from typing import Optional
+from typing import Optional, List
 
 
 class DuplicateAccountError(ValueError):
@@ -39,40 +39,6 @@ class UserUpdate(BaseModel):
     license_number: str
 
 class UserRepo:
-    def get(self, email: str) -> UsersOutWithPassword:
-        try:
-            with pool.connection() as conn:
-                with conn.cursor() as cur:
-                    result = cur.execute(
-                        """
-                        SELECT user_id, first_name, last_name, phone_number, email, address, car, license_number,
-                        is_swooper, hashed_password, username
-                        FROM users
-                        WHERE email = %s
-                        """,
-                        [email]
-                    )
-                    record = result.fetchone()
-                    if record is None:
-                        return None
-                    user = UsersOut(
-                        user_id=record[0],
-                        first_name=record[1],
-                        last_name=record[2],
-                        phone_number=record[3],
-                        email=record[4],
-                        address=record[5],
-                        car=record[6],
-                        license_number=record[7],
-                        is_swooper=record[8],
-                        hashed_password=record[9],
-                        username=record[10]
-                    )
-                    return user
-        except Exception as e:
-            print(e)
-            return {"message": "doesnt work oops"}
-
     def create(self, users: UsersIn, hashed_password: str) -> UsersOutWithPassword:
         with pool.connection() as conn:
             with conn.cursor() as db:
@@ -96,6 +62,39 @@ class UserRepo:
                 old_data = users.dict()
                 return UsersOutWithPassword(user_id=user_id, **old_data, hashed_password=hashed_password)
 
+    def get(self, email: str) -> UsersOutWithPassword:
+            try:
+                with pool.connection() as conn:
+                    with conn.cursor() as cur:
+                        result = cur.execute(
+                            """
+                            SELECT user_id, first_name, last_name, phone_number, email, address, car, license_number,
+                            is_swooper, hashed_password, username
+                            FROM users
+                            WHERE email = %s
+                            """,
+                            [email]
+                        )
+                        record = result.fetchone()
+                        if record is None:
+                            return None
+                        user = UsersOut(
+                            user_id=record[0],
+                            first_name=record[1],
+                            last_name=record[2],
+                            phone_number=record[3],
+                            email=record[4],
+                            address=record[5],
+                            car=record[6],
+                            license_number=record[7],
+                            is_swooper=record[8],
+                            hashed_password=record[9],
+                            username=record[10]
+                        )
+                        return user
+            except Exception as e:
+                print(e)
+                return {"message": "doesnt work oops"}
 
     def update(self, user_id: int, users: UserUpdate) -> UsersOut:
         try:
@@ -120,3 +119,37 @@ class UserRepo:
         except Exception as e:
             print(e)
             return {"message": "Could not update user information"}
+
+
+    def get_all_users(self) -> List[UsersOutWithPassword]:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        '''
+                        SELECT user_id, first_name, last_name, phone_number, email, address, car, license_number,
+                        is_swooper, hashed_password, username
+                        FROM users
+                        ORDER BY user_id
+                        '''
+                    )
+                    result = []
+                    for record in db:
+                        users = UsersOutWithPassword(
+                            user_id=record[0],
+                            first_name=record[1],
+                            last_name=record[2],
+                            phone_number=record[3],
+                            email=record[4],
+                            address=record[5],
+                            car=record[6],
+                            license_number=record[7],
+                            is_swooper=record[8],
+                            hashed_password=record[9],
+                            username=record[10]
+                        )
+                        result.append(users)
+                    return result
+        except Exception as e:
+            print(e)
+            return {"message": "Could not get all users"}

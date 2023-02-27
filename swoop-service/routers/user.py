@@ -51,22 +51,32 @@ async def create_account(
 
 #####################################################################################################
 
-@router.get("/accounts/", response_model=UsersOut)
+@router.get("/api/accounts/", response_model=UsersOut)
 def get_user(
-    email: str,
     repo: UserRepo = Depends(),
+    user_data: dict = Depends(authenticator.get_current_account_data),
 ) -> UsersOut:
+    email = user_data['email']
     return repo.get(email)
 
 #####################################################################################################
+@router.get("/api/accounts/all", response_model=List[UsersOut])
+def get_users(
+    repo: UserRepo = Depends(),
+    user_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return repo.get_all_users()
 
-@router.put("/accounts/{user_id}", response_model=UserUpdate)
+#####################################################################################################
+
+@router.put("/api/accounts/{user_id}", response_model=UserUpdate)
 def update_user_form_swoop(
     user_id: int,
     users: UserUpdate,
     repo: UserRepo = Depends(),
 ) -> UsersIn:
     return repo.update(user_id, users)
+#####################################################################################################
 
 
 @router.get("/token", response_model=AccountToken | None)
