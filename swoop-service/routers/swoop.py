@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, Response
-from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, SwoopsAccept, Error
+from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, SwoopsAccept, Error, SwoopsOutWithUsers
 from typing import Union, List, Optional
 from authenticator import authenticator
 
@@ -19,7 +19,7 @@ def get_all_available_swoops(repo: SwoopsRepository = Depends()):
     return repo.get_all_available()
 
 
-@router.get("/swoops", response_model=Union[List[SwoopsOut], Error])
+@router.get("/swoops", response_model=Union[List[SwoopsOutWithUsers], Error])
 def get_swooper_history(
     repo: SwoopsRepository = Depends(),
     user_data: dict = Depends(authenticator.get_current_account_data),
@@ -54,12 +54,12 @@ def complete_swoop_job(
 ) -> Union[Error, SwoopsAccept]:
     return repo.complete_swoop_job(pickup_id, swoops, account_data)
 
-@router.get("/swoops/{pickup_id}", response_model=Optional[SwoopsOut])
+@router.get("/swoops/{pickup_id}", response_model=Optional[SwoopsOutWithUsers])
 def get_one_swoop(
     pickup_id: int,
     repo: SwoopsRepository = Depends(),
     user_data: dict = Depends(authenticator.get_current_account_data),
-) -> SwoopsOut:
+) -> SwoopsOutWithUsers:
     user_id = user_data["user_id"]
     return repo.get_one_swoop(pickup_id, user_id)
 

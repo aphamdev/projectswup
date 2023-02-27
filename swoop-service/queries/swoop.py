@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List, Union
 from fastapi.security import OAuth2PasswordBearer
-from queries.user import UsersIn
+from queries.user import UsersIn, UsersOut
 from queries.pool import pool
 from fastapi import APIRouter, Depends
 
@@ -36,22 +36,87 @@ class SwoopsAccept(BaseModel):
     status: int
     swooper_id: int
 
+class SwoopsOutWithUsers(UsersOut):
+    pickup_id: int
+    customer_id: Optional[int]
+    swooper_id: Optional[int]
+    trash_type: str
+    description: str
+    picture_url: str
+    hazards: Optional[str]
+    size: str
+    weight: int
+    status: int
+    user_id: Optional[int]
+    first_name: Optional[str]
+    last_name: Optional[str]
+    phone_number: Optional[str]
+    email: Optional[str]
+    address: Optional[str]
+    car: Optional[str]
+    license_number: Optional[str]
+    username: Optional[str]
+    hashed_password: Optional[str]
+    is_swooper: Optional[bool]
+
 
 class SwoopsRepository:
 
-    def get_one_swoop(self, pickup_id: int, user_id) -> Optional[SwoopsOut]:
+    # def get_one_swoop(self, pickup_id: int, user_id) -> Optional[SwoopsOut]:
+    # # connect to the database
+    #     print(pickup_id)
+    #     try:
+    #         with pool.connection() as conn:
+    #             # get a cursor (something to run SQL with which is PG-admin in our case)
+    #             with conn.cursor() as db:
+    #                 # execute the SELECT statement
+    #                 db.execute(
+    #                     """
+    #                     SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
+    #                     FROM swoops
+    #                     WHERE pickup_id = %s AND swooper_id = %s
+    #                     """,
+    #                     [pickup_id, user_id]
+    #                 )
+    #                 # process the query result
+    #                 record = db.fetchone()
+    #                 print(record)
+    #                 if record is not None:
+    #                     swoop = SwoopsOut(
+    #                         pickup_id=record[0],
+    #                         customer_id=record[1],
+    #                         swooper_id=record[2],
+    #                         trash_type=record[3],
+    #                         description=record[4],
+    #                         picture_url=record[5],
+    #                         hazards=record[6],
+    #                         size=record[7],
+    #                         weight=record[8],
+    #                         status=record[9]
+    #                     )
+    #                     return swoop
+    #                 else:
+    #                     return None
+
+    #     except Exception as e:
+    #         print(e)
+    #         return {"message": "Could not get that swoop"}
+
+    def get_one_swoop(self, pickup_id: int, user_id: int) -> Optional[SwoopsOutWithUsers]:
     # connect to the database
-        print(pickup_id)
         try:
             with pool.connection() as conn:
-                # get a cursor (something to run SQL with which is PG-admin in our case)
+                # get a cursor to execute SQL queries
                 with conn.cursor() as db:
-                    # execute the SELECT statement
+                    # execute the SELECT statement with JOIN
                     db.execute(
                         """
-                        SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
-                        FROM swoops
-                        WHERE pickup_id = %s AND swooper_id = %s
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        FROM swoops s
+                        INNER JOIN users u
+                        ON s.customer_id = u.user_id
+                        WHERE s.pickup_id = %s AND s.swooper_id = %s
                         """,
                         [pickup_id, user_id]
                     )
@@ -59,7 +124,8 @@ class SwoopsRepository:
                     record = db.fetchone()
                     print(record)
                     if record is not None:
-                        swoop = SwoopsOut(
+                        # extract columns from both tables
+                        swoop = SwoopsOutWithUsers(
                             pickup_id=record[0],
                             customer_id=record[1],
                             swooper_id=record[2],
@@ -69,17 +135,26 @@ class SwoopsRepository:
                             hazards=record[6],
                             size=record[7],
                             weight=record[8],
-                            status=record[9]
+                            status=record[9],
+                            first_name=record[10],
+                            last_name=record[11],
+                            phone_number=record[12],
+                            email=record[13],
+                            address=record[14],
+                            hashed_password=record[15],
+                            username=record[16],
+                            car=record[17],
+                            license_number=record[18],
+                            is_swooper=record[19]
                         )
                         return swoop
                     else:
                         return None
-
         except Exception as e:
-            print(e)
-            return {"message": "Could not get that swoop"}
+            print(str(e))
+            return None
 
-    def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOut]]:
+    def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOutWithUsers]]:
         # connect to the database
         try:
             with pool.connection() as conn:
@@ -88,8 +163,11 @@ class SwoopsRepository:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
-                        FROM swoops
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        FROM swoops s
+                        INNER JOIN users u
+                        ON s.customer_id = u.user_id
                         WHERE swooper_id = %s
                         ORDER BY status
                         """,
@@ -98,7 +176,7 @@ class SwoopsRepository:
                     # process the query result
                     result = []
                     for record in db:
-                        swoop = SwoopsOut(
+                        swoop = SwoopsOutWithUsers(
                             pickup_id=record[0],
                             customer_id=record[1],
                             swooper_id=record[2],
@@ -108,7 +186,17 @@ class SwoopsRepository:
                             hazards=record[6],
                             size=record[7],
                             weight=record[8],
-                            status=record[9]
+                            status=record[9],
+                            first_name=record[10],
+                            last_name=record[11],
+                            phone_number=record[12],
+                            email=record[13],
+                            address=record[14],
+                            hashed_password=record[15],
+                            username=record[16],
+                            car=record[17],
+                            license_number=record[18],
+                            is_swooper=record[19]
                         )
                         result.append(swoop)
 
