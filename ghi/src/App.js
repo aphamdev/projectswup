@@ -10,6 +10,7 @@ import PickupForm from './PickupForm.js';
 import SwooperUpdateForm from './SwooperUpdateForm.js';
 import SwooperHistoryList from './SwooperHistoryList.js';
 import { AuthProvider } from "./Auth";
+import AvailableSwoops from './AvailableSwoops.js';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -52,9 +53,10 @@ function App() {
         <Routes>
             <Route path="/login" element={<LogInForm/>} />
             <Route path="/signup" element={<SignupForm/>} />
-            <Route path="/swoopers/sign_up" element={<SwooperUpdateForm/>}/>
+            <Route path="/swoopers/signup" element={<SwooperUpdateForm/>}/>
             <Route path="/pickups/new" element={<PickupForm/>} />
             <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
+            <Route path="/listings" element={<AvailableSwoops/>} />
         </Routes>
       </AuthProvider>
       </BrowserRouter>

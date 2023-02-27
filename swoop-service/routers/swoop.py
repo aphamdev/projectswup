@@ -14,7 +14,7 @@ def create_pickups(
 ):
     return repo.create(pickup, account_data)
 
-@router.get("/listings", response_model=Union[Error, List[SwoopsOut]])
+@router.get("/listings", response_model=Union[Error, List[SwoopsOutWithUsers]])
 def get_all_available_swoops(repo: SwoopsRepository = Depends()):
     return repo.get_all_available()
 

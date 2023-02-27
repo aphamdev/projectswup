@@ -58,6 +58,11 @@ class SwoopsOutWithUsers(UsersOut):
     username: Optional[str]
     hashed_password: Optional[str]
     is_swooper: Optional[bool]
+<<<<<<< HEAD
+
+class SwoopsRepository:
+
+=======
 
 
 class SwoopsRepository:
@@ -102,6 +107,7 @@ class SwoopsRepository:
     #         print(e)
     #         return {"message": "Could not get that swoop"}
 
+>>>>>>> main
     def get_one_swoop(self, pickup_id: int, user_id: int) -> Optional[SwoopsOutWithUsers]:
     # connect to the database
         try:
@@ -153,6 +159,10 @@ class SwoopsRepository:
         except Exception as e:
             print(str(e))
             return None
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 
     def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOutWithUsers]]:
         # connect to the database
@@ -242,33 +252,48 @@ class SwoopsRepository:
                     status=0
                 )
 
-    def get_all_available(self) -> Union[Error, List[SwoopsOut]]:
+    def get_all_available(self) -> Union[Error, List[SwoopsOutWithUsers]]:
         try:
-            # Connect the database
             with pool.connection() as conn:
-                # Get a cursor (something to run SQL with)
+                # get a cursor to execute SQL queries
                 with conn.cursor() as db:
-                    # Run our INSERT statement
+                    # execute the SELECT statement with JOIN
                     db.execute(
-                        '''
-                        SELECT pickup_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
-                        FROM swoops
+                        """
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        FROM swoops s
+                        INNER JOIN users u
+                        ON s.customer_id = u.user_id
                         WHERE status = 0
                         ORDER BY pickup_id
-                        '''
+                        """,
                     )
+                    # process the query result
                     result = []
-                    for post in db:
-                        swoop = SwoopsOut(
-                            pickup_id=post[0],
-                            customer_id=post[1],
-                            trash_type=post[2],
-                            description=post[3],
-                            picture_url=post[4],
-                            hazards=post[5],
-                            size=post[6],
-                            weight=post[7],
-                            status=post[8],
+                    for record in db:
+                        # extract columns from both tables
+                        swoop = SwoopsOutWithUsers(
+                            pickup_id=record[0],
+                            customer_id=record[1],
+                            swooper_id=record[2],
+                            trash_type=record[3],
+                            description=record[4],
+                            picture_url=record[5],
+                            hazards=record[6],
+                            size=record[7],
+                            weight=record[8],
+                            status=record[9],
+                            first_name=record[10],
+                            last_name=record[11],
+                            phone_number=record[12],
+                            email=record[13],
+                            address=record[14],
+                            hashed_password=record[15],
+                            username=record[16],
+                            car=record[17],
+                            license_number=record[18],
+                            is_swooper=record[19]
                         )
                         result.append(swoop)
                     return result
