@@ -1,6 +1,7 @@
 import { useAuthContext, useToken } from "./Auth";
 
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 function LogInForm() {
   const { token } = useAuthContext();
@@ -18,11 +19,12 @@ function LogInForm() {
     setPassword(value);
   }
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault()
     await login(username, password)
-    window.location.href = '/';
     console.log("LOGIN SUCCESS")
+    navigate("/");
   }
 
 

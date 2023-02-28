@@ -1,5 +1,6 @@
 import { useToken } from "./Auth";
 import React, {useState} from 'react'
+import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
   const { signup } = useToken();
@@ -46,12 +47,13 @@ function SignupForm() {
     setAddress(value);
   }
 
+
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault()
     await signup(first_name, last_name, phone_number,
         email, address, password, username)
-    window.location.href = '/';
-
+    navigate("/");
   }
 
 
