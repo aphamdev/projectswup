@@ -9,9 +9,9 @@ import SignupForm from "./SignupForm"
 import PickupForm from './PickupForm.js';
 import SwooperUpdateForm from './SwooperUpdateForm.js';
 import SwooperHistoryList from './SwooperHistoryList.js';
-import { AuthProvider } from "./Auth";
 import AvailableSwoops from './AvailableSwoops.js';
 import CustomerPostList from './CustomerPostList.js';
+import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -48,18 +48,19 @@ function App() {
 
     <div>
       <BrowserRouter>
-      <AuthProvider>
-        <GetToken />
-        <Routes>
-            <Route path="/login" element={<LogInForm/>} />
-            <Route path="/signup" element={<SignupForm/>} />
-            <Route path="/pickups" element={<CustomerPostList />} />
-            <Route path="/swoopers/signup" element={<SwooperUpdateForm/>}/>
-            <Route path="/pickups/new" element={<PickupForm/>} />
-            <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
-            <Route path="/listings" element={<AvailableSwoops/>} />
-        </Routes>
-      </AuthProvider>
+        <AuthProvider>
+          <GetToken />
+          <Routes>
+              <Route path="/login" element={<LogInForm/>} />
+              <Route path="/signup" element={<SignupForm/>} />
+              <Route path="/pickups" element={<CustomerPostList />} />
+              <Route path="/swoopers/signup" element={<SwooperUpdateForm/>}/>
+              <Route path="/pickups/new" element={<PickupForm/>} />
+              <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
+              <Route path="/listings" element={<AvailableSwoops/>} />
+              <Route path="/swoopshistory/:pickup_id" element={<SwoopHistoryDetail/>} />
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}
