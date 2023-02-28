@@ -60,7 +60,13 @@ function SwoopHistoryDetail(id) {
                     <td>{ swoop.trash_type }</td>
                     <td>{ swoop.description }</td>
                     <td>{ swoop.hazards }</td>
-                    <td>{ swoop.status }</td>
+                    {swoop.status == 1 ? (
+                    <td>
+                        In progress
+                    </td>
+                    ) : (
+                        <td>Completed</td>
+                    )}
                     <td>{ swoop.size }</td>
                     <td>{ swoop.weight }</td>
                     <td>

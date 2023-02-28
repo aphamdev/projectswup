@@ -1,16 +1,37 @@
 import React, {useEffect, useState} from 'react';
-import { useAuthContext } from './Auth';
+import { useAuthContext, useUser } from './Auth';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 
 function AvailableSwoops() {
 
     const {token} = useAuthContext();
+    const [user, setUser] = useState([]);
+    const fetchUserData = async () => {
+        const URL = 'http://localhost:8080/api/accounts/';
+
+        const response = await fetch(URL, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setUser(data)
+        }
+    }
+
     const [availableSwoops, setAvailableSwoops] = useState([]);
     const fetchAvailableSwoops = async () => {
 
         const availableSwoopsURL = 'http://localhost:8080/listings';
 
-        const response = await fetch(availableSwoopsURL);
+        const fetchConfig = {
+            method: "get",
+            headers: {
+            Authorization: `Bearer ${token}`,
+            },
+        };
+
+        const response = await fetch(availableSwoopsURL, fetchConfig);
 
         if (response.ok) {
             const availableSwoopsData = await response.json();
@@ -48,8 +69,9 @@ function AvailableSwoops() {
 
 
     useEffect(() => {
+        fetchUserData();
         fetchAvailableSwoops();
-      }, []);
+      }, [token]);
 
     if (availableSwoops === null) {
         return (
@@ -61,7 +83,7 @@ return (
 <Container>
   <h1 className="text-center mt-4 mb-4">Available Swoops</h1>
   <Row>
-    {availableSwoops.map(swoop => (
+    {availableSwoops.filter(swoop => swoop.customer_id !== user.user_id).map(swoop => (
       <Row key={swoop.pickup_id} className="mb-4">
         <Card>
           <Row>
