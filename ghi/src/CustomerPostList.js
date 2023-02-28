@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import { useToken } from './Auth';
+import { useAuthContext } from './Auth';
+import CustomerPostDetail from './DetailCustomerPost';
+import {Row, Col, Card, Button } from 'react-bootstrap';
 
 
 function CustomerPostList() {
-const [posts, setPostsChange] = useState([])
-const { token } = useToken();
+
+// const { token } = useAuthContext();
+const [swoops, setSwoops] = useState([])
+const [selectedRow, setSelectedRow] = useState(null);
+const { token, login } = useToken();
+
+
 
 ///// grab all of the customer posts ////
 const fetchAllCustomerPosts = async () => {
@@ -18,7 +26,7 @@ const fetchAllCustomerPosts = async () => {
   const response = await fetch(customerPostUrl, fetchConfig);
   if (response.ok) {
     const data = await response.json();
-    setPostsChange(data);
+    setSwoops(data);
   }
 }
 
@@ -27,64 +35,59 @@ useEffect(() => {
   fetchAllCustomerPosts();
 }, [token]);
 
-return (
-  <>
-  <div className="row">
+ const handleRowClick = (swoop) => {
+    setSelectedRow(selectedRow === swoop ? null : swoop);
+  };
 
-            <div className="shadow p-4 mt-4">
-            <h1>All Your Posts</h1>
-            <div className="mb-3">
-                    <div>
-                    <table className="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Pickup #</th>
-                          <th>Swooper</th>
-                          <th>Trash Type</th>
-                          <th>Description</th>
-                          <th>Picture</th>
-                          <th>Hazards</th>
-                          <th>Size</th>
-                          <th>Weight</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      {posts.map(post => {
-                          return (
-                            <tr key={post.pickup_id}>
-                                <td>{post.pickup_id}</td>
-                                {post.swooper_id === null ? (
-                                  <td>N/A</td>
-                                ) : (
-                                  <td>{post.swooper_id}</td>
-                                )}
-                                <td>{post.trash_type}</td>
-                                <td>{post.description}</td>
-                                <td>{post.picture_url}</td>
-                                <td>{post.hazards}</td>
-                                <td>{post.size}</td>
-                                <td>{post.weight}</td>
-                                {post.status === 0 ? (
-                                  <td>Pending</td>
-                                ) : post.status === 1 ? (
-                                  <td>In Progress</td>
-                                ) : (
-                                  <td>Completed</td>
-                                )}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                    </div>
-                </div>
-            </div>
+
+ return (
+    <div>
+      <h1>Your Swoops</h1>
+      <table className="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Pick Up</th>
+            {/* <th>Swooper</th> */}
+            <th>Trash Type</th>
+            <th>Description</th>
+            <th>Hazards</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {swoops.map((swoop) => {
+            const isRowSelected = selectedRow === swoop;
+            return (
+              <React.Fragment key={swoop.swooper_id}>
+                <tr onClick={() => handleRowClick(swoop)}>
+                  <td>{swoop.pickup_id}</td>
+                  {/* <td>{swoop.swooper_id}</td> */}
+                  <td>{swoop.trash_type}</td>
+                  <td>{swoop.description}</td>
+                  <td>{swoop.hazards}</td>
+                  <td>{swoop.status === 1 ? 'In Progress' : swoop.status === 2 ? 'Completed' : 'Not Accepted'}</td>
+                  <td></td>
+                </tr>
+                  {isRowSelected && (
+
+                    <tr>
+                      <td colSpan={5}>
+                      {swoop.swooper_id != null ? (
+                          <CustomerPostDetail id={swoop.pickup_id} />
+                        ) : (
+                          <div>Waiting for Swooper to accept your job</div>
+                        )}
+                      </td>
+                  </tr>
+                )}
+              </React.Fragment>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
-  </>
-)
-
+  );
 }
-
 
 export default CustomerPostList;

@@ -28,7 +28,7 @@ def get_swooper_history(
     return repo.get_swooper_history(user_id)
 
 
-@router.get("/pickups", response_model=Union[Error, List[SwoopsOut]])
+@router.get("/pickups", response_model=Union[Error, List[SwoopsOutWithUsers]])
 def get_all_customer_posts(
     repo: SwoopsRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
@@ -63,11 +63,11 @@ def get_one_swoop(
     user_id = user_data["user_id"]
     return repo.get_one_swoop(pickup_id, user_id)
 
-@router.get("/pickups/{pickup_id}", response_model=Optional[SwoopsOut])
+@router.get("/pickups/{pickup_id}", response_model=Optional[SwoopsOutWithUsers])
 def get_one_customerpost(
     pickup_id: int,
     repo: SwoopsRepository = Depends(),
     account_data: dict = Depends(authenticator.get_current_account_data),
-):
+) -> SwoopsOutWithUsers:
     user_id = account_data["user_id"]
     return repo.get_one_customerpost(pickup_id, user_id)

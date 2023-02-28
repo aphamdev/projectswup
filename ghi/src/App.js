@@ -12,6 +12,7 @@ import SwooperUpdateForm from './SwooperUpdateForm.js';
 import SwooperHistoryList from './SwooperHistoryList.js';
 import AvailableSwoops from './AvailableSwoops.js';
 import CustomerPostList from './CustomerPostList.js';
+import CustomerPostDetail from './DetailCustomerPost.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 import MainPage from './MainPage.js';
 
@@ -62,6 +63,7 @@ function App() {
                     <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
                     <Route path="/listings" element={<AvailableSwoops/>} />
                     <Route path="/swoopshistory/:pickup_id" element={<SwoopHistoryDetail/>} />
+                    <Route path="/pickups/{pickup_id}" element={<CustomerPostDetail />} />
                 </Routes>
                 <div/>
           </AuthProvider>
