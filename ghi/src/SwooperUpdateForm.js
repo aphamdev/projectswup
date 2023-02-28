@@ -40,6 +40,7 @@ function SwooperUpdateForm() {
     if (response.ok) {
         console.log("Swooper sign-up successful!")
         console.log(token)
+        window.location.href = '/';
         return response.json()
     }
   }

@@ -13,6 +13,7 @@ import SwooperHistoryList from './SwooperHistoryList.js';
 import AvailableSwoops from './AvailableSwoops.js';
 import CustomerPostList from './CustomerPostList.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
+import MainPage from './MainPage.js';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -52,6 +53,7 @@ function App() {
               <Nav />
                 <div className="container"></div>
                 <Routes>
+                    <Route path="/" element={<MainPage/>} />
                     <Route path="/login" element={<LogInForm/>} />
                     <Route path="/signup" element={<SignupForm/>} />
                     <Route path="/pickups" element={<CustomerPostList />} />

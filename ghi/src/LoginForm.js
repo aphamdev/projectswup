@@ -21,6 +21,7 @@ function LogInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await login(username, password)
+    window.location.href = '/';
     console.log("LOGIN SUCCESS")
   }
 
