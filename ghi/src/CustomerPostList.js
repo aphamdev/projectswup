@@ -1,44 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import { useToken } from './Auth';
-import { useAuthContext } from './Auth';
 
 
 function CustomerPostList() {
-
-// const { token } = useAuthContext();
 const [posts, setPostsChange] = useState([])
-
-const { token, login } = useToken();
-
-
+const { token } = useToken();
 
 ///// grab all of the customer posts ////
 const fetchAllCustomerPosts = async () => {
-
   const customerPostUrl = `http://localhost:8080/pickups`
-
   const fetchConfig = {
     method: "get",
     headers: {
       Authorization: `Bearer ${token}`,
     },
   }
-
   const response = await fetch(customerPostUrl, fetchConfig);
-
   if (response.ok) {
     const data = await response.json();
     setPostsChange(data);
   }
-
 }
 
 //////any uses effects/////
 useEffect(() => {
-  // useAuthContext();
-  // useToken();
   fetchAllCustomerPosts();
-}, []);
+}, [token]);
 
 return (
   <>

@@ -1,5 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState } from 'react';
 import { useAuthContext, useToken } from "./Auth";
 
 
@@ -24,10 +24,10 @@ function Nav() {
     useEffect(() => {
         fetchUserData();
     }, [token]);
+
 //Logout//////////////////////////////////////////////////////////////////////////////////////
     const handleLogout = async (e) => {
-        await logout()
-        window.location.href = '/login';
+        await logout();
     }
 //Renders different navbar is youre logged in or not//////////////////////////////////////////////////////////////////////////////////////
     const swooper_status = user.is_swooper
@@ -93,7 +93,6 @@ function Nav() {
                         </NavLink>
                     </li>
                     </>
-
                 ) : (
                     <>
                     <li className="nav-item dropdown">
@@ -111,17 +110,14 @@ function Nav() {
                         Become a Swooper!
                         </NavLink>
                     </li>
-                    <li className="nav-item">
-                        <button className="nav-link" aria-current="page" onClick={handleLogout}>
+                    <li id="logout" className="nav-item">
+                        <NavLink className="nav-link" aria-current="page" onClick={handleLogout}>
                         Logout
-                        </button>
+                        </NavLink>
                     </li>
                     </>
                 )}
                 </ul>
-
-
-
             </div>
         </div>
         </nav>

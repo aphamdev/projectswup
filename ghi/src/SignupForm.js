@@ -2,7 +2,7 @@ import { useToken } from "./Auth";
 import React, {useState} from 'react'
 
 function SignupForm() {
-  const { token, signup } = useToken();
+  const { signup } = useToken();
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const [first_name, setFirstName] = useState('')
@@ -10,7 +10,6 @@ function SignupForm() {
   const [phone_number, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
-  const [submitted, setSubmitted] = useState(false);
 
   const handleUserNameChange = (e) => {
     const value = e.target.value;
