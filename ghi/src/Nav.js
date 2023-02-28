@@ -7,7 +7,6 @@ function Nav() {
     const { token } = useAuthContext();
     // // const user = useUser(token);
     // // console.log(user)
-    console.log(token, "this is token")
 
     const [user, setUser] = useState([]);
     const fetchUserData = async () => {
@@ -28,7 +27,6 @@ function Nav() {
         fetchUserData();
     }, [token]);
 
-    console.log(user)
 
 
 
@@ -70,6 +68,7 @@ function Nav() {
               </a>
               <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
                 <li><Link className="dropdown-item" to="/listings">Available Swoops</Link></li>
+                <li><Link className="dropdown-item" to="/swoopshistory">Current and Past Swoops</Link></li>
               </ul>
             </li>
             <li className="nav-item">

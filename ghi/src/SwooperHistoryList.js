@@ -34,6 +34,34 @@ function SwooperHistoryList() {
     setSelectedRow(selectedRow === swoop ? null : swoop);
   };
 
+  const finishSwoop = async (swoop) => {
+
+        const swoopUrl = `http://localhost:8080/swoops/complete/${swoop.pickup_id}`
+
+        const data = {};
+        data.trash_type = swoop.trash_type
+        data.description = swoop.description
+        data.picture_url = swoop.picture_url
+        data.hazards = swoop.hazards
+        data.size = swoop.size
+        data.weight = swoop.weight
+
+
+        const fetchConfig  = {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const response = await fetch(swoopUrl, fetchConfig)
+        if (response.ok) {
+            console.log("Swoop Succesfully Completed!")
+            fetchSwoops()
+        }
+    }
+
   return (
     <div>
       <h1>Your Swoops</h1>
@@ -56,7 +84,13 @@ function SwooperHistoryList() {
                   <td>{swoop.trash_type}</td>
                   <td>{swoop.description}</td>
                   <td>{swoop.hazards}</td>
-                  <td>{swoop.status}</td>
+                  {swoop.status == 1 ? (
+                    <td>
+                        <Button onClick={() => finishSwoop(swoop)}>Click to Complete</Button>
+                    </td>
+                    ) : (
+                        <td>Completed</td>
+                    )}
                   <td></td>
                 </tr>
                 {isRowSelected && (
