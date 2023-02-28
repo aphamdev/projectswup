@@ -1,8 +1,10 @@
-import { useToken } from "./Auth";
+import { useAuthContext, useToken } from "./Auth";
+
 import React, {useState} from 'react'
 
 function LogInForm() {
-  const { token, login } = useToken();
+  const { token } = useAuthContext();
+  const { login } = useToken();
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')
 
@@ -19,7 +21,7 @@ function LogInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     await login(username, password)
-    console.log('login successful +++++++++++++++++++++++++++++++++++++++++++++++++++')
+    console.log("LOGIN SUCCESS")
   }
 
 

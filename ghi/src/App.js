@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import Construct from './Construct.js'
 import ErrorNotification from './ErrorNotification';
 import './App.css';
-import { AuthProvider, useToken } from "./Auth";
+import { AuthProvider, useToken, useAuthContext } from "./Auth";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogInForm from "./LoginForm"
 import SignupForm from "./SignupForm"
 import PickupForm from './PickupForm.js';
+import Nav from './Nav.js';
 import SwooperUpdateForm from './SwooperUpdateForm.js';
 import SwooperHistoryList from './SwooperHistoryList.js';
 import AvailableSwoops from './AvailableSwoops.js';
@@ -42,25 +43,26 @@ function App() {
   //   getData();
   // }, [])
 
-
-
   return(
 
     <div>
       <BrowserRouter>
-        <AuthProvider>
-          <GetToken />
-          <Routes>
-              <Route path="/login" element={<LogInForm/>} />
-              <Route path="/signup" element={<SignupForm/>} />
-              <Route path="/pickups" element={<CustomerPostList />} />
-              <Route path="/swoopers/signup" element={<SwooperUpdateForm/>}/>
-              <Route path="/pickups/new" element={<PickupForm/>} />
-              <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
-              <Route path="/listings" element={<AvailableSwoops/>} />
-              <Route path="/swoopshistory/:pickup_id" element={<SwoopHistoryDetail/>} />
-          </Routes>
-        </AuthProvider>
+          <AuthProvider>
+            <GetToken />
+              <Nav />
+                <div className="container"></div>
+                <Routes>
+                    <Route path="/login" element={<LogInForm/>} />
+                    <Route path="/signup" element={<SignupForm/>} />
+                    <Route path="/pickups" element={<CustomerPostList />} />
+                    <Route path="/swoopers/signup" element={<SwooperUpdateForm/>}/>
+                    <Route path="/pickups/new" element={<PickupForm/>} />
+                    <Route path="/swoopshistory" element={<SwooperHistoryList/>} />
+                    <Route path="/listings" element={<AvailableSwoops/>} />
+                    <Route path="/swoopshistory/:pickup_id" element={<SwoopHistoryDetail/>} />
+                </Routes>
+                <div/>
+          </AuthProvider>
       </BrowserRouter>
       {/* <ErrorNotification error={error} />
       <Construct info={launch_info} /> */}

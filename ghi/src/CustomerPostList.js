@@ -26,8 +26,6 @@ const fetchAllCustomerPosts = async () => {
 
   const response = await fetch(customerPostUrl, fetchConfig);
 
-
-
   if (response.ok) {
     const data = await response.json();
     setPostsChange(data);
@@ -45,7 +43,7 @@ useEffect(() => {
 return (
   <>
   <div className="row">
-        <div className="offset-3 col-6">
+
             <div className="shadow p-4 mt-4">
             <h1>All Your Posts</h1>
             <div className="mb-3">
@@ -69,15 +67,24 @@ return (
                           return (
                             <tr key={post.pickup_id}>
                                 <td>{post.pickup_id}</td>
-                                {/* <td>{post.swooper_id}</td> */}
-                                <td>{post.customer_id}</td>
+                                {post.swooper_id === null ? (
+                                  <td>N/A</td>
+                                ) : (
+                                  <td>{post.swooper_id}</td>
+                                )}
                                 <td>{post.trash_type}</td>
                                 <td>{post.description}</td>
                                 <td>{post.picture_url}</td>
                                 <td>{post.hazards}</td>
                                 <td>{post.size}</td>
                                 <td>{post.weight}</td>
-                                <td>{post.status}</td>
+                                {post.status === 0 ? (
+                                  <td>Pending</td>
+                                ) : post.status === 1 ? (
+                                  <td>In Progress</td>
+                                ) : (
+                                  <td>Completed</td>
+                                )}
                             </tr>
                           );
                         })}
@@ -86,7 +93,6 @@ return (
                     </div>
                 </div>
             </div>
-        </div>
     </div>
   </>
 )
