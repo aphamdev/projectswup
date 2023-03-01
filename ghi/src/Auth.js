@@ -123,13 +123,22 @@ export function useToken() {
     if (response.ok) {
       await login(email, password);
       console.log("Signup Successful")
-    } else {
-      return false;
-    }
-
-
-
+      } else if (response.status >= 400 && response.status < 600) {
+    const body = await response.json();
+    throw Error(body.detail);
+  } else {
+    throw Error(`Unexpected response status: ${response.status}`);
   }
+}
+  //   } else {
+  //     console.log("THIS IS THE RESPONSE", response)
+  //     throw Error(response.message)
+  //     // return false;
+  //   }
+
+
+
+  // }
 
   async function update(username, password, email, firstName, lastName, car, licenseNumber) {
     const url = `http://localhost:8080/api/accounts`;

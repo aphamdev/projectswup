@@ -11,6 +11,10 @@ function SignupForm() {
   const [phone_number, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
+  const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+
 
   const handleUserNameChange = (e) => {
     const value = e.target.value;
@@ -51,14 +55,41 @@ function SignupForm() {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await signup(first_name, last_name, phone_number,
-        email, address, password, username)
-    navigate("/");
+    try {
+      await signup(
+        first_name,
+        last_name,
+        phone_number,
+        email,
+        address,
+        password,
+        username
+      );
+      window.location.href = "/";
+    } catch (error) {
+      console.log(error)
+      setErrorMessage(String(error))
+    //   if (error.response) {
+    //   setErrorMessage(error.response.data.detail);
+    //   console.log(error.response.data.detail)
+    // } else {
+    //   setErrorMessage("Something went wrong. Please try again later.");
+    //   // console.log(error)
+    //   // console.log("THIS IS THE ERRRORRRRRRRRR", error.message)
+    //   // setErrorMessage(error);
+    // }
   }
+  };
+  //   await signup(first_name, last_name, phone_number,
+  //       email, address, password, username)
+  //   window.location.href = '/';
+
+
 
 
    return (
     <div>
+      {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
       <label>
         Username:
@@ -96,10 +127,9 @@ function SignupForm() {
       </label>
       <br />
       <button type="submit">Sign Up!</button>
-
     </form>
     </div>
   );
 }
 
-export default SignupForm
+export default SignupForm;

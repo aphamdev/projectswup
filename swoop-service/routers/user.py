@@ -40,10 +40,10 @@ async def create_account(
     hashed_password = authenticator.hash_password(info.password)
     try:
         account = accounts.create(info, hashed_password)
-    except DuplicateAccountError:
+    except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Cannot create an account with those credentials",
+            detail=str(e),
         )
     form = AccountForm(username=info.email, password=info.password)
     token = await authenticator.login(response, request, form, accounts)
@@ -63,7 +63,7 @@ def get_user(
 @router.get("/api/accounts/all", response_model=List[UsersOut])
 def get_users(
     repo: UserRepo = Depends(),
-    user_data: dict = Depends(authenticator.get_current_account_data),
+    # user_data: dict = Depends(authenticator.get_current_account_data),
 ):
     return repo.get_all_users()
 

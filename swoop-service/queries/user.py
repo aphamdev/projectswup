@@ -3,6 +3,7 @@ from queries.pool import pool
 from typing import Optional, List
 
 
+
 class DuplicateAccountError(ValueError):
     pass
 
@@ -40,27 +41,47 @@ class UserUpdate(BaseModel):
 
 class UserRepo:
     def create(self, users: UsersIn, hashed_password: str) -> UsersOutWithPassword:
-        with pool.connection() as conn:
-            with conn.cursor() as db:
-                result = db.execute(
-                    """
-                    INSERT INTO users
-                        (
-                            first_name, last_name, phone_number, email, address, username, hashed_password
-                        )
-                    VALUES
-                        (%s,%s,%s,%s,%s,%s,%s)
-                    RETURNING user_id;
-                    """,
-                    [
-                        users.first_name, users.last_name, users.phone_number,
-                        users.email, users.address, users.username, hashed_password
-                    ]
-                )
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    result = db.execute(
+                        """
+                        INSERT INTO users
+                            (
+                                first_name, last_name, phone_number, email, address, username, hashed_password
+                            )
+                        VALUES
+                            (%s,%s,%s,%s,%s,%s,%s)
+                        RETURNING user_id;
+                        """,
+                        [
+                            users.first_name, users.last_name, users.phone_number,
+                            users.email, users.address, users.username, hashed_password
+                        ]
+                    )
+                    user_id = result.fetchone()[0]
+                    old_data = users.dict()
+                    return UsersOutWithPassword(user_id=user_id, **old_data, hashed_password=hashed_password)
 
-                user_id = result.fetchone()[0]
-                old_data = users.dict()
-                return UsersOutWithPassword(user_id=user_id, **old_data, hashed_password=hashed_password)
+        except Exception as e:
+            if 'email' in str(e):
+                raise ValueError('Email already exists')
+            elif 'phone_number' in str(e):
+                raise ValueError('Phone number already exists')
+            elif 'username' in str(e):
+                raise DuplicateAccountError('Username already exists')
+            else:
+                raise
+        # except Exception as e:
+        #     print("EEEEEEEEEEEEEEEE", str(e))
+        #     if "users_email_key" in str(e):
+        #         raise DuplicateAccountError("An account with this email already exists")
+        #     elif "users_username_key" in str(e):
+        #         raise DuplicateAccountError("An account with this username already exists")
+        #     elif "users_address_key" in str(e):
+        #         raise DuplicateAccountError("An account with this address already exists")
+        #     else:
+        #         raise
 
     def get(self, email: str) -> UsersOutWithPassword:
             try:
