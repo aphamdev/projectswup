@@ -51,6 +51,8 @@ function DetailCustomerPost(id) {
                     <th>Trash Type</th>
                     <th>Description</th>
                     <th>Hazards</th>
+                    <th>Size</th>
+                    <th>Weight</th>
                     <th>Status</th>
                     <th>Picture</th>
                 </tr>
@@ -61,7 +63,9 @@ function DetailCustomerPost(id) {
                     <td>{ swoop.trash_type }</td>
                     <td>{ swoop.description }</td>
                     <td>{ swoop.hazards }</td>
-                    <td>{ swoop.status }</td>
+                    <td>{ swoop.size }</td>
+                    <td>{ swoop.weight }lbs</td>
+                    <td>{swoop.status === 1 ? 'In Progress' : swoop.status === 2 ? 'Completed' : 'Not Accepted'}</td>
                     <td>
                         <img
                             src={ swoop.picture_url }
