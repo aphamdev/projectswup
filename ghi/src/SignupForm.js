@@ -11,7 +11,6 @@ function SignupForm() {
   const [phone_number, setPhoneNumber] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
-  const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
 

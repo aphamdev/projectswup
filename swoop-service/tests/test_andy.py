@@ -1,6 +1,5 @@
 from fastapi.testclient import TestClient
 from main import app
-from fastapi import Depends
 from queries.swoop import SwoopsRepository
 from authenticator import authenticator
 
@@ -45,7 +44,8 @@ def account_override():
 def test_create_pickup():
     # Arrange
     app.dependency_overrides[SwoopsRepository] = CreateSwoopsRepository
-    app.dependency_overrides[authenticator.try_get_current_account_data] = account_override
+    app.dependency_overrides[
+        authenticator.try_get_current_account_data] = account_override
 
     json = {
         "customer_id": 1,

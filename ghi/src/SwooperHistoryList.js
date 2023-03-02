@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Button, Table, Container, Accordion } from 'react-bootstrap';
-import { useAuthContext, useUser } from './Auth.js';
+import { Row, Col, Card, Button, Container} from 'react-bootstrap';
+import { useAuthContext} from './Auth.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
-import { NavLink, Link } from 'react-router-dom';
+
 
 function SwooperHistoryList() {
   const [swoops, setSwoops] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const { token } = useAuthContext();
 
-  const fetchSwoops = async () => {
-    const url = `http://localhost:8080/swoops`;
-    const fetchConfig = {
-      method: "get",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    const response = await fetch(url, fetchConfig);
-
-    if (response.ok) {
-      const data = await response.json();
-      setSwoops(data);
-    }
-  };
 
   useEffect(() => {
+      const fetchSwoops = async () => {
+        const url = `http://localhost:8080/swoops`;
+        const fetchConfig = {
+          method: "get",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await fetch(url, fetchConfig);
+
+        if (response.ok) {
+          const data = await response.json();
+          setSwoops(data);
+        }
+      }
     fetchSwoops();
   }, [token]);
 
@@ -57,7 +57,22 @@ function SwooperHistoryList() {
         const response = await fetch(swoopUrl, fetchConfig)
         if (response.ok) {
             console.log("Swoop Succesfully Completed!")
-            fetchSwoops()
+              const fetchSwoops = async () => {
+                const url = `http://localhost:8080/swoops`;
+                const fetchConfig = {
+                  method: "get",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                };
+                const response = await fetch(url, fetchConfig);
+
+                if (response.ok) {
+                  const data = await response.json();
+                  setSwoops(data);
+                }
+              }
+              fetchSwoops();
         }
     }
 
@@ -82,7 +97,7 @@ function SwooperHistoryList() {
                     {swoop.hazards}
                   </Col>
                   <Col md={3} className="text-center border-right">
-                    {swoop.status == 1 ? (
+                    {swoop.status === 1 ? (
                       <Button
                         variant="primary"
                         onClick={() => finishSwoop(swoop)}

@@ -1,37 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import { useToken } from './Auth';
-import { useAuthContext } from './Auth';
 import CustomerPostDetail from './DetailCustomerPost';
-import {Row, Col, Card, Button } from 'react-bootstrap';
-
 
 function CustomerPostList() {
 
-// const { token } = useAuthContext();
 const [swoops, setSwoops] = useState([])
 const [selectedRow, setSelectedRow] = useState(null);
 const { token } = useToken();
 
-
-
-///// grab all of the customer posts ////
-const fetchAllCustomerPosts = async () => {
-  const customerPostUrl = `http://localhost:8080/pickups`
-  const fetchConfig = {
-    method: "get",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-  const response = await fetch(customerPostUrl, fetchConfig);
-  if (response.ok) {
-    const data = await response.json();
-    setSwoops(data);
-  }
-}
-
 //////any uses effects/////
 useEffect(() => {
+  const fetchAllCustomerPosts = async () => {
+    const customerPostUrl = `http://localhost:8080/pickups`
+    const fetchConfig = {
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    const response = await fetch(customerPostUrl, fetchConfig);
+    if (response.ok) {
+      const data = await response.json();
+      setSwoops(data);
+    }
+  }
   fetchAllCustomerPosts();
 }, [token]);
 

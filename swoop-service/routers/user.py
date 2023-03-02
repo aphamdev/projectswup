@@ -10,8 +10,15 @@ from fastapi import (
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from pydantic import BaseModel
-from queries.user import UsersProfileUpdate, UsersOut, UsersIn, UserRepo, DuplicateAccountError, UserUpdate, UsersOutWithPassword
-from typing import Union, List, Optional
+from queries.user import (
+    UsersProfileUpdate,
+    UsersOut,
+    UsersIn,
+    UserRepo,
+    UserUpdate,
+    UsersOutWithPassword
+)
+from typing import List
 
 
 class AccountForm(BaseModel):
@@ -49,7 +56,8 @@ async def create_account(
     token = await authenticator.login(response, request, form, accounts)
     return AccountToken(account=account, **token.dict())
 
-#####################################################################################################
+############################################################################
+
 
 @router.get("/api/accounts/", response_model=UsersOut)
 def get_user(
@@ -59,7 +67,9 @@ def get_user(
     email = user_data['email']
     return repo.get(email)
 
-#####################################################################################################
+############################################################################
+
+
 @router.get("/api/accounts/all", response_model=List[UsersOut])
 def get_users(
     repo: UserRepo = Depends(),
@@ -67,7 +77,8 @@ def get_users(
 ):
     return repo.get_all_users()
 
-#####################################################################################################
+############################################################################
+
 
 @router.put("/api/accounts/{user_id}", response_model=UserUpdate)
 def update_user_form_swoop(
@@ -76,13 +87,15 @@ def update_user_form_swoop(
     repo: UserRepo = Depends(),
 ) -> UsersIn:
     return repo.update(user_id, users)
-#####################################################################################################
+############################################################################
 
 
 @router.get("/token", response_model=AccountToken | None)
 async def get_token(
     request: Request,
-    account: UsersOutWithPassword = Depends(authenticator.try_get_current_account_data)
+    account: UsersOutWithPassword = Depends(
+        authenticator.try_get_current_account_data
+    )
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
         print(account, " TTTHHHHHISSSS ISSS ACCCOUUUNNTTT FROM TOKEEEENNNNNN")
@@ -93,6 +106,8 @@ async def get_token(
         }
 
 #############################################################
+
+
 @router.put("/api/profile/{user_id}", response_model=UsersProfileUpdate)
 def update_profile(
     user_id: int,

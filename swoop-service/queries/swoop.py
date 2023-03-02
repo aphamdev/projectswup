@@ -1,9 +1,7 @@
 from pydantic import BaseModel
 from typing import Optional, List, Union
-from fastapi.security import OAuth2PasswordBearer
-from queries.user import UsersIn, UsersOut
+from queries.user import UsersOut
 from queries.pool import pool
-from fastapi import APIRouter, Depends
 
 
 class Error(BaseModel):
@@ -31,10 +29,12 @@ class SwoopsOut(BaseModel):
     weight: int
     status: int
 
+
 class SwoopsAccept(BaseModel):
     pickup_id: int
     status: int
     swooper_id: int
+
 
 class SwoopsOutWithUsers(UsersOut):
     pickup_id: int
@@ -61,8 +61,11 @@ class SwoopsOutWithUsers(UsersOut):
 
 
 class SwoopsRepository:
-    def get_one_swoop(self, pickup_id: int, user_id: int) -> Optional[SwoopsOutWithUsers]:
-    # connect to the database
+    def get_one_swoop(
+            self,
+            pickup_id: int,
+            user_id: int) -> Optional[SwoopsOutWithUsers]:
+        # connect to the database
         try:
             with pool.connection() as conn:
                 # get a cursor to execute SQL queries
@@ -70,8 +73,12 @@ class SwoopsRepository:
                     # execute the SELECT statement with JOIN
                     db.execute(
                         """
-                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
-                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id,
+                            s.trash_type, s.description, s.picture_url,
+                            s.hazards, s.size, s.weight, s.status,
+                            u.first_name, u.last_name, u.phone_number, u.email,
+                            u.address, u.hashed_password, u.username, u.car,
+                            u.license_number, u.is_swooper, u.user_id
                         FROM swoops s
                         INNER JOIN users u
                         ON s.customer_id = u.user_id
@@ -113,17 +120,24 @@ class SwoopsRepository:
             print(str(e))
             return None
 
-    def get_swooper_history(self, user_id) -> Union[Error,List[SwoopsOutWithUsers]]:
+    def get_swooper_history(self, user_id) -> Union[Error,
+                                                    List[SwoopsOutWithUsers]]:
         # connect to the database
         try:
             with pool.connection() as conn:
-                # get a cursor (something to run SQL with which is PG-admin in our case)
+                # get a cursor
                 with conn.cursor() as db:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
-                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id,
+                        s.trash_type,
+                        s.description, s.picture_url, s.hazards, s.size,
+                        s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number,
+                        u.email,
+                        u.address, u.hashed_password, u.username, u.car,
+                        u.license_number, u.is_swooper, u.user_id
                         FROM swoops s
                         INNER JOIN users u
                         ON s.customer_id = u.user_id
@@ -175,7 +189,9 @@ class SwoopsRepository:
                 result = db.execute(
                     """
                     INSERT INTO swoops
-                        (customer_id, trash_type, description, picture_url, hazards, size, weight)
+                        (customer_id, trash_type, description,
+                        picture_url,
+                        hazards, size, weight)
                     VALUES
                         (%s, %s, %s, %s, %s, %s, %s)
                     RETURNING pickup_id;
@@ -209,8 +225,13 @@ class SwoopsRepository:
                     # execute the SELECT statement with JOIN
                     db.execute(
                         """
-                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
-                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        SELECT s.pickup_id, s.customer_id,
+                        s.swooper_id,
+                        s.trash_type, s.description, s.picture_url, s.hazards,
+                        s.size, s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number, u.email,
+                        u.address, u.hashed_password, u.username, u.car,
+                        u.license_number, u.is_swooper, u.user_id
                         FROM swoops s
                         INNER JOIN users u
                         ON s.customer_id = u.user_id
@@ -250,18 +271,23 @@ class SwoopsRepository:
             print(e)
             return {"message": "Could not get all available swoops"}
 
-
-
-    def get_all_customer_posts(self, user_id) -> Union[Error,List[SwoopsOutWithUsers]]:
+    def get_all_customer_posts(self, user_id) -> Union[Error,
+                                                       List[SwoopsOutWithUsers]
+                                                       ]:
         try:
             with pool.connection() as conn:
-                # get a cursor (something to run SQL with which is PG-admin in our case)
+                # get a cursor (something to run SQL with which is PG-admin in
+                # our case)
                 with conn.cursor() as db:
                     # execute the SELECT statement
                     db.execute(
                         """
-                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
-                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id,
+                        s.trash_type, s.description, s.picture_url, s.hazards,
+                        s.size, s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number, u.email,
+                        u.address, u.hashed_password, u.username, u.car,
+                        u.license_number, u.is_swooper, u.user_id
                         FROM swoops s
                         INNER JOIN users u
                         ON s.customer_id = u.user_id
@@ -303,7 +329,10 @@ class SwoopsRepository:
             return e
             # return {"message": "Could not get list of swoops"}
 
-    def accept_job_swoop(self, pickup_id: int, pickup: SwoopsIn, account_data: dict) -> Union[Error, SwoopsAccept]:
+    def accept_job_swoop(self, pickup_id: int,
+                         pickup: SwoopsIn,
+                         account_data: dict) -> Union[Error,
+                                                      SwoopsAccept]:
         try:
             # Connect the database
             with pool.connection() as conn:
@@ -321,12 +350,19 @@ class SwoopsRepository:
                             pickup_id
                         ]
                     )
-                    return SwoopsAccept(pickup_id=pickup_id, swooper_id=account_data["user_id"], status=1)
+                    return SwoopsAccept(
+                        pickup_id=pickup_id,
+                        swooper_id=account_data["user_id"],
+                        status=1
+                    )
         except Exception as e:
             print(e)
             return {"message": "Could not accept available pickup"}
 
-    def complete_swoop_job(self, pickup_id: int, swoops: SwoopsIn,  account_data: dict) -> Union[Error, SwoopsAccept]:
+    def complete_swoop_job(
+            self, pickup_id: int,
+            swoops: SwoopsIn,
+            account_data: dict) -> Union[Error, SwoopsAccept]:
         try:
             # Connect the database
             with pool.connection() as conn:
@@ -344,14 +380,17 @@ class SwoopsRepository:
                             pickup_id
                         ]
                     )
-                    return SwoopsAccept(pickup_id=pickup_id, swooper_id=account_data["user_id"], status=2)
+                    return SwoopsAccept(pickup_id=pickup_id,
+                                        swooper_id=account_data["user_id"],
+                                        status=2)
         except Exception as e:
             print(e)
             return {"message": "Could not complete pickup"}
 
-
-
-    def get_one_customerpost(self, pickup_id: int, user_id: int) -> Optional[SwoopsOutWithUsers]:
+    def get_one_customerpost(
+            self,
+            pickup_id: int,
+            user_id: int) -> Optional[SwoopsOutWithUsers]:
         try:
             with pool.connection() as conn:
                 # get a cursor to execute SQL queries
@@ -359,8 +398,12 @@ class SwoopsRepository:
                     # execute the SELECT statement with JOIN
                     db.execute(
                         """
-                        SELECT s.pickup_id, s.customer_id, s.swooper_id, s.trash_type, s.description, s.picture_url, s.hazards, s.size, s.weight, s.status,
-                        u.first_name, u.last_name, u.phone_number, u.email, u.address, u.hashed_password, u.username, u.car, u.license_number, u.is_swooper, u.user_id
+                        SELECT s.pickup_id, s.customer_id, s.swooper_id,
+                        s.trash_type, s.description, s.picture_url, s.hazards,
+                        s.size, s.weight, s.status,
+                        u.first_name, u.last_name, u.phone_number, u.email,
+                        u.address, u.hashed_password, u.username, u.car,
+                        u.license_number, u.is_swooper, u.user_id
                         FROM swoops s
                         INNER JOIN users u
                         ON s.swooper_id = u.user_id
@@ -400,35 +443,3 @@ class SwoopsRepository:
         except Exception as e:
             print(str(e))
             return None
-    #         try:
-    #             with pool.connection() as conn:
-    #                 with conn.cursor() as db:
-    #                     result = db.execute(
-    #                         """
-    #                         SELECT pickup_id, swooper_id, customer_id, trash_type, description, picture_url, hazards, size, weight, status
-    #                         FROM swoops
-    #                         WHERE pickup_id = %s AND customer_id = %s
-    #                         """,
-    #                         [pickup_id, user_id]
-    #                     )
-    #                     record = result.fetchone()
-    #                     if record is None:
-    #                         return None
-    #                     return self.record_to_swoopsout(record)
-    #         except Exception as e:
-    #             print(e)
-    #             return {"message": "Could not get post"}
-
-    # def record_to_swoopsout(self, record):
-    #     return SwoopsOut(
-    #         pickup_id=record[0],
-    #         swooper_id=record[1],
-    #         customer_id=record[2],
-    #         trash_type=record[3],
-    #         description=record[4],
-    #         picture_url=record[5],
-    #         hazards=record[6],
-    #         size=record[7],
-    #         weight=record[8],
-    #         status=record[9]
-    #     )

@@ -1,16 +1,16 @@
 from fastapi.testclient import TestClient
-from fastapi import Depends
 from main import app
 from queries.swoop import SwoopsRepository
-from queries.user import UserRepo
 from authenticator import authenticator
 
 
 client = TestClient(app)
 
+
 class MockSwoopsQueries:
     def get_swooper_history(self, user_id):
         return [Swooper_history_mock]
+
 
 Swooper_history_mock = {
     "user_id": 0,
@@ -50,8 +50,10 @@ mock_user = {
     "is_swooper": True
 }
 
+
 def account_override():
     return mock_user
+
 
 def test_get_swooper_history_protected():
 
@@ -66,6 +68,7 @@ def test_get_swooper_history_protected():
     assert response.json() == [Swooper_history_mock]
 
     app.dependency_overrides = {}
+
 
 def test_init():
     assert 1 == 1

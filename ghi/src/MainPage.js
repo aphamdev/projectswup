@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Container, Row, Col, Button, Nav, Card, Carousel } from 'react-bootstrap';
 
 function  MainPage() {

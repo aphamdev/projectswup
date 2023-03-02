@@ -1,12 +1,64 @@
 import React, {useEffect, useState} from 'react';
-import { useAuthContext, useUser } from './Auth';
+import { useAuthContext} from './Auth';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
 
 function AvailableSwoops() {
 
     const {token} = useAuthContext();
     const [user, setUser] = useState([]);
-    const fetchUserData = async () => {
+    const [availableSwoops, setAvailableSwoops] = useState([]);
+
+
+
+    const handleAccept = async (swoop) => {
+      const acceptSwoopUrl = `http://localhost:8080/swoops/accept/${swoop.pickup_id}`;
+
+      const data = {};
+      data.trash_type = swoop.trash_type
+      data.description = swoop.description
+      data.picture_url = swoop.picture_url
+      data.hazards = swoop.hazards
+      data.size = swoop.size
+      data.weight = swoop.weight
+
+      const fetchConfig = {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response = await fetch(acceptSwoopUrl, fetchConfig);
+      if (response.ok) {
+        console.log("Swoop Succesfully Accepted!")
+        const fetchAvailableSwoops = async () => {
+
+          const availableSwoopsURL = 'http://localhost:8080/listings';
+
+          const fetchConfig = {
+              method: "get",
+              headers: {
+              Authorization: `Bearer ${token}`,
+              },
+          };
+
+          const response = await fetch(availableSwoopsURL, fetchConfig);
+
+          if (response.ok) {
+              const availableSwoopsData = await response.json();
+              setAvailableSwoops(availableSwoopsData)
+          }
+      }
+        fetchAvailableSwoops();
+      }
+    }
+
+
+
+    useEffect(() => {
+      const fetchUserData = async () => {
         const URL = 'http://localhost:8080/api/accounts/';
 
         const response = await fetch(URL, {
@@ -18,9 +70,7 @@ function AvailableSwoops() {
             setUser(data)
         }
     }
-
-    const [availableSwoops, setAvailableSwoops] = useState([]);
-    const fetchAvailableSwoops = async () => {
+      const fetchAvailableSwoops = async () => {
 
         const availableSwoopsURL = 'http://localhost:8080/listings';
 
@@ -38,37 +88,6 @@ function AvailableSwoops() {
             setAvailableSwoops(availableSwoopsData)
         }
     }
-
-    const handleAccept = async (swoop) => {
-      const acceptSwoopUrl = `http://localhost:8080/swoops/accept/${swoop.pickup_id}`;
-
-      const data = {};
-      data.trash_type = swoop.trash_type
-      data.description = swoop.description
-      data.picture_url = swoop. picture_url
-      data.hazards = swoop.hazards
-      data.size = swoop.size
-      data.weight = swoop.weight
-
-      const fetchConfig = {
-        method: "PUT",
-        body: JSON.stringify(data),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      };
-
-      const response = await fetch(acceptSwoopUrl, fetchConfig);
-      if (response.ok) {
-        console.log("Swoop Succesfully Accepted!")
-        fetchAvailableSwoops();
-      }
-    }
-
-
-
-    useEffect(() => {
         fetchUserData();
         fetchAvailableSwoops();
       }, [token]);

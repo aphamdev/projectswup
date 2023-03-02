@@ -1,15 +1,15 @@
 from fastapi.testclient import TestClient
-from fastapi import Depends
 from main import app
 from queries.user import UserRepo
 from authenticator import authenticator
 
-
 client = TestClient(app)
+
 
 class MockUsersQueries:
     def get_all_users(self):
         return [all_users_mock]
+
 
 all_users_mock = {
     "user_id": 0,
@@ -39,11 +39,12 @@ mock_user = {
     "is_swooper": True
 }
 
+
 def account_override():
     return mock_user
 
-def test_get_all_users():
 
+def test_get_all_users():
 
     app.dependency_overrides[UserRepo] = MockUsersQueries
     app.dependency_overrides[
@@ -53,11 +54,7 @@ def test_get_all_users():
     response = client.get("/api/accounts/all")
     print(response)
 
-
     assert response.status_code == 200
     assert response.json() == [all_users_mock]
 
     app.dependency_overrides = {}
-
-def test_init():
-    assert 1 == 1

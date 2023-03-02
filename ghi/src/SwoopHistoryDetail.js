@@ -1,42 +1,31 @@
 import React, {useEffect, useState} from 'react'
-import { useAuthContext, useUser } from './Auth.js';
+import { useAuthContext} from './Auth.js';
 
 
 function SwoopHistoryDetail(id) {
     const [swoop, setSwoops] = useState([]);
     const {token } = useAuthContext();
 
-    const fetchSwoopsDetails = async () => {
-        const url = `http://localhost:8080/swoops/${id.id}`;
-        console.log("THIS IS IDDDDDDD", id.id)
-        // const data = {};
-        // data.trash_type = swoop.trash_type
-        // data.description = swoop.description
-        // data.picture_url = swoop. picture_url
-        // data.hazards = swoop.hazards
-        // data.size = swoop.size
-        // data.weight = swoop.weight
 
-        const fetchConfig = {
-            method: "get",
-            headers: {
-            Authorization: `Bearer ${token}`,
-            },
-        };
-
-        const response = await fetch(url, fetchConfig);
-
-        if (response.ok) {
-            const data = await response.json();
-            console.log(data)
-            setSwoops(data)
-        }
-    }
     useEffect(() => {
-        fetchSwoopsDetails();
-    }, [token]);
+        const fetchSwoopsDetails = async () => {
+            const url = `http://localhost:8080/swoops/${id.id}`;
 
-
+            const fetchConfig = {
+                method: "get",
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            };
+            const response = await fetch(url, fetchConfig);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data)
+                setSwoops(data)
+            }
+        }
+    fetchSwoopsDetails();
+    }, [token, id.id]);
     return (
         <div>
             <div>
@@ -60,7 +49,7 @@ function SwoopHistoryDetail(id) {
                     <td>{ swoop.trash_type }</td>
                     <td>{ swoop.description }</td>
                     <td>{ swoop.hazards }</td>
-                    {swoop.status == 1 ? (
+                    {swoop.status === 1 ? (
                     <td>
                         In progress
                     </td>
@@ -73,6 +62,7 @@ function SwoopHistoryDetail(id) {
                         <img
                             src={ swoop.picture_url }
                             height="120"
+                            alt="Swoop"
                             />
                     </td>
                 </tr>

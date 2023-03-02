@@ -8,28 +8,29 @@ function ProfilePageUpdateForm() {
   const { token } = useAuthContext();
   ///////////////////////////////////////////////////////////////////////////
   const [user, setUser] = useState([]);
-    const fetchUserData = async () => {
-        const URL = 'http://localhost:8080/api/accounts/';
 
-        const response = await fetch(URL, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            setUser(data)
-            setUserName(data.username)
-            setFirstName(data.first_name)
-            setLastName(data.last_name)
-            setPhoneNumber(data.phone_number)
-            setEmail(data.email)
-            setAddress(data.address)
-            setCar(data.car)
-            setLicenseNumber(data.license_number)
-        }
-    }
     useEffect(() => {
-        fetchUserData();
+        const fetchUserData = async () => {
+          const URL = 'http://localhost:8080/api/accounts/';
+
+          const response = await fetch(URL, {
+              headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (response.ok) {
+              const data = await response.json();
+              setUser(data)
+              setUserName(data.username)
+              setFirstName(data.first_name)
+              setLastName(data.last_name)
+              setPhoneNumber(data.phone_number)
+              setEmail(data.email)
+              setAddress(data.address)
+              setCar(data.car)
+              setLicenseNumber(data.license_number)
+          }
+      }
+      fetchUserData();
     }, [token]);
 ///////////////////////////////////////////////////////////////////////////
   const [username, setUserName] = useState('')

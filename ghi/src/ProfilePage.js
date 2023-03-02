@@ -7,19 +7,20 @@ function ProfilePage() {
     const { token } = useAuthContext();
 //Getting current user data //////////////////////////////////////////////////////////////////////////////////////
     const [user, setUser] = useState([]);
-    const fetchUserData = async () => {
-        const URL = 'http://localhost:8080/api/accounts/';
 
-        const response = await fetch(URL, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            setUser(data)
-        }
-    }
     useEffect(() => {
+        const fetchUserData = async () => {
+            const URL = 'http://localhost:8080/api/accounts/';
+
+            const response = await fetch(URL, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setUser(data)
+            }
+        }
         fetchUserData();
     }, [token]);
 //The JSX //////////////////////////////////////////////////////////////////////////////////////

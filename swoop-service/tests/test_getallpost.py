@@ -1,12 +1,11 @@
 from fastapi.testclient import TestClient
-
 from main import app
 from queries.swoop import SwoopsRepository
-from queries.user import UserRepo
 from authenticator import authenticator
 
 
 client = TestClient(app)
+
 
 class EmptyPostQueries:
     def get_all_customer_posts(self, user_id):
@@ -52,11 +51,12 @@ mock_user = {
     "is_swooper": True
 }
 
+
 def account_override():
     return mock_user
 
-def test_get_all_customer_posts_protected():
 
+def test_get_all_customer_posts_protected():
 
     app.dependency_overrides[SwoopsRepository] = EmptyPostQueries
     app.dependency_overrides[
@@ -65,11 +65,11 @@ def test_get_all_customer_posts_protected():
 
     response = client.get("/pickups")
 
-
     assert response.status_code == 200
     assert response.json() == [customerpost_mock]
 
     app.dependency_overrides = {}
+
 
 def test_init():
     assert 1 == 1

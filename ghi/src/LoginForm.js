@@ -1,10 +1,8 @@
-import { useAuthContext, useToken } from "./Auth";
-
+import { useToken } from "./Auth";
 import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 
 function LogInForm() {
-  const { token } = useAuthContext();
   const { login } = useToken();
   const [username, setUserName] = useState('')
   const [password, setPassword] = useState('')

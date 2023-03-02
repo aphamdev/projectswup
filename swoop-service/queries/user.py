@@ -3,7 +3,6 @@ from queries.pool import pool
 from typing import Optional, List
 
 
-
 class DuplicateAccountError(ValueError):
     pass
 
@@ -53,28 +52,42 @@ class UserUpdate(BaseModel):
 
 
 class UserRepo:
-    def create(self, users: UsersIn, hashed_password: str) -> UsersOutWithPassword:
+    def create(self, users: UsersIn,
+               hashed_password: str) -> UsersOutWithPassword:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     result = db.execute(
                         """
                         INSERT INTO users
-                            (
-                                first_name, last_name, phone_number, email, address, username, hashed_password
-                            )
+                            (first_name,
+                            last_name,
+                            phone_number,
+                            email,
+                            address,
+                            username,
+                            hashed_password)
                         VALUES
                             (%s,%s,%s,%s,%s,%s,%s)
                         RETURNING user_id;
                         """,
                         [
-                            users.first_name, users.last_name, users.phone_number,
-                            users.email, users.address, users.username, hashed_password
+                            users.first_name,
+                            users.last_name,
+                            users.phone_number,
+                            users.email,
+                            users.address,
+                            users.username,
+                            hashed_password
                         ]
                     )
                     user_id = result.fetchone()[0]
                     old_data = users.dict()
-                    return UsersOutWithPassword(user_id=user_id, **old_data, hashed_password=hashed_password)
+                    return UsersOutWithPassword(
+                        user_id=user_id,
+                        **old_data,
+                        hashed_password=hashed_password
+                    )
 
         except Exception as e:
             if 'email' in str(e):
@@ -87,38 +100,46 @@ class UserRepo:
                 raise
 
     def get(self, email: str) -> UsersOutWithPassword:
-            try:
-                with pool.connection() as conn:
-                    with conn.cursor() as cur:
-                        result = cur.execute(
-                            """
-                            SELECT user_id, first_name, last_name, phone_number, email, address, car, license_number,
-                            is_swooper, hashed_password, username
-                            FROM users
-                            WHERE email = %s
-                            """,
-                            [email]
-                        )
-                        record = result.fetchone()
-                        if record is None:
-                            return None
-                        user = UsersOut(
-                            user_id=record[0],
-                            first_name=record[1],
-                            last_name=record[2],
-                            phone_number=record[3],
-                            email=record[4],
-                            address=record[5],
-                            car=record[6],
-                            license_number=record[7],
-                            is_swooper=record[8],
-                            hashed_password=record[9],
-                            username=record[10]
-                        )
-                        return user
-            except Exception as e:
-                print(e)
-                return {"message": "doesnt work oops"}
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as cur:
+                    result = cur.execute(
+                        """
+                        SELECT user_id,
+                                first_name,
+                                last_name,
+                                phone_number,
+                                email, address,
+                                car,
+                                license_number,
+                                is_swooper,
+                                hashed_password,
+                                username
+                        FROM users
+                        WHERE email = %s
+                        """,
+                        [email]
+                    )
+                    record = result.fetchone()
+                    if record is None:
+                        return None
+                    user = UsersOut(
+                        user_id=record[0],
+                        first_name=record[1],
+                        last_name=record[2],
+                        phone_number=record[3],
+                        email=record[4],
+                        address=record[5],
+                        car=record[6],
+                        license_number=record[7],
+                        is_swooper=record[8],
+                        hashed_password=record[9],
+                        username=record[10]
+                    )
+                    return user
+        except Exception as e:
+            print(e)
+            return {"message": "doesnt work oops"}
 
     def update(self, user_id: int, users: UserUpdate) -> UsersOut:
         try:
@@ -144,14 +165,21 @@ class UserRepo:
             print(e)
             return {"message": "Could not update user information"}
 
-    def update_profile(self, user_id: int, users: UsersProfileUpdate) -> UsersOut:
+    def update_profile(self,
+                       user_id: int,
+                       users: UsersProfileUpdate) -> UsersOut:
         try:
             with pool.connection() as conn:
                 with conn.cursor() as db:
                     db.execute(
                         """
                         UPDATE users
-                        SET first_name = %s, last_name = %s, phone_number = %s, email = %s, address = %s, username = %s, car = %s, license_number = %s
+                        SET (first_name = %s,
+                            last_name = %s,
+                            phone_number = %s,
+                            email = %s, address = %s,
+                            username = %s, car = %s,
+                            license_number = %s)
                         WHERE user_id = %s
                         """,
                         [
@@ -178,8 +206,17 @@ class UserRepo:
                 with conn.cursor() as db:
                     db.execute(
                         '''
-                        SELECT user_id, first_name, last_name, phone_number, email, address, car, license_number,
-                        is_swooper, hashed_password, username
+                        SELECT user_id,
+                                first_name,
+                                last_name,
+                                phone_number,
+                                email,
+                                address,
+                                car,
+                                license_number,
+                                is_swooper,
+                                hashed_password,
+                                username
                         FROM users
                         ORDER BY user_id
                         '''
