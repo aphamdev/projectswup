@@ -1,0 +1,24 @@
+.container {
+  margin-top: 50px;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: rgba(0, 0, 0, 0.075);
+  cursor: pointer;
+}
+
+.clickable-row {
+  cursor: pointer;
+}
+
+.active {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.details {
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: #f9f9f9;
+  margin: 10px 0;
+}

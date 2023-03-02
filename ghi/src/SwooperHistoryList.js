@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col, Card, Button, Table, Container, Accordion } from 'react-bootstrap';
 import { useAuthContext, useUser } from './Auth.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 import { NavLink, Link } from 'react-router-dom';
@@ -22,7 +22,6 @@ function SwooperHistoryList() {
     if (response.ok) {
       const data = await response.json();
       setSwoops(data);
-      console.log("THIS IS LIST DATA", data)
     }
   };
 
@@ -63,50 +62,57 @@ function SwooperHistoryList() {
     }
 
   return (
-    <div>
-      <h1>Your Swoops</h1>
-      <table className="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Trash Type</th>
-            <th>Description</th>
-            <th>Hazards</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {swoops.map((swoop) => {
-            const isRowSelected = selectedRow === swoop;
-            return (
-              <React.Fragment key={swoop.swooper_id}>
-                <tr onClick={() => handleRowClick(swoop)}>
-                  <td>{swoop.trash_type}</td>
-                  <td>{swoop.description}</td>
-                  <td>{swoop.hazards}</td>
-                  {swoop.status == 1 ? (
-                    <td>
-                        <Button onClick={() => finishSwoop(swoop)}>Click to Complete</Button>
-                    </td>
+  <div className="bg-white py-5">
+    <Container>
+      <h1 className="text-center mb-5 font-weight-bold">Your Swoops</h1>
+      <div className="accordion" >
+        {swoops.map((swoop) => {
+          const isRowSelected = selectedRow === swoop;
+          return (
+            <React.Fragment key={swoop.swooper_id}>
+              <div className="my-3 border rounded-pill p-4" onClick={() => handleRowClick(swoop)}>
+                <Row className="d-flex align-items-center justify-content-between">
+                  <Col md={3} className="text-center text-muted border-right">
+                    {swoop.trash_type}
+                  </Col>
+                  <Col md={3} className="text-center border-right">
+                    {swoop.description}
+                  </Col>
+                  <Col md={3} className="text-center border-right">
+                    {swoop.hazards}
+                  </Col>
+                  <Col md={3} className="text-center border-right">
+                    {swoop.status == 1 ? (
+                      <Button
+                        variant="primary"
+                        onClick={() => finishSwoop(swoop)}
+                      >
+                        Complete
+                      </Button>
                     ) : (
-                        <td>Completed</td>
+                      <span className="text-success">Completed</span>
                     )}
-                  <td></td>
-                </tr>
-                {isRowSelected && (
-                  <tr>
-                    <td colSpan={5}>
-                      <SwoopHistoryDetail id={swoop.pickup_id} />
-                    </td>
-                  </tr>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
+                  </Col>
+                </Row>
+              </div>
+              {isRowSelected && (
+                <Row className="my-3">
+                  <Col md={12}>
+                    <Card className="rounded border shadow-sm">
+                      <Card.Body>
+                        <SwoopHistoryDetail id={swoop.pickup_id} />
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </Row>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </Container>
+  </div>
+);
 }
 
 export default SwooperHistoryList;
