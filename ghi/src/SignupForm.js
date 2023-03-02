@@ -65,7 +65,7 @@ function SignupForm() {
         password,
         username
       );
-      window.location.href = "/";
+      navigate("/");
     } catch (error) {
       console.log(error)
       setErrorMessage(String(error))

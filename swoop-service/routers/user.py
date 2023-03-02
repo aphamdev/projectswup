@@ -10,7 +10,7 @@ from fastapi import (
 from jwtdown_fastapi.authentication import Token
 from authenticator import authenticator
 from pydantic import BaseModel
-from queries.user import UsersOut, UsersIn, UserRepo, DuplicateAccountError, UserUpdate, UsersOutWithPassword
+from queries.user import UsersProfileUpdate, UsersOut, UsersIn, UserRepo, DuplicateAccountError, UserUpdate, UsersOutWithPassword
 from typing import Union, List, Optional
 
 
@@ -91,3 +91,12 @@ async def get_token(
             "type": "Bearer",
             "account": account,
         }
+
+#############################################################
+@router.put("/api/profile/{user_id}", response_model=UsersProfileUpdate)
+def update_profile(
+    user_id: int,
+    users: UsersProfileUpdate,
+    repo: UserRepo = Depends(),
+) -> UsersIn:
+    return repo.update_profile(user_id, users)

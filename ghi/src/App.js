@@ -15,6 +15,8 @@ import CustomerPostList from './CustomerPostList.js';
 import CustomerPostDetail from './DetailCustomerPost.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 import MainPage from './MainPage.js';
+import ProfilePage from './ProfilePage.js';
+import ProfilePageUpdateForm from './ProfilePageUpdateForm.js';
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -54,6 +56,8 @@ function App() {
               <Nav />
                 <div className="container"></div>
                 <Routes>
+                    <Route path="/profile" element={<ProfilePage/>}/>
+                    <Route path="/profile/update" element={<ProfilePageUpdateForm/>}/>
                     <Route path="/" element={<MainPage/>} />
                     <Route path="/login" element={<LogInForm/>} />
                     <Route path="/signup" element={<SignupForm/>} />

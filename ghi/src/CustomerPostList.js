@@ -10,7 +10,7 @@ function CustomerPostList() {
 // const { token } = useAuthContext();
 const [swoops, setSwoops] = useState([])
 const [selectedRow, setSelectedRow] = useState(null);
-const { token, login } = useToken();
+const { token } = useToken();
 
 
 

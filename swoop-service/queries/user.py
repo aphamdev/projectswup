@@ -32,12 +32,25 @@ class UsersOut(BaseModel):
     is_swooper: Optional[bool]
 
 
+class UsersProfileUpdate(BaseModel):
+    first_name: Optional[str]
+    last_name: Optional[str]
+    phone_number: Optional[str]
+    email: Optional[str]
+    address: Optional[str]
+    car: Optional[str]
+    license_number: Optional[str]
+    username: Optional[str]
+
+
 class UsersOutWithPassword(UsersOut):
     hashed_password: str
+
 
 class UserUpdate(BaseModel):
     car: str
     license_number: str
+
 
 class UserRepo:
     def create(self, users: UsersIn, hashed_password: str) -> UsersOutWithPassword:
@@ -72,16 +85,6 @@ class UserRepo:
                 raise DuplicateAccountError('Username already exists')
             else:
                 raise
-        # except Exception as e:
-        #     print("EEEEEEEEEEEEEEEE", str(e))
-        #     if "users_email_key" in str(e):
-        #         raise DuplicateAccountError("An account with this email already exists")
-        #     elif "users_username_key" in str(e):
-        #         raise DuplicateAccountError("An account with this username already exists")
-        #     elif "users_address_key" in str(e):
-        #         raise DuplicateAccountError("An account with this address already exists")
-        #     else:
-        #         raise
 
     def get(self, email: str) -> UsersOutWithPassword:
             try:
@@ -141,6 +144,33 @@ class UserRepo:
             print(e)
             return {"message": "Could not update user information"}
 
+    def update_profile(self, user_id: int, users: UsersProfileUpdate) -> UsersOut:
+        try:
+            with pool.connection() as conn:
+                with conn.cursor() as db:
+                    db.execute(
+                        """
+                        UPDATE users
+                        SET first_name = %s, last_name = %s, phone_number = %s, email = %s, address = %s, username = %s, car = %s, license_number = %s
+                        WHERE user_id = %s
+                        """,
+                        [
+                            users.first_name,
+                            users.last_name,
+                            users.phone_number,
+                            users.email,
+                            users.address,
+                            users.username,
+                            users.car,
+                            users.license_number,
+                            user_id
+                        ]
+                    )
+                    old_data = users.dict()
+                    return UsersProfileUpdate(**old_data)
+        except Exception as e:
+            print(e)
+            return {"message": "Could not update user information"}
 
     def get_all_users(self) -> List[UsersOutWithPassword]:
         try:

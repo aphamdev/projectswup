@@ -61,47 +61,6 @@ class SwoopsOutWithUsers(UsersOut):
 
 
 class SwoopsRepository:
-
-    # def get_one_swoop(self, pickup_id: int, user_id) -> Optional[SwoopsOut]:
-    # # connect to the database
-    #     print(pickup_id)
-    #     try:
-    #         with pool.connection() as conn:
-    #             # get a cursor (something to run SQL with which is PG-admin in our case)
-    #             with conn.cursor() as db:
-    #                 # execute the SELECT statement
-    #                 db.execute(
-    #                     """
-    #                     SELECT pickup_id, customer_id, swooper_id, trash_type, description, picture_url, hazards, size, weight, status
-    #                     FROM swoops
-    #                     WHERE pickup_id = %s AND swooper_id = %s
-    #                     """,
-    #                     [pickup_id, user_id]
-    #                 )
-    #                 # process the query result
-    #                 record = db.fetchone()
-    #                 print(record)
-    #                 if record is not None:
-    #                     swoop = SwoopsOut(
-    #                         pickup_id=record[0],
-    #                         customer_id=record[1],
-    #                         swooper_id=record[2],
-    #                         trash_type=record[3],
-    #                         description=record[4],
-    #                         picture_url=record[5],
-    #                         hazards=record[6],
-    #                         size=record[7],
-    #                         weight=record[8],
-    #                         status=record[9]
-    #                     )
-    #                     return swoop
-    #                 else:
-    #                     return None
-
-    #     except Exception as e:
-    #         print(e)
-    #         return {"message": "Could not get that swoop"}
-
     def get_one_swoop(self, pickup_id: int, user_id: int) -> Optional[SwoopsOutWithUsers]:
     # connect to the database
         try:

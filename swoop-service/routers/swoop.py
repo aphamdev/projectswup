@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends
 from queries.swoop import SwoopsIn, SwoopsRepository, SwoopsOut, SwoopsAccept, Error, SwoopsOutWithUsers
 from typing import Union, List, Optional
 from authenticator import authenticator

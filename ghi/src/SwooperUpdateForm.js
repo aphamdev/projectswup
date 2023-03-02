@@ -1,5 +1,4 @@
-import { useToken } from "./Auth";
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import { useAuthContext, useUser } from "./Auth";
 
 function SwooperUpdateForm() {
