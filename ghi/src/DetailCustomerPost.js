@@ -8,7 +8,7 @@ function DetailCustomerPost(id) {
 
     useEffect(() => {
     const fetchPostDetails = async () => {
-    const url = `http://localhost:8080/pickups/${id.id}`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/pickups/${id.id}`;
     const fetchConfig = {
         method: "get",
         headers: {

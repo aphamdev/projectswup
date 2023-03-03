@@ -5,12 +5,12 @@ import { NavLink } from 'react-router-dom';
 function ProfilePage() {
 //Authorization//////////////////////////////////////////////////////////////////////////////////////
     const { token } = useAuthContext();
-//Getting current user data //////////////////////////////////////////////////////////////////////////////////////
+//Getting current user data//////////////////////////////////////////////////////////////////////////////////////
     const [user, setUser] = useState([]);
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const URL = 'http://localhost:8080/api/accounts/';
+            const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts/`;
 
             const response = await fetch(URL, {
                 headers: { Authorization: `Bearer ${token}` },

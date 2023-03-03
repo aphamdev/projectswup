@@ -12,7 +12,7 @@ function SwooperHistoryList() {
 
   useEffect(() => {
       const fetchSwoops = async () => {
-        const url = `http://localhost:8080/swoops`;
+        const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/swoops`;
         const fetchConfig = {
           method: "get",
           headers: {
@@ -35,7 +35,7 @@ function SwooperHistoryList() {
 
   const finishSwoop = async (swoop) => {
 
-        const swoopUrl = `http://localhost:8080/swoops/complete/${swoop.pickup_id}`
+        const swoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${swoop.pickup_id}`
 
         const data = {};
         data.trash_type = swoop.trash_type
@@ -58,7 +58,7 @@ function SwooperHistoryList() {
         if (response.ok) {
             console.log("Swoop Succesfully Completed!")
               const fetchSwoops = async () => {
-                const url = `http://localhost:8080/swoops`;
+                const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/swoops`;
                 const fetchConfig = {
                   method: "get",
                   headers: {

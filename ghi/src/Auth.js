@@ -8,7 +8,7 @@ export function getToken() {
 }
 
 export async function getTokenInternal() {
-  const url = `http://localhost:8080/token`;
+  const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/token`;
   try {
     const response = await fetch(url, {
       credentials: "include",
@@ -76,7 +76,7 @@ export function useToken() {
 
   async function logout() {
     if (token) {
-      const url = `http://localhost:8080/token`;
+      const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/token`;
       await fetch(url, { method: "delete", credentials: "include" });
       internalToken = null;
       setToken(null);
@@ -85,7 +85,7 @@ export function useToken() {
   }
 
   async function login(username, password) {
-    const url = `http://localhost:8080/token`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/token`;
     const form = new FormData();
     form.append("username", username);
     form.append("password", password);
@@ -104,7 +104,7 @@ export function useToken() {
   }
 
   async function signup(firstName, lastName, phoneNumber, email, address, password, username) {
-    const url = `http://localhost:8080/api/accounts`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/accounts`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
@@ -141,7 +141,7 @@ export function useToken() {
   // }
 
   async function update(username, password, email, firstName, lastName, car, licenseNumber) {
-    const url = `http://localhost:8080/api/accounts`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/accounts`;
     const response = await fetch(url, {
       method: "put",
       body: JSON.stringify({
@@ -175,7 +175,7 @@ export const useUser = (token) => {
     }
 
     async function getUser() {
-      const url = `http://localhost:8080/api/accounts/`;
+      const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/accounts/`;
       const response = await fetch(url, {
         credentials: "include",
       });

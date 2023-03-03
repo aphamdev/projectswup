@@ -11,7 +11,7 @@ function AvailableSwoops() {
 
 
     const handleAccept = async (swoop) => {
-      const acceptSwoopUrl = `http://localhost:8080/swoops/accept/${swoop.pickup_id}`;
+      const acceptSwoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${swoop.pickup_id}`;
 
       const data = {};
       data.trash_type = swoop.trash_type
@@ -35,7 +35,7 @@ function AvailableSwoops() {
         console.log("Swoop Succesfully Accepted!")
         const fetchAvailableSwoops = async () => {
 
-          const availableSwoopsURL = 'http://localhost:8080/listings';
+          const availableSwoopsURL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/listings`;
 
           const fetchConfig = {
               method: "get",
@@ -59,7 +59,7 @@ function AvailableSwoops() {
 
     useEffect(() => {
       const fetchUserData = async () => {
-        const URL = 'http://localhost:8080/api/accounts/';
+        const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts/`;
 
         const response = await fetch(URL, {
             headers: { Authorization: `Bearer ${token}` },
@@ -72,7 +72,7 @@ function AvailableSwoops() {
     }
       const fetchAvailableSwoops = async () => {
 
-        const availableSwoopsURL = 'http://localhost:8080/listings';
+        const availableSwoopsURL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/listings`;
 
         const fetchConfig = {
             method: "get",

@@ -11,7 +11,7 @@ const { token } = useToken();
 //////any uses effects/////
 useEffect(() => {
   const fetchAllCustomerPosts = async () => {
-    const customerPostUrl = `http://localhost:8080/pickups`
+    const customerPostUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/pickups`
     const fetchConfig = {
       method: "get",
       headers: {

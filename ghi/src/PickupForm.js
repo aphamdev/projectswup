@@ -20,7 +20,7 @@ function PickupForm(props) {
         data.size = size;
         data.weight = parseInt(weight);
 
-        const swoopsUrl = "http://localhost:8080/pickups"; // The endpoint we want to post to
+        const swoopsUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/pickups`; // The endpoint we want to post to
         const fetchConfig = {
         method: "post",
         body: JSON.stringify(data),

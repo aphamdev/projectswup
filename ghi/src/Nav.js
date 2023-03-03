@@ -12,7 +12,7 @@ function Nav() {
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const URL = 'http://localhost:8080/api/accounts/';
+            const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts/`;
 
             const response = await fetch(URL, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -72,7 +72,7 @@ function Nav() {
                 {swooper_status === true ? (
                     <>
                     <li className="nav-item dropdown">
-                        <button className="btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="mx-1 btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             My Pickups
                         </button>
                         <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
@@ -81,7 +81,7 @@ function Nav() {
                         </ul>
                     </li>
                     <li className="nav-item dropdown">
-                        <button className="btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="mx-1 btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             Swoop Center
                         </button>
                         <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
@@ -90,12 +90,12 @@ function Nav() {
                         </ul>
                     </li>
                     <li id="profile" className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" to="/profile">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/profile">
                         My Profile
                         </NavLink>
                     </li>
                     <li id="logout" className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" onClick={handleLogout}>
+                        <NavLink className="mx-1 nav-link" aria-current="page" onClick={handleLogout}>
                         Logout
                         </NavLink>
                     </li>
@@ -103,7 +103,7 @@ function Nav() {
                 ) : (
                     <>
                     <li className="nav-item dropdown">
-                        <button className="btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button className="mx-1 btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                             My Pickups
                         </button>
                     <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
@@ -113,17 +113,17 @@ function Nav() {
                     </li>
 
                     <li className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" to="/swoopers/signup">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/swoopers/signup">
                         Become a Swooper!
                         </NavLink>
                     </li>
                     <li id="profile" className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" to="/profile">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/profile">
                         My Profile
                         </NavLink>
                     </li>
                     <li id="logout" className="nav-item">
-                        <NavLink className="nav-link" aria-current="page" onClick={handleLogout}>
+                        <NavLink className="mx-1 nav-link" aria-current="page" onClick={handleLogout}>
                         Logout
                         </NavLink>
                     </li>
