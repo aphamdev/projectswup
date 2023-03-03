@@ -104,7 +104,7 @@ export function useToken() {
   }
 
   async function signup(firstName, lastName, phoneNumber, email, address, password, username) {
-    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/accounts`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts`;
     const response = await fetch(url, {
       method: "post",
       body: JSON.stringify({
