@@ -101,7 +101,7 @@ async def get_token(
         print(account, " TTTHHHHHISSSS ISSS ACCCOUUUNNTTT FROM TOKEEEENNNNNN")
         return {
             "access_token": request.cookies[authenticator.cookie_name],
-            "type": "Bearer",
+            "token_type": "Bearer",
             "account": account,
         }
 
