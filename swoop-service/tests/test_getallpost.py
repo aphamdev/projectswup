@@ -9,7 +9,7 @@ client = TestClient(app)
 
 class EmptyPostQueries:
     def get_all_customer_posts(self, user_id):
-        return []
+        return [customerpost_mock]
 
 
 customerpost_mock = {
