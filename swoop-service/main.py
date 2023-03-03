@@ -4,7 +4,6 @@ from routers import swoop, user
 import os
 from authenticator import authenticator
 
-os.environ["CORS_HOST"] = "https://projectswup.gitlab.io"
 
 app = FastAPI()
 app.include_router(swoop.router)
