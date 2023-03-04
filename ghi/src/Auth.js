@@ -175,7 +175,7 @@ export const useUser = (token) => {
     }
 
     async function getUser() {
-      const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/accounts/`;
+      const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/accounts`;
       const response = await fetch(url, {
         credentials: "include",
       });

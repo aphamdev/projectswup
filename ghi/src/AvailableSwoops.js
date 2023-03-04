@@ -59,7 +59,7 @@ function AvailableSwoops() {
 
     useEffect(() => {
       const fetchUserData = async () => {
-        const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts/`;
+        const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts`;
 
         const response = await fetch(URL, {
             headers: { Authorization: `Bearer ${token}` },
