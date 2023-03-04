@@ -59,7 +59,7 @@ async def create_account(
 ############################################################################
 
 
-@router.get("/api/accounts/", response_model=UsersOut)
+@router.get("/api/accounts", response_model=UsersOut)
 def get_user(
     repo: UserRepo = Depends(),
     user_data: dict = Depends(authenticator.get_current_account_data),

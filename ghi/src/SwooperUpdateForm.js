@@ -22,7 +22,7 @@ function SwooperUpdateForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/${user.user_id}`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${user.user_id}`;
     const fetchConfig = {
         method: "put",
         body: JSON.stringify({

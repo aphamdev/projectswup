@@ -12,7 +12,7 @@ function SwooperHistoryList() {
 
   useEffect(() => {
       const fetchSwoops = async () => {
-        const url = `${process.env.REACT_APP_SAMPLE_SERVICE_API_HOST}/swoops`;
+        const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/swoops`;
         const fetchConfig = {
           method: "get",
           headers: {
