@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
-import { useAuthContext, useUser } from "./Auth";
+import React, { useState, useEffect} from 'react'
+import { useAuthContext} from "./Auth";
 
 function SwooperUpdateForm() {
   const {token} = useAuthContext();
-  const user = useUser(token);
+  const [user, setUser] = useState([]);
   const [car, setCar] = useState('')
   const [license_number, setLicenseNumber] = useState('')
 
@@ -22,7 +22,7 @@ function SwooperUpdateForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${user.user_id}`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts/${user.user_id}`;
     const fetchConfig = {
         method: "put",
         body: JSON.stringify({
@@ -43,6 +43,22 @@ function SwooperUpdateForm() {
         return response.json()
     }
   }
+
+    useEffect(() => {
+      const fetchUserData = async () => {
+        const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts`;
+
+        const response = await fetch(URL, {
+            headers: { Authorization: `Bearer ${token}` },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setUser(data)
+        }
+    }
+        fetchUserData();
+      }, [token]);
 
 
    return (

@@ -86,7 +86,7 @@ function ProfilePageUpdateForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const url = `http://localhost:8080/api/profile/${user.user_id}`;
+    const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/profile/${user.user_id}`;
     const fetchConfig = {
         method: "put",
         body: JSON.stringify({

@@ -174,12 +174,12 @@ class UserRepo:
                     db.execute(
                         """
                         UPDATE users
-                        SET (first_name = %s,
+                        SET first_name = %s,
                             last_name = %s,
                             phone_number = %s,
                             email = %s, address = %s,
                             username = %s, car = %s,
-                            license_number = %s)
+                            license_number = %s
                         WHERE user_id = %s
                         """,
                         [
