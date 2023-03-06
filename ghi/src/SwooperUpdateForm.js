@@ -39,7 +39,7 @@ function SwooperUpdateForm() {
     if (response.ok) {
         console.log("Swooper sign-up successful!")
         console.log(token)
-        window.location.href = '/';
+        window.location.href = '/module3-project-gamma';
         return response.json()
     }
   }

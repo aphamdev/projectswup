@@ -35,7 +35,7 @@ function SwooperHistoryList() {
 
   const finishSwoop = async (swoop) => {
 
-        const swoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${swoop.pickup_id}`
+        const swoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/swoops/complete/${swoop.pickup_id}`
 
         const data = {};
         data.trash_type = swoop.trash_type

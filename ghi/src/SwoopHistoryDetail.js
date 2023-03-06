@@ -9,7 +9,7 @@ function SwoopHistoryDetail(id) {
 
     useEffect(() => {
         const fetchSwoopsDetails = async () => {
-            const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${id.id}`;
+            const url = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/swoops/${id.id}`;
 
             const fetchConfig = {
                 method: "get",

@@ -11,7 +11,7 @@ function AvailableSwoops() {
 
 
     const handleAccept = async (swoop) => {
-      const acceptSwoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/${swoop.pickup_id}`;
+      const acceptSwoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/swoops/accept/${swoop.pickup_id}`;
 
       const data = {};
       data.trash_type = swoop.trash_type
