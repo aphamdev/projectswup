@@ -1,6 +1,7 @@
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import { useAuthContext, useToken } from "./Auth";
+import LoginForm from './LoginForm';
 
 
 function Nav() {
@@ -30,40 +31,65 @@ function Nav() {
     const navigate = useNavigate();
     const handleLogout = async (e) => {
         await logout();
-        navigate("/login");
+        navigate("/");
     }
+
 //Renders different navbar is youre logged in or not//////////////////////////////////////////////////////////////////////////////////////
     const swooper_status = user.is_swooper
     if ( token === false) {
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+                <div className="mx-auto">
                 <div className="container-fluid">
-                    <NavLink className="navbar-brand" to="/">SWUP</NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li id="login" className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="/login">
-                                Login
+                            <NavLink className="mx-auto px-2 navbar-brand" to="/">SWUP</NavLink>
+                            <li className="nav-item">
+                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
+                                How it Works
                                 </NavLink>
                             </li>
-                            <li id="signup" className="nav-item">
-                                <NavLink className="nav-link" aria-current="page" to="/signup">
-                                Signup
+                            <li className="nav-item">
+                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
+                                About Us
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
+                                Contact Us
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
+                                FAQ
+                                </NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="mx-1 nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Login
                                 </NavLink>
                             </li>
                         </ul>
                     </div>
                 </div>
+                </div>
             </nav>
+            <>
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <LoginForm />
+            </div>
+            </>
+            </>
         )
     }
         return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+        <div className="mx-auto">
         <div className="container-fluid">
-            <NavLink className="navbar-brand" to="/">SWUP</NavLink>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
             </button>
@@ -71,30 +97,33 @@ function Nav() {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 {swooper_status === true ? (
                     <>
-                    <li className="nav-item dropdown">
-                        <button className="mx-1 btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Pickups
-                        </button>
-                        <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
-                            <li><Link className="dropdown-item" to="/pickups">My Pickups</Link></li>
-                            <li><Link className="dropdown-item" to="/pickups/new">Schedule a Pickup</Link></li>
-                        </ul>
+                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWUP</NavLink>
+                    <li className="nav-item">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/pickups">
+                        My Pickups
+                        </NavLink>
                     </li>
-                    <li className="nav-item dropdown">
-                        <button className="mx-1 btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            Swoop Center
-                        </button>
-                        <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
-                            <li><Link className="dropdown-item" to="/listings">Available Swoops</Link></li>
-                            <li><Link className="dropdown-item" to="/swoopshistory">My Swoops</Link></li>
-                        </ul>
+                    <li className="nav-item">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/newpickup">
+                        Schedule a Pickup
+                        </NavLink>
                     </li>
-                    <li id="profile" className="nav-item">
+                    <li className="nav-item">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/listings">
+                        Available Swoops
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/swoopshistory">
+                        My Swoops
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/profile">
                         My Profile
                         </NavLink>
                     </li>
-                    <li id="logout" className="nav-item">
+                    <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" onClick={handleLogout}>
                         Logout
                         </NavLink>
@@ -102,27 +131,28 @@ function Nav() {
                     </>
                 ) : (
                     <>
-                    <li className="nav-item dropdown">
-                        <button className="mx-1 btn btn-dark nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            My Pickups
-                        </button>
-                    <ul className="dropdown-menu" aria-labelledby='navbarDarkDropdownMenuLink'>
-                        <li><Link className="dropdown-item" to="/pickups">My Pickups</Link></li>
-                        <li><Link className="dropdown-item" to="/pickups/new">Schedule a Pickup</Link></li>
-                    </ul>
+                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWUP</NavLink>
+                    <li className="nav-item">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/pickups">
+                        My Pickups
+                        </NavLink>
                     </li>
-
+                    <li className="nav-item">
+                        <NavLink className="mx-1 nav-link" aria-current="page" to="/newpickup">
+                        Schedule a Pickup
+                        </NavLink>
+                    </li>
                     <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/swoopers/signup">
                         Become a Swooper!
                         </NavLink>
                     </li>
-                    <li id="profile" className="nav-item">
+                    <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/profile">
                         My Profile
                         </NavLink>
                     </li>
-                    <li id="logout" className="nav-item">
+                    <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" onClick={handleLogout}>
                         Logout
                         </NavLink>
@@ -131,6 +161,7 @@ function Nav() {
                 )}
                 </ul>
             </div>
+        </div>
         </div>
         </nav>
   )

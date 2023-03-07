@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react';
 import { useAuthContext } from "./Auth";
 import { NavLink } from 'react-router-dom';
 
+
 function ProfilePage() {
 //Authorization//////////////////////////////////////////////////////////////////////////////////////
     const { token } = useAuthContext();
@@ -23,6 +24,7 @@ function ProfilePage() {
         }
         fetchUserData();
     }, [token]);
+
 //The JSX //////////////////////////////////////////////////////////////////////////////////////
   return (
     <>
