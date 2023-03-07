@@ -30,7 +30,7 @@ function  MainPage() {
                 />
               </Carousel.Item>
             ))}
-
+          
           <Container fluid className="p-0" style={{ minHeight: '10vh', position: 'relative', zIndex: 1 }}>
             <Row className="justify-content-start align-items-center" style={{ minHeight: '75vh', position: 'relative' }}>
               <Col md={6} className="offset-md-3 d-flex justify-content-start align-items">

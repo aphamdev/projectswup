@@ -15,6 +15,7 @@ import MainPage from './MainPage.js';
 import ProfilePage from './ProfilePage.js';
 import ProfilePageUpdateForm from './ProfilePageUpdateForm.js';
 import Team from './Team.js'
+import MainPageLoggedIn from "./MainPageLoggedIn";
 
 
 function GetToken() {
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/swoopshistory/:pickup_id" element={<SwoopHistoryDetail/>} />
                     <Route path="/pickups/{pickup_id}" element={<CustomerPostDetail />} />
                     <Route path="/team" element={<Team />} />
+                    <Route path="/loggedin" element={<MainPageLoggedIn />} />
                  </Routes>
                 <div/>
           </AuthProvider>

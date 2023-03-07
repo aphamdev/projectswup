@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import { useAuthContext, useToken } from "./Auth";
-import LoginForm from './LoginForm';
+import LoginInSignUp from './togglesignin'
+// import LoginForm from './LoginForm'
 
 
 function Nav() {
@@ -47,7 +48,7 @@ function Nav() {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            <NavLink className="mx-auto px-2 navbar-brand" to="/">SWUP</NavLink>
+                            <NavLink className="mx-auto px-2 navbar-brand" to="/">SWÜP</NavLink>
                             <li className="nav-item">
                                 <NavLink className="mx-1 nav-link" aria-current="page" to="/">
                                 How it Works
@@ -80,7 +81,7 @@ function Nav() {
             </nav>
             <>
             <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <LoginForm />
+                <LoginInSignUp />
             </div>
             </>
             </>
@@ -97,7 +98,7 @@ function Nav() {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 {swooper_status === true ? (
                     <>
-                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWUP</NavLink>
+                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWÜP</NavLink>
                     <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/pickups">
                         My Pickups
@@ -131,7 +132,7 @@ function Nav() {
                     </>
                 ) : (
                     <>
-                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWUP</NavLink>
+                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWÜP</NavLink>
                     <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/pickups">
                         My Pickups
