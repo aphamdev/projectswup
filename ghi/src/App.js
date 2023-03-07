@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LogInForm from "./LoginForm"
 import SignupForm from "./SignupForm"
 import PickupForm from './PickupForm.js';
+import LogInSignUp from "./togglesignin";
 import Nav from './Nav.js';
 import SwooperUpdateForm from './SwooperUpdateForm.js';
 import SwooperHistoryList from './SwooperHistoryList.js';
@@ -13,6 +14,7 @@ import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 import MainPage from './MainPage.js';
 import ProfilePage from './ProfilePage.js';
 import ProfilePageUpdateForm from './ProfilePageUpdateForm.js';
+
 
 function GetToken() {
     // Get token from JWT cookie (if already logged in)
@@ -55,6 +57,7 @@ function App() {
                     <Route path="/profile" element={<ProfilePage/>}/>
                     <Route path="/profile/update" element={<ProfilePageUpdateForm/>}/>
                     <Route path="/" element={<MainPage/>} />
+                    <Route path="/test" element={<LogInSignUp/>} />
                     <Route path="/login" element={<LogInForm/>} />
                     <Route path="/signup" element={<SignupForm/>} />
                     <Route path="/pickups" element={<CustomerPostList />} />

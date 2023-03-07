@@ -30,7 +30,7 @@ function LogInForm() {
       <div className="container w-25 mt-5">
         <div className="card p-5 shadow">
         <form onSubmit={handleSubmit}>
-          <h1 className="text-center fw-bold fs-1 h3 mb-3 fw-normal">Please sign in!</h1>
+          <h1 className="text-center fw-bold fs-1 h3 mb-3 fw-normal">Sign In!</h1>
           <div className="form-floating">
             <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" value={username} onChange={handleUserNameChange}/>
             <label for="floatingInput">Email address</label>

@@ -85,49 +85,68 @@ function SignupForm() {
 
 
 
-   return (
-    <div>
+return (
+  <div className="container w-25 mt-5">
+    <div className="card p-5 shadow">
       {errorMessage && <p>{errorMessage}</p>}
       <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={handleUserNameChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <br />
-      <label>
-        First Name:
-        <input type="text" value={first_name} onChange={handleFirstNameChange} />
-      </label>
-      <br />
-      <label>
-        Last Name:
-        <input type="text" value={last_name} onChange={handleLastNameChange} />
-      </label>
-      <br />
-      <label>
-        Phone number:
-        <input type="text" value={phone_number} onChange={handlePhoneNumberChange} />
-      </label>
-      <br />
-      <label>
-        Email:
-        <input type="text" value={email} onChange={handleEmailChange} />
-      </label>
-      <br />
-      <label>
-        Address:
-        <input type="text" value={address} onChange={handleAddressChange} />
-      </label>
-      <br />
-      <button type="submit">Sign Up!</button>
-    </form>
+        <h1 className="text-center fw-bold fs-1 h3 mb-3 fw-normal">Sign Up!</h1>
+        <div className="form-floating">
+            <input type="text" className="form-control" value={username} onChange={handleUserNameChange} />
+          <label>
+            Username:
+          </label>
+          <br />
+        </div>
+        <div className="form-floating">
+            <input type="password" className="form-control" value={password} onChange={handlePasswordChange} />
+          <label>
+            Password:
+          </label>
+          <br />
+        </div>
+        <div className="form-floating">
+            <input type="text" className="form-control" value={first_name} onChange={handleFirstNameChange} />
+          <label>
+            First Name:
+          </label>
+          <br />
+        </div>
+        <div className="form-floating">
+            <input type="text" className="form-control" value={last_name} onChange={handleLastNameChange} />
+          <label>
+            Last Name:
+          </label>
+          <br />
+        </div>
+        <div className="form-floating">
+            <input type="text" className="form-control" value={phone_number} onChange={handlePhoneNumberChange} />
+          <label>
+            Phone number:
+          </label>
+          <br />
+        </div>
+        <div className="form-floating">
+            <input type="text" className="form-control" value={email} onChange={handleEmailChange} />
+          <label>
+            Email:
+          </label>
+          <br />
+        </div>
+        <div className="form-floating">
+            <input type="text" className="form-control" value={address} onChange={handleAddressChange} />
+          <label>
+            Address:
+          </label>
+          <br />
+        </div>
+        <button className="w-100 btn btn-lg btn-primary" type="submit">Sign Up!</button>
+        <p className="text-center mt-5 mb-3 text-muted">© 2023 SWUP Technologies Inc.</p>
+      </form>
     </div>
-  );
+  </div>
+);
+
 }
 
 export default SignupForm;
