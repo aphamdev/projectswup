@@ -50,7 +50,7 @@ function LogInSignUp() {
     setAddress(value);
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault();

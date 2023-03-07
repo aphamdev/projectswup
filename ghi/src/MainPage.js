@@ -103,7 +103,7 @@ function  MainPage() {
                 </div>
                 <div className="col-md-4">
                   <h5>Meet the Team</h5>
-                  <a href='#'>Our Story</a>
+                  <a href='https://gitlab.com/projectswup/module3-project-gamma'>Our Story</a>
                 </div>
               </div>
             </div>
