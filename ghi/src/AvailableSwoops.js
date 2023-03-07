@@ -8,7 +8,18 @@ function AvailableSwoops() {
     const [user, setUser] = useState([]);
     const [availableSwoops, setAvailableSwoops] = useState([]);
 
+    const [sortBy, setSortBy] = useState('weight');
 
+    const sortedSwoops = availableSwoops
+      .filter(swoop => swoop.customer_id !== user.user_id)
+      .sort((a, b) => {
+        if (sortBy === "weight") {
+          return a.weight - b.weight;
+        } else if (sortBy === "pickup_id") {
+          return a.pickup_id - b.pickup_id;
+        }
+        return 0;
+      });
 
     const handleAccept = async (swoop) => {
       const acceptSwoopUrl = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/swoops/accept/${swoop.pickup_id}`;
@@ -98,50 +109,51 @@ function AvailableSwoops() {
         );
     }
 
-return (
-<Container>
-  <h1 className="text-center mt-4 mb-4">Available Swoops</h1>
-  <Row>
-    {availableSwoops.filter(swoop => swoop.customer_id !== user.user_id).map(swoop => (
-      <Row key={swoop.pickup_id} className="mb-4">
-        <Card>
-          <Row>
-            <Col xs={9}>
-              <Card.Body>
-                <Card.Title>{swoop.trash_type}</Card.Title>
-                <Card.Subtitle className="mb-2 text-muted">#{swoop.pickup_id}</Card.Subtitle>
-                <Card.Text>{swoop.description}</Card.Text>
-                <Row>
-                  <Col xs={6}><strong>Weight:</strong> {swoop.weight} lbs</Col>
-                  <Col xs={3}><strong>Hazards:</strong> {swoop.hazards}</Col>
-                  <Col xs={3}><Button onClick={() => handleAccept(swoop)} variant="success" block className="float-right">Accept</Button></Col>
-                </Row>
-                <Row className="mt-3">
-                  <Col xs={6}>
-                    <span style={{ color: "green", fontWeight: "bold" }}>Available</span>
-                    <img src="https://img.icons8.com/metro/26/000000/checkmark.png" alt="checkmark" style={{ marginLeft: 10 }} />
-                  </Col>
-                  <Col xs={6} className="text-right">
-                    <small className="text-muted">Posted by {swoop.first_name} {swoop.last_name}</small>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Col>
-            <Col xs={3}>
-              <Card.Img variant="top" src={swoop.picture_url} />
-            </Col>
+ return (
+    <Container>
+      <h1 className="text-center mt-4 mb-4">Available Swoops</h1>
+      <div className="text-right mb-3">
+        <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+          <option value="weight">Sort by weight</option>
+          <option value="hazards">Sort by post number</option>
+        </select>
+      </div>
+      <Row>
+        {sortedSwoops.map(swoop => (
+          <Row key={swoop.pickup_id} className="mb-4">
+            <Card>
+              <Row>
+                <Col xs={9}>
+                  <Card.Body>
+                    <Card.Title>{swoop.trash_type}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">#{swoop.pickup_id}</Card.Subtitle>
+                    <Card.Text>{swoop.description}</Card.Text>
+                    <Row>
+                      <Col xs={6}><strong>Weight:</strong> {swoop.weight} lbs</Col>
+                      <Col xs={3}><strong>Hazards:</strong> {swoop.hazards}</Col>
+                      <Col xs={3}><Button onClick={() => handleAccept(swoop)} variant="success" block className="float-right">Accept</Button></Col>
+                    </Row>
+                    <Row className="mt-3">
+                      <Col xs={6}>
+                        <span style={{ color: "green", fontWeight: "bold" }}>Available</span>
+                        <img src="https://img.icons8.com/metro/26/000000/checkmark.png" alt="checkmark" style={{ marginLeft: 10 }} />
+                      </Col>
+                      <Col xs={6} className="text-right">
+                        <small className="text-muted">Posted by {swoop.first_name} {swoop.last_name}</small>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Col>
+                <Col xs={3}>
+                  <Card.Img variant="top" src={swoop.picture_url} />
+                </Col>
+              </Row>
+            </Card>
           </Row>
-        </Card>
+        ))}
       </Row>
-    ))}
-  </Row>
-</Container>
-)
-
-
-
-
-
+    </Container>
+  );
 }
 
 export default AvailableSwoops;
