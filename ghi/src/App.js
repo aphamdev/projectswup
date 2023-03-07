@@ -14,6 +14,7 @@ import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 import MainPage from './MainPage.js';
 import ProfilePage from './ProfilePage.js';
 import ProfilePageUpdateForm from './ProfilePageUpdateForm.js';
+import Team from './Team.js'
 
 
 function GetToken() {
@@ -46,6 +47,7 @@ function App() {
                     <Route path="/listings" element={<AvailableSwoops/>} />
                     <Route path="/swoopshistory/:pickup_id" element={<SwoopHistoryDetail/>} />
                     <Route path="/pickups/{pickup_id}" element={<CustomerPostDetail />} />
+                    <Route path="/team" element={<Team />} />
                  </Routes>
                 <div/>
           </AuthProvider>
