@@ -15,7 +15,11 @@ function  MainPage() {
 
     const handleSelect = (selectedIndex, e) => {
         setIndex(selectedIndex);
-};
+    };
+
+    while (backgroundImages.length < 3) {
+      backgroundImages.push('');
+    }
 
   return (
     <>
@@ -30,31 +34,33 @@ function  MainPage() {
                 />
               </Carousel.Item>
             ))}
-          <Container fluid className="p-0" style={{ minHeight: '10vh', position: 'relative', zIndex: 0, backgroundImage: `${backgroundImages}`}}>
-            <Row className="justify-content-start align-items-center" style={{ minHeight: '75vh', position: 'relative' }}>
-              <Col md={6} className="offset-md-3 d-flex justify-content-start align-items">
-                <div className="card shadow-lg p-3 mb-5 bg-white rounded">
-                  <div className="card-body text-black">
-                    <Nav className="justify-content-between mb-4">
-                      <Nav.Item className='hover-highlight'>
-                        <NavLink to="/login" className="nav-link font-weight-bold text-black">Schedule a Pickup</NavLink>
-                      </Nav.Item>
-                     <Nav.Item>
-                        <NavLink to="/signup" className="nav-link font-weight-bold text-black">Become a Swooper</NavLink>
-                      </Nav.Item>
-                    </Nav>
-                    <h2 className="text-center font-weight-bold mb-4">SWUP Ready?</h2>
-                    <NavLink to="/signup" className="nav-link"><Button variant="dark" size="lg" block>Sign Up</Button></NavLink>
+          <div>
+            <Container fluid className="p-0" style={{ minHeight: '10vh', position: 'relative', zIndex: 1 }}>
+              <Row className="justify-content-start align-items-center" style={{ minHeight: '75vh', position: 'relative' }}>
+                <Col md={6} className="offset-md-3 d-flex justify-content-start align-items">
+                  <div className="card shadow-lg p-3 mb-5 bg-white rounded">
+                    <div className="card-body text-black">
+                      <Nav className="justify-content-between mb-4">
+                        <Nav.Item className='hover-highlight'>
+                          <NavLink to="/login" className="nav-link font-weight-bold text-black">Schedule a Pickup</NavLink>
+                        </Nav.Item>
+                      <Nav.Item>
+                          <NavLink to="/signup" className="nav-link font-weight-bold text-black">Become a Swooper</NavLink>
+                        </Nav.Item>
+                      </Nav>
+                      <h2 className="text-center font-weight-bold mb-4">SWUP Ready?</h2>
+                      <NavLink to="/signup" className="nav-link"><Button variant="dark" size="lg" block>Sign Up</Button></NavLink>
+                    </div>
                   </div>
-                </div>
-              </Col>
-            </Row>
-            <Row className="justify-content-center" style={{ position: 'absolute', bottom: 0, width: '100%' }}>
-              <Col className="text-center text-white my-5">
-                <p>© 2023 SWUP Technologies Inc.</p>
-              </Col>
-            </Row>
-          </Container>
+                </Col>
+              </Row>
+              <Row className="justify-content-center" style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+                <Col className="text-center text-white my-5">
+                  <p>© 2023 SWUP Technologies Inc.</p>
+                </Col>
+              </Row>
+            </Container>
+          </div>
       </Carousel>
 
 

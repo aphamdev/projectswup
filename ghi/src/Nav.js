@@ -50,26 +50,6 @@ function Nav() {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <NavLink className="mx-auto px-2 navbar-brand" to="/">SWÜP</NavLink>
                             <li className="nav-item">
-                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
-                                How it Works
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
-                                About Us
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
-                                Contact Us
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="mx-1 nav-link" aria-current="page" to="/">
-                                FAQ
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
                                 <NavLink className="mx-1 nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Login
                                 </NavLink>

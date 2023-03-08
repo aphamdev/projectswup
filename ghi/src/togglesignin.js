@@ -123,9 +123,9 @@ function LogInSignUp() {
         <Components.Overlay signinIn={signIn}>
 
           <Components.LeftOverlayPanel signinIn={signIn}>
-            <Components.Title>Welcome Back!</Components.Title>
+            <Components.Title>Already have an account?</Components.Title>
                 <Components.Paragraph>
-                    To keep connected with us please login with your personal info
+                    Please login with your personal info
                 </Components.Paragraph>
                 <Components.GhostButton onClick={() => toggle(true)}>
                     Sign In
@@ -133,9 +133,9 @@ function LogInSignUp() {
                 </Components.LeftOverlayPanel>
 
                 <Components.RightOverlayPanel signinIn={signIn}>
-                  <Components.Title>Hello, Friend!</Components.Title>
+                  <Components.Title>Missing out on the fun?</Components.Title>
                   <Components.Paragraph>
-                      Enter Your personal details and start journey with us
+                      Enter your personal details and start a journey with us
                   </Components.Paragraph>
                       <Components.GhostButton onClick={() => toggle(false)}>
                           Sign Up
