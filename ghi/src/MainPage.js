@@ -30,7 +30,7 @@ function  MainPage() {
                 />
               </Carousel.Item>
             ))}
-          
+
           <Container fluid className="p-0" style={{ minHeight: '10vh', position: 'relative', zIndex: 1 }}>
             <Row className="justify-content-start align-items-center" style={{ minHeight: '75vh', position: 'relative' }}>
               <Col md={6} className="offset-md-3 d-flex justify-content-start align-items">
@@ -88,31 +88,6 @@ function  MainPage() {
           </Col>
         </Row>
       </Container>
-
-      <footer className="bg-dark text-white text-center py-3">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-4">
-                  <h5>About Us</h5>
-                  <p>SWUP Technologies Inc. is a waste management platform that connects customers to local waste collectors.</p>
-                </div>
-                <div className="col-md-4">
-                  <h5>Contact Us</h5>
-                  <p>Email: contact@swup.com</p>
-                  <p>Phone: 1-800-SWUP</p>
-                </div>
-                <div className="col-md-4">
-                  <h5>Meet the Team</h5>
-                  <a href='/team'>Our Story</a>
-                </div>
-              </div>
-            </div>
-            <div className="text-center">
-              <p>&copy; 2023 SWUP Technologies Inc. All rights reserved.</p>
-            </div>
-      </footer>
-
-
     </>
  );
 };

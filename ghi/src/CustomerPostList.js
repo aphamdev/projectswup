@@ -34,7 +34,7 @@ useEffect(() => {
 
  return (
     <div>
-      <h1>Your Swoops</h1>
+      <h1>Your Pickups</h1>
       <table className="table table-striped table-hover">
         <thead>
           <tr>
