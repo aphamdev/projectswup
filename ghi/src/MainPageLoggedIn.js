@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuthContext} from './Auth';
 import { HiOutlineBookOpen } from 'react-icons/hi';
 import { FaRegLightbulb } from 'react-icons/fa';
+import work from './img/work.jpg'
 
 function  MainPageLoggedIn() {
   const backgroundImages = [
@@ -169,7 +170,7 @@ return (
 
       <Row>
         <Col md={6}>
-          <Image src="https://img.freepik.com/free-vector/internship-job-training-illustration_23-2148751181.jpg?w=1380&t=st=1678306870~exp=1678307470~hmac=abd33295701f112a724e84e786c19f070737cb786c8ef85f69a10ff103641a64" fluid/>
+          <Image src={work} fluid/>
         </Col>
         <Col md={6} className="">
           <Col className='' style={{ height: '100%' }}>
@@ -201,3 +202,4 @@ return (
 };
 
 export default MainPageLoggedIn;
+
