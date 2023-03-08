@@ -1,0 +1,67 @@
+.card1 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80vh;
+    flex:0.5;
+    border-radius: 50px;
+    position: relative;
+    margin: 0.5rem;
+    cursor: pointer;
+    transition: flex 0.3s;
+}
+
+.card1 h2 {
+    color:white;
+    position: absolute;
+    /* bottom: 2rem;
+    left: 1rem; */
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transition: opacity 3s;
+    text-align: center;
+    margin-bottom: 0;
+    transform: translate(-50%, -50%);
+    font-size: 50px
+}
+
+.card1 button {
+position: absolute;
+border-radius: 20px;
+border: 3px solid white;;
+background-color: transparent;
+color: white;
+padding: 10px 20px;
+cursor: pointer;
+font-size: 28px;
+opacity: 0;
+transition: opacity 3s;
+position: absolute;
+top: calc(50% + 60px);
+left: 50%;
+transform: translateX(-50%);
+transition-delay: 0.634045980495874s;
+}
+
+.card1 button:hover {
+background-color: rgba(255, 255, 255, 0.2);
+}
+
+.card1.active {
+    flex: 5;
+}
+
+.card1.active h2 {
+    opacity: 1;
+}
+
+.card1.active button {
+    opacity: 1;
+}
+
+.card1:not(.active) button,
+.card1:not(.active) h2 {
+opacity: 0;
+transition: opacity 0s;
+}
