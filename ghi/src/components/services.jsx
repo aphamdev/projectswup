@@ -63,9 +63,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <ul class="team-icon">
 
-                          <li><a href="https://www.linkedin.com/in/ezekielsamatua/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/ezekielsamatua/" target="_blank" rel="noreferrer" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="https://gitlab.com/ejsamatua" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/ejsamatua" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
                           <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
@@ -92,9 +92,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <ul class="team-icon">
 
-                          <li><a href="https://www.linkedin.com/in/andy-h-lam/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/andy-h-lam/" target="_blank" rel="noreferrer" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="https://gitlab.com/andyhlam619" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/andyhlam619" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
                           <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
@@ -120,9 +120,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <ul class="team-icon">
 
-                          <li><a href="https://www.linkedin.com/in/anthonypham15/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/anthonypham15/" target="_blank" rel="noreferrer" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="https://gitlab.com/apham.dev" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/apham.dev" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
                           <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
@@ -150,9 +150,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <ul class="team-icon">
 
-                          <li><a href="https://www.linkedin.com/in/dnam74/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/dnam74/" target="_blank" rel="noreferrer" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="https://gitlab.com/dynam74" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/dynam74" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
                           <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
@@ -177,7 +177,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <ul class="team-icon">
 
-                          <li><a href="https://www.linkedin.com/in/tracey-chung/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/tracey-chung/" target="_blank" rel="noreferrer" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
                           <li><a href="https://www.gitlab.com/" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
