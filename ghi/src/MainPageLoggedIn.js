@@ -160,30 +160,6 @@ function  MainPageLoggedIn() {
           </Col>
         </Row>
       </Container>
-
-      <footer className="bg-dark text-white text-center py-3">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-4">
-                  <h5>About Us</h5>
-                  <p>SWUP Technologies Inc. is a waste management platform that connects customers to local waste collectors.</p>
-                </div>
-                <div className="col-md-4">
-                  <h5>Contact Us</h5>
-                  <p>Email: contact@swup.com</p>
-                  <p>Phone: 1-800-SWUP</p>
-                </div>
-                <div className="col-md-4">
-                  <h5>Meet the Team</h5>
-                </div>
-              </div>
-            </div>
-            <div className="text-center">
-              <p>&copy; 2023 SWUP Technologies Inc. All rights reserved.</p>
-            </div>
-      </footer>
-
-
     </>
  );
 };

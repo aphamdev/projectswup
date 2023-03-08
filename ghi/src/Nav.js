@@ -98,7 +98,7 @@ function Nav() {
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 {swooper_status === true ? (
                     <>
-                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWÜP</NavLink>
+                    <NavLink className="mx-auto px-2 navbar-brand" to="/loggedin">SWÜP</NavLink>
                     <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/pickups">
                         My Pickups
@@ -132,7 +132,7 @@ function Nav() {
                     </>
                 ) : (
                     <>
-                    <NavLink className="mx-auto px-2 navbar-brand" to="/">SWÜP</NavLink>
+                    <NavLink className="mx-auto px-2 navbar-brand" to="/loggedin">SWÜP</NavLink>
                     <li className="nav-item">
                         <NavLink className="mx-1 nav-link" aria-current="page" to="/pickups">
                         My Pickups

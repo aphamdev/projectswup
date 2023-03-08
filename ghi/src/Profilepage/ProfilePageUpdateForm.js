@@ -1,37 +1,36 @@
 import React, {useEffect, useState} from 'react'
-import { useAuthContext } from "./Auth";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from "../Auth";
 
 
-function ProfilePageUpdateForm() {
+function ProfilePageUpdateForm(props) {
   ///////////////////////////////////////////////////////////////////////////
   const { token } = useAuthContext();
   ///////////////////////////////////////////////////////////////////////////
   const [user, setUser] = useState([]);
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts`;
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-          const URL = `${process.env.REACT_APP_SWOOP_SERVICE_API_HOST}/api/accounts`;
+      const response = await fetch(URL, {
+          headers: { Authorization: `Bearer ${token}` },
+      });
 
-          const response = await fetch(URL, {
-              headers: { Authorization: `Bearer ${token}` },
-          });
-
-          if (response.ok) {
-              const data = await response.json();
-              setUser(data)
-              setUserName(data.username)
-              setFirstName(data.first_name)
-              setLastName(data.last_name)
-              setPhoneNumber(data.phone_number)
-              setEmail(data.email)
-              setAddress(data.address)
-              setCar(data.car)
-              setLicenseNumber(data.license_number)
-          }
+      if (response.ok) {
+          const data = await response.json();
+          setUser(data)
+          setUserName(data.username)
+          setFirstName(data.first_name)
+          setLastName(data.last_name)
+          setPhoneNumber(data.phone_number)
+          setEmail(data.email)
+          setAddress(data.address)
+          setCar(data.car)
+          setLicenseNumber(data.license_number)
       }
-      fetchUserData();
-    }, [token]);
+    }
+    fetchUserData();
+  }, [token]);
 ///////////////////////////////////////////////////////////////////////////
   const [username, setUserName] = useState('')
   const [first_name, setFirstName] = useState('')
@@ -82,7 +81,7 @@ function ProfilePageUpdateForm() {
     setLicenseNumber(value);
   }
 ///////////////////////////////////////////////////////////////////////////
-  const navigate = useNavigate();
+// const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -108,17 +107,15 @@ function ProfilePageUpdateForm() {
 
     const response = await fetch(url, fetchConfig);
     if (response.ok) {
-        navigate('/profile');
-        return response.json()
-
+      props.fetchProfileData()
     }
   }
 ///////////////////////////////////////////////////////////////////////////
   return (
-    <div className="row">
-            <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
-                <h1>Update your Profile</h1>
+    <div className="modal-dialog">
+      <div className="modal-content p-4">
+            <div className="modal-body">
+                <h1 className="mb-3 text-center">Update your Profile</h1>
                 <form onSubmit={handleSubmit} id="create-presentation-form">
                 <div className="form-floating mb-3">
                     <input value={username} onChange={handleUserNameChange} placeholder="UserName" required type="text" name="username" id="username" className="form-control"/>
@@ -156,11 +153,15 @@ function ProfilePageUpdateForm() {
                 </div>
                 </>
                 ) : (<></>)}
-                <button className="btn btn-primary">Submit</button>
+                <div className='text-center'>
+                  <button data-bs-dismiss="modal" className="btn btn-primary">Submit</button>
+                </div>
                 </form>
             </div>
             </div>
         </div>
+
+
   )
 }
 

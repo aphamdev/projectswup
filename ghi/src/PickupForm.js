@@ -80,9 +80,14 @@ function PickupForm(props) {
         }
     //our jsx///////////////////////////////////////////////////////////////////////////
     return (
-        <div className="row">
-            <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
+            <div
+            className='shadow p-5 mt-5'
+            style={{
+                maxWidth: "600px",
+                margin: "0 auto",
+                borderRadius: '20px',
+
+            }}>
                 <h1>Schedule a Pickup!</h1>
                 <form onSubmit={handleSubmit} id="create-presentation-form">
                 <div className="mb-3">
@@ -120,7 +125,7 @@ function PickupForm(props) {
                     <input value={weight} onChange={handleWeightChange} placeholder="Weight" required type="number" name="weight" id="weight" className="form-control"/>
                     <label htmlFor="weight">Weight (lbs)</label>
                 </div>
-                <button className="btn btn-primary">Submit</button>
+                <button className="mx-auto btn btn-success">Submit</button>
                 </form>
                 {submitted && (
 						<div
@@ -130,8 +135,6 @@ function PickupForm(props) {
 						</div>
 					)}
             </div>
-            </div>
-        </div>
     )
 }
 

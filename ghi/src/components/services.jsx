@@ -23,12 +23,13 @@ They worked tirelessly on the app, staying up late into the night coding and deb
                     </div>
             <div class="col-sm-6 col-md-4">
 
-                  <div class="team-item">
+                <div class="team-item">
 
                       <img src="https://media.licdn.com/dms/image/D5603AQGmcGfJFeaYrg/profile-displayphoto-shrink_200_200/0/1664808696012?e=1683763200&v=beta&t=O4sHU3EbRgQ0ea8XyLHWEkm7lNVxtCPsVx6Zk5uWfPM" class="team-img" alt="pic" />
                       <h3>Christian Lee</h3>
                       <div class="team-info"><p>Co-Founder</p></div>
-                      <p>University of Puget Sound 2016: BS Biology w/ Minors in Mathematics and Business. In his spare time he enjoys golf, snowboarding and watching mma.</p>
+                      <p>University of Puget Sound 2016: BS Biology w/ Minors in Mathematics and Business.</p>
+                      <p>In his spare time, Christian enjoys playing golf, snowboarding and watching MMA</p>
 
                       <ul class="team-icon">
 
@@ -56,7 +57,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>University of San Diego 2020: BS Cognitive Science. In his spare time, Ezekiel enjoys catching bodies both on the dance floor and in Valorent. </p>
+                      <p>University of San Diego 2020: BS Cognitive Science.</p>
+                      <p>In his sparetime, Ezekiel enjoys catching bodies both on the dancefloor and on the Valorant battlefields.</p>
+
 
                       <ul class="team-icon">
 
@@ -83,7 +86,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>University of California, San Diego: BS Ecology and Evolutionary Biology. In his spare time, Andy enjoys roaming the plains of Joshua Tree foraging wild berries and connecting with Nature.</p>
+                      <p>University of California, San Diego: BS Ecology and Evolutionary Biology.</p>
+                      <p>In his sparetime, Andy spends his free time roaming the plains of Joshua Tree connecting with his spiritual self.</p>
+
 
                       <ul class="team-icon">
 
@@ -110,7 +115,8 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>California State University, Long Beach 2016: Criminal Justice/Law Enforcement Administration. In his spare time, whether its vlogging or photography, Anthony enjoys improving his content creation skills.</p>
+                      <p>California State University, Long Beach 2016: Criminal Justice.</p>
+                      <p>In his sparetime, whether it be through his vlog or through photography, Anthony enjoys improving upon his content creation skills.</p>
 
                       <ul class="team-icon">
 
@@ -137,7 +143,10 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>University of California, Irvine 2020: BS Economics. In his spare time, Daniel enjoys hitting the gym and creating custom keyboards for the masses.</p>
+                      <p>University of California, Irvine 2020: BS Economics.</p>
+                      <p>In his sparetime, Daniel enjoys pulling and pushing heavy things. He also has a passion for creating custom keyboards for the masses.</p>
+
+
 
                       <ul class="team-icon">
 
