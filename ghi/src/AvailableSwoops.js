@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { useAuthContext} from './Auth';
 import { Row, Col, Card, Button, Container } from 'react-bootstrap';
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 function AvailableSwoops() {
 
     const {token} = useAuthContext();
     const [user, setUser] = useState([]);
     const [availableSwoops, setAvailableSwoops] = useState([]);
+    const [listref] = useAutoAnimate();
 
     const [sortBy, setSortBy] = useState('weight');
 
@@ -109,19 +111,22 @@ function AvailableSwoops() {
         );
     }
 
+
  return (
     <Container>
       <h1 className="text-center mt-4 mb-4">Available Swoops</h1>
       <div className="text-right mb-3">
-        <select value={sortBy} onChange={e => setSortBy(e.target.value)}>
+        <select value={sortBy} onChange={e => setSortBy(e.target.value)} ref={listref}>
           <option value="weight">Sort by weight</option>
           <option value="hazards">Sort by post number</option>
         </select>
       </div>
       <Row>
+        <div ref={listref}>
         {sortedSwoops.map(swoop => (
           <Row key={swoop.pickup_id} className="mb-4">
-            <Card>
+
+            <Card className='py-4'>
               <Row>
                 <Col xs={9}>
                   <Card.Body>
@@ -151,6 +156,7 @@ function AvailableSwoops() {
             </Card>
           </Row>
         ))}
+        </div>
       </Row>
     </Container>
   );

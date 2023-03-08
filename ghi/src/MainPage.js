@@ -6,7 +6,7 @@ function  MainPage() {
 
 
     const backgroundImages = [
-    'https://images.unsplash.com/photo-1560843300-ce9370f96b56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
+    'https://images.unsplash.com/photo-1519668106955-a24e5f67f8c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
     'https://images.unsplash.com/photo-1561763439-fb89720fc359?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2094&q=80',
     'https://images.unsplash.com/photo-1504222013707-cd1090517aed?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1493&q=80'
     ];
@@ -30,8 +30,7 @@ function  MainPage() {
                 />
               </Carousel.Item>
             ))}
-
-          <Container fluid className="p-0" style={{ minHeight: '10vh', position: 'relative', zIndex: 1 }}>
+          <Container fluid className="p-0" style={{ minHeight: '10vh', position: 'relative', zIndex: 0, backgroundImage: `${backgroundImages}`}}>
             <Row className="justify-content-start align-items-center" style={{ minHeight: '75vh', position: 'relative' }}>
               <Col md={6} className="offset-md-3 d-flex justify-content-start align-items">
                 <div className="card shadow-lg p-3 mb-5 bg-white rounded">
@@ -57,6 +56,9 @@ function  MainPage() {
             </Row>
           </Container>
       </Carousel>
+
+
+
 
       <Container style={{ marginTop: '50px', marginBottom: '50px'}}>
         <Row>
@@ -88,6 +90,31 @@ function  MainPage() {
           </Col>
         </Row>
       </Container>
+
+      <footer className="bg-dark text-white text-center py-3">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-4">
+                  <h5>About Us</h5>
+                  <p>SWUP Technologies Inc. is a waste management platform that connects customers to local waste collectors.</p>
+                </div>
+                <div className="col-md-4">
+                  <h5>Contact Us</h5>
+                  <p>Email: contact@swup.com</p>
+                  <p>Phone: 1-800-SWUP</p>
+                </div>
+                <div className="col-md-4">
+                  <h5>Meet the Team</h5>
+                  <a href='/team'>Our Story</a>
+                </div>
+              </div>
+            </div>
+            <div className="text-center">
+              <p>&copy; 2023 SWUP Technologies Inc. All rights reserved.</p>
+            </div>
+      </footer>
+
+
     </>
  );
 };
