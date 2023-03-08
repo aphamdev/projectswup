@@ -62,19 +62,32 @@ function SwooperUpdateForm() {
 
 
    return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Car:
-        <input type="text" value={car} onChange={handleCarChange} />
-      </label>
-      <br />
-      <label>
-        License Number:
-        <input type="text" value={license_number} onChange={handleLicenseChange} />
-      </label>
-      <button type="submit">Sign Up!</button>
-
-    </form>
+    <div className="container w-50 mt-5">
+      <div className="card p-5 shadow">
+          <form onSubmit={handleSubmit}>
+            <h1 className="text-center fw-bold fs-1 h3 mb-3 fw-normal">Update Info</h1>
+              <div className="text-center">
+                <p>Please fill-in the information below to become a Swooper!</p>
+              </div>
+            <div className="form-floating">
+              <input type="text" className="form-control" value={car} onChange={handleCarChange} />
+            <label>
+              Car:
+            </label>
+            <br />
+            </div>
+            <div className="form-floating">
+              <input type="text" className="form-control" value={license_number} onChange={handleLicenseChange} />
+            <label>
+              License Number:
+            </label>
+            <br />
+            </div>
+            <button className="w-100 btn btn-lg btn-primary" type="submit">Sign Up!</button>
+            <p className="text-center mt-5 mb-3 text-muted">© 2023 SWUP Technologies Inc.</p>
+          </form>
+      </div>
+    </div>
   );
 }
 

@@ -21,25 +21,24 @@ They worked tirelessly on the app, staying up late into the night coding and deb
                           <p class="section-subtitle">{message}</p>
 
                     </div>
-
             <div class="col-sm-6 col-md-4">
 
                   <div class="team-item">
 
                       <img src="https://media.licdn.com/dms/image/D5603AQGmcGfJFeaYrg/profile-displayphoto-shrink_200_200/0/1664808696012?e=1683763200&v=beta&t=O4sHU3EbRgQ0ea8XyLHWEkm7lNVxtCPsVx6Zk5uWfPM" class="team-img" alt="pic" />
                       <h3>Christian Lee</h3>
-                      <div class="team-info"><p>Co-Founder | CTO </p></div>
-                      <p>As Chief Technology Officer, Christian will oversee the development and implementation of the technology strategy of Swüp to ensure delivery of high-quality solutions that drive business growth.</p>
+                      <div class="team-info"><p>Co-Founder</p></div>
+                      <p>University of Puget Sound 2016: BS Biology w/ Minors in Mathematics and Business. In his spare time he enjoys golf, snowboarding and watching mma.</p>
 
                       <ul class="team-icon">
 
-                          <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/christian-lee-495550126/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="#" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/chris_lee253" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
-                          <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
                       </ul>
 
@@ -55,19 +54,19 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <h3>Ezekiel Samatua</h3>
 
-                      <div class="team-info"><p>Co-Founder | CITA </p></div>
+                      <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>As Chief IT Architect, Ezekial brings his breadth of knowledge to Swüp and will spearhead Information Security as well oversee the development of Swüps computer and digital systems.</p>
+                      <p>University of San Diego 2020: BS Cognitive Science. In his spare time, Ezekiel enjoys catching bodies both on the dance floor and in Valorent. </p>
 
                       <ul class="team-icon">
 
-                          <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/ezekielsamatua/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="#" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/ejsamatua" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
-                          <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
                       </ul>
 
@@ -82,19 +81,19 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <h3>Andy Lam</h3>
 
-                      <div class="team-info"><p>Co-Founder | COO </p></div>
+                      <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>As Chief Operations Officer, Andy will head and oversee the day-to-day operations of the organization and ensure that business goals and objectives are met efficiently and effectively.</p>
+                      <p>University of California, San Diego: BS Ecology and Evolutionary Biology. In his spare time, Andy enjoys roaming the plains of Joshua Tree foraging wild berries and connecting with Nature.</p>
 
                       <ul class="team-icon">
 
-                          <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/andy-h-lam/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="#" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/andyhlam619" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
-                          <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
                       </ul>
 
@@ -109,19 +108,19 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <h3>Anthony Pham</h3>
 
-                      <div class="team-info"><p>Co-Founder | CMO </p></div>
+                      <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>As a Chief Marketing Officer, Anthony will oversee the marketing strategy of the organization to help accelerate brand awareness and drive business growth.</p>
+                      <p>California State University, Long Beach 2016: Criminal Justice/Law Enforcement Administration. In his spare time, whether its vlogging or photography, Anthony enjoys improving his content creation skills.</p>
 
                       <ul class="team-icon">
 
-                          <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/anthonypham15/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="#" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/apham.dev" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
-                          <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
                       </ul>
 
@@ -136,19 +135,19 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <h3>Daniel Nam</h3>
 
-                      <div class="team-info"><p>Co-Founder | CFO </p></div>
+                      <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>As Chief Financial Officer, Daniel will oversee the financial management of Swüp and to ensure that it is financially healthy and sustainable.</p>
+                      <p>University of California, Irvine 2020: BS Economics. In his spare time, Daniel enjoys hitting the gym and creating custom keyboards for the masses.</p>
 
                       <ul class="team-icon">
 
-                          <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/dnam74/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="#" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="https://gitlab.com/dynam74" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
-                          <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
                       </ul>
 
@@ -169,13 +168,13 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <ul class="team-icon">
 
-                          <li><a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                          <li><a href="https://www.linkedin.com/in/tracey-chung/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
 
-                          <li><a href="#" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
+                          <li><a href="#" target="_blank" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="#" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="#" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a></li>
 
-                          <li><a href="#" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                          <li><a href="#" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
                       </ul>
 
