@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useToken } from './Auth';
 import CustomerPostDetail from './DetailCustomerPost';
+import { Row, Col, Container } from 'react-bootstrap';
+
 
 function CustomerPostList() {
 
@@ -31,55 +33,56 @@ useEffect(() => {
     setSelectedRow(selectedRow === swoop ? null : swoop);
   };
 
-
- return (
-    <div>
-      <h1>Your Pickups</h1>
-      <table className="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>Pick Up</th>
-            {/* <th>Swooper</th> */}
-            <th>Trash Type</th>
-            <th>Description</th>
-            <th>Hazards</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {swoops.map((swoop) => {
-            const isRowSelected = selectedRow === swoop;
-            return (
-              <React.Fragment key={swoop.swooper_id}>
-                <tr onClick={() => handleRowClick(swoop)}>
-                  <td>{swoop.pickup_id}</td>
-                  {/* <td>{swoop.swooper_id}</td> */}
-                  <td>{swoop.trash_type}</td>
-                  <td>{swoop.description}</td>
-                  <td>{swoop.hazards}</td>
-                  <td>{swoop.status === 1 ? 'In Progress' : swoop.status === 2 ? 'Completed' : 'Not Accepted'}</td>
-                  <td></td>
-                </tr>
+return (
+  <Container>
+    <h1 className="text-center mt-4 mb-4">Your Posts</h1>
+    <Row>
+      <Col>
+        <table className="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Post #</th>
+              <th>Trash Type</th>
+              <th>Description</th>
+              <th>Hazards</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {swoops.map((swoop) => {
+              const isRowSelected = selectedRow === swoop;
+              return (
+                <React.Fragment key={swoop.swooper_id}>
+                  <tr onClick={() => handleRowClick(swoop)}>
+                    <td>{swoop.pickup_id}</td>
+                    <td>{swoop.trash_type}</td>
+                    <td>{swoop.description}</td>
+                    <td>{swoop.hazards}</td>
+                    <td>{swoop.status === 1 ? 'In Progress' : swoop.status === 2 ? 'Completed' : 'Not Accepted'}</td>
+                    <td></td>
+                  </tr>
                   {isRowSelected && (
-
                     <tr>
                       <td colSpan={5}>
-                      {swoop.swooper_id != null ? (
+                        {swoop.swooper_id != null ? (
                           <CustomerPostDetail id={swoop.pickup_id} />
                         ) : (
                           <div>Waiting for Swooper to accept your job</div>
                         )}
                       </td>
-                  </tr>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-}
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </table>
+      </Col>
+    </Row>
+  </Container>
+);
+          }
+
 
 export default CustomerPostList;
