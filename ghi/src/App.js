@@ -27,10 +27,10 @@ function GetToken() {
 
 function App() {
   const domain = /https:\/\/[^/]+/;
-  const basename = process.env.PUBLIC_URL.replace(domain, '');
+  const basename = process.env.PUBLIC_URL.replace(domain, "");
   return(
     <div style={{ paddingBottom: "300px" }}> {/* Add 80px padding to the bottom */}
-      <BrowserRouter basname={basename}>
+      <BrowserRouter basename={basename}>
           <AuthProvider>
             <GetToken />
               <Nav />
