@@ -26,7 +26,7 @@ function  MainPage() {
                   className="d-block w-100"
                   src={image}
                   alt={`Slide ${idx}`}
-                  style={{ height: "700px", width: "100vw"}}
+                  style={{ height: "700px", width: "100vw", objectFit: "cover"}}
                 />
               </Carousel.Item>
             ))}

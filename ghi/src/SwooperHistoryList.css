@@ -22,3 +22,8 @@
   background-color: #f9f9f9;
   margin: 10px 0;
 }
+
+::-webkit-scrollbar {
+        width: 0;
+        background-color: transparent;
+      }

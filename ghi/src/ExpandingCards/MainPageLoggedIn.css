@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital@1&family=Sono&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.expanding-body {
+    font-family: 'Bebas Neue', cursive;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    height: 100vh;
+    font-size: 62.5%
+}
+
+. {
+    margin: 0;
+    padding: 0;
+}

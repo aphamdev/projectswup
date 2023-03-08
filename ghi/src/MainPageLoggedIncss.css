@@ -1,0 +1,8 @@
+.carousel {
+position: relative;
+z-index: 0;
+}
+
+.container {
+margin-top: -2000px;
+}

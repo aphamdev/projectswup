@@ -20,73 +20,37 @@ function SwoopHistoryDetail(id) {
             const response = await fetch(url, fetchConfig);
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
                 setSwoops(data)
             }
         }
     fetchSwoopsDetails();
-    }, [token, id.id]);
+    }, [token, id]);
     return (
-        <div>
-            <div>
-        <h1>Swoop Details</h1>
-        <table className="table table-striped table-hover">
-            <thead>
-                Pick up Info
-                <tr>
-                    <th>Trash Type</th>
-                    <th>Description</th>
-                    <th>Hazards</th>
-                    <th>Status</th>
-                    <th>size</th>
-                    <th>weight</th>
-                    <th>picture</th>
-                </tr>
-            </thead>
-            <tbody>
-
-                <tr key={swoop.swooper_id }>
-                    <td>{ swoop.trash_type }</td>
-                    <td>{ swoop.description }</td>
-                    <td>{ swoop.hazards }</td>
-                    {swoop.status === 1 ? (
-                    <td>
-                        In progress
-                    </td>
-                    ) : (
-                        <td>Completed</td>
-                    )}
-                    <td>{ swoop.size }</td>
-                    <td>{ swoop.weight }</td>
-                    <td>
-                        <img
-                            src={ swoop.picture_url }
-                            height="120"
-                            alt="Swoop"
-                            />
-                    </td>
-                </tr>
-            </tbody>
-            <thead>
-                Customer Info
-                <tr>
-
-                    <th>first name</th>
-                    <th>last name</th>
-                    <th>phone number</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr key={swoop.swooper_id }>
-                    <td>{ swoop.first_name }</td>
-                    <td>{ swoop.last_name }</td>
-                    <td>{ swoop.phone_number }</td>
-                </tr>
-            </tbody>
-
-        </table>
-    </div>
+      <div>
+        <div className="border-0">
+          <div className=" card-body border-0">
+            <h1 className="card-title border-0">Swoop Details</h1>
+            <div className="row">
+              <div className="col-md-6">
+                <p className="card-text">Trash Type: {swoop.trash_type}</p>
+                <p className="card-text">Description: {swoop.description}</p>
+                <p className="card-text">Hazards: {swoop.hazards}</p>
+                <p className="card-text">Status: {swoop.status}</p>
+              </div>
+              <div className="col-md-6">
+                <p className="card-text">Size: {swoop.size}</p>
+                <p className="card-text">Weight: {swoop.weight}</p>
+                <img className="card-img-top" src={swoop.picture_url} alt={swoop.description} style={{ height: "200px", width: "auto" }}/>
+              </div>
+            </div>
+            <hr />
+            <h5 className="card-title">Customer Info</h5>
+            <p className="card-text">First Name: {swoop.first_name}</p>
+            <p className="card-text">Last Name: {swoop.last_name}</p>
+            <p className="card-text">Phone Number: {swoop.phone_number}</p>
+          </div>
         </div>
+      </div>
     )
 }
 
