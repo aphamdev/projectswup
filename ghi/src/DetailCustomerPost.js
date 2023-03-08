@@ -63,9 +63,9 @@ function DetailCustomerPost(id) {
                 <thead>
                     Swooper Information
                     <tr>
-                        <th>first name</th>
-                        <th>last name</th>
-                        <th>phone number</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Phone number</th>
                     </tr>
                 </thead>
                 <tbody>

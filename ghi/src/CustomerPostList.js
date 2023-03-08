@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useToken } from './Auth';
 import CustomerPostDetail from './DetailCustomerPost';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Card} from 'react-bootstrap';
 
 
 function CustomerPostList() {
@@ -36,53 +36,64 @@ useEffect(() => {
 return (
   <Container>
     <h1 className="text-center mt-4 mb-4">Your Posts</h1>
-    <Row>
-      <Col>
-        <table className="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Post #</th>
-              <th>Trash Type</th>
-              <th>Description</th>
-              <th>Hazards</th>
-              <th>Status</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {swoops.map((swoop) => {
-              const isRowSelected = selectedRow === swoop;
-              return (
-                <React.Fragment key={swoop.swooper_id}>
-                  <tr onClick={() => handleRowClick(swoop)}>
-                    <td>{swoop.pickup_id}</td>
-                    <td>{swoop.trash_type}</td>
-                    <td>{swoop.description}</td>
-                    <td>{swoop.hazards}</td>
-                    <td>{swoop.status === 1 ? 'In Progress' : swoop.status === 2 ? 'Completed' : 'Not Accepted'}</td>
-                    <td></td>
-                  </tr>
-                  {isRowSelected && (
-                    <tr>
-                      <td colSpan={5}>
-                        {swoop.swooper_id != null ? (
-                          <CustomerPostDetail id={swoop.pickup_id} />
-                        ) : (
-                          <div>Waiting for Swooper to accept your job</div>
-                        )}
-                      </td>
-                    </tr>
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </tbody>
-        </table>
-      </Col>
-    </Row>
+    <Col >
+      <section>
+        {swoops.map((swoop) => {
+          const isRowSelected = selectedRow === swoop;
+          return (
+            <React.Fragment key={swoop.swooper_id}>
+              <div className="my-3 border rounded-pill p-4 dog bg-light" onClick={() => handleRowClick(swoop)}>
+                <Row className="font-weight-bold d-flex align-items-center justify-content-between ">
+                  <Col> Post
+                  </Col>
+                  <Col> Trash Type
+                  </Col>
+                  <Col> Description
+                  </Col>
+                  <Col> Hazards
+                  </Col>
+                  <Col> Status
+                  </Col>
+                </Row>
+                <Row>
+                  <Col> #{swoop.pickup_id}
+                  </Col>
+                  <Col> {swoop.trash_type}
+                  </Col>
+                  <Col> {swoop.description}
+                  </Col>
+                  <Col> {swoop.hazards}
+                  </Col>
+                  <Col style={{color: swoop.status === 1 ? 'gold' : swoop.status === 2 ? 'green' : 'red'}}>
+                    {swoop.status === 1 ? 'In Progress' : swoop.status === 2 ? 'Completed' : 'Not Accepted'}
+                  </Col>
+                </Row>
+              </div >
+              {isRowSelected && (
+                <div className="swoop-detail">
+                  <Row className="my-3 " >
+                    <Col md={12}>
+                      <Card className="rounded border shadow-sm">
+                        <Card.Body>
+                          {swoop.swooper_id != null ? (
+                        <CustomerPostDetail id={swoop.pickup_id} />
+                      ) : (
+                        <div className="center">
+                          Your request is currently pending for a Swooper to accept your job. Kindly check again later.
+                        </div>
+                      )}
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Row>
+                </div>
+              )}
+            </React.Fragment>
+          );
+        })}
+      </section>
+    </Col>
   </Container>
-);
-          }
-
+  )};
 
 export default CustomerPostList;
