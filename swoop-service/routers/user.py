@@ -16,7 +16,8 @@ from queries.user import (
     UsersIn,
     UserRepo,
     UserUpdate,
-    UsersOutWithPassword
+    UsersOutWithPassword,
+    UserDelete
 )
 from typing import List
 
@@ -98,7 +99,6 @@ async def get_token(
     )
 ) -> AccountToken | None:
     if account and authenticator.cookie_name in request.cookies:
-        print(account, " TTTHHHHHISSSS ISSS ACCCOUUUNNTTT FROM TOKEEEENNNNNN")
         return {
             "access_token": request.cookies[authenticator.cookie_name],
             "token_type": "Bearer",
@@ -115,3 +115,13 @@ def update_profile(
     repo: UserRepo = Depends(),
 ) -> UsersIn:
     return repo.update_profile(user_id, users)
+
+#############################################################
+
+
+@router.delete("/delete", response_model=UserDelete)
+def delete_profile(
+    repo: UserRepo = Depends(),
+    account_data: dict = Depends(authenticator.get_current_account_data),
+):
+    return repo.delete(account_data)

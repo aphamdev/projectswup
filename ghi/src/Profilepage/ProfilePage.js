@@ -3,6 +3,7 @@ import { useAuthContext } from "../Auth";
 // import { NavLink } from 'react-router-dom';
 import ProfilePageUpdateForm from './ProfilePageUpdateForm';
 import profile from './profile.jpg';
+import ProfilePageDelete from './ProfilePageDelete';
 
 
 function ProfilePage() {
@@ -84,8 +85,11 @@ function ProfilePage() {
                         </ul>
                         </div>
                         <div className="card-footer py-3 d-flex justify-content-center">
-                            <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" className="mx-3 btn btn-success" data-bs-toggle="modal" data-bs-target="#updateModal">
                                 Update Profile
+                            </button>
+                            <button type="button" className="mx-3 btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                Delete Profile
                             </button>
                         </div>
                     </div>
@@ -101,13 +105,10 @@ function ProfilePage() {
             </div>
         </div>
     </div>
-
-
-
-
-
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div className="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <ProfilePageDelete/>
+    </div>
+    <div className="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <ProfilePageUpdateForm fetchProfileData={fetchProfileData} />
     </div>
     </>

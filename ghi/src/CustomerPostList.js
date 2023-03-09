@@ -45,7 +45,7 @@ useEffect(() => {
     <Col>
       {swoops.length === 0 ? (
         <div>
-          <p className="errormessage" style={{ position: 'absolute', top: 320, right: 350, zIndex:"2" }}>
+          <p className="errormessage" style={{ position: 'absolute', top: '30%', left: '50%', zIndex:"2" }}>
             You have not made a post. Schedule one&nbsp;
             <NavLink
             aria-current="page" to="/newpickup">
