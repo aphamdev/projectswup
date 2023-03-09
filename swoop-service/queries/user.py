@@ -51,7 +51,27 @@ class UserUpdate(BaseModel):
     license_number: str
 
 
+class UserDelete(BaseModel):
+    deleted: bool
+
+
 class UserRepo:
+    def delete(self, account_data: dict) -> UserDelete:
+        print(account_data)
+        with pool.connection() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    DELETE FROM users
+                    WHERE user_id = %s;
+                    """,
+                    [account_data["user_id"]]
+                )
+                user = UserDelete(
+                    deleted=True
+                )
+                return user
+
     def create(self, users: UsersIn,
                hashed_password: str) -> UsersOutWithPassword:
         try:
