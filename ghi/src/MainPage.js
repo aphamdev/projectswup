@@ -44,15 +44,6 @@ function  MainPage() {
           </Carousel.Item>
         ))}
     </Carousel>
-    <p
-    style={{
-      marginTop: "34%",
-      marginLeft: "44.5%",
-      top: '0',
-      left: '0',
-      position: 'absolute',
-      zIndex: '2'
-    }}>© 2023 SWUP Technologies Inc.</p>
 
     <div className="shadow-lg p-5 mb-5 bg-white"
       style={{
