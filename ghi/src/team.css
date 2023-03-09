@@ -125,3 +125,22 @@ ul.team-icon li a.twitter{
 	-o-transition: all 0.25s ease-in-out;
 	transition: all 0.25s ease-in-out;
 }
+
+.image-container {
+
+	margin-top: -300px;
+	display: inline-block;
+	padding-left: 60px;
+
+}
+
+.logo-container {
+    width: 50px; /* set the width of the logo container */
+    display: inline-block; /* make the logo container inline */
+    vertical-align: middle; /* vertically align the logo container */
+	padding-left: 10px;
+  }
+
+  .logo-container img {
+    max-width: 100%; /* make the image responsive */
+  }

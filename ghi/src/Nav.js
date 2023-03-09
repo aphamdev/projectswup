@@ -2,6 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import React, {useEffect, useState } from 'react';
 import { useAuthContext, useToken } from "./Auth";
 import LoginInSignUp from './togglesignin'
+import logo from "./img/logo.png"
 // import LoginForm from './LoginForm'
 
 
@@ -41,6 +42,9 @@ function Nav() {
         return (
             <>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark py-2">
+                <div>
+                    <img src={logo} class="logo-container" alt="Logo" />
+                </div>
                 <div className="mx-auto">
                 <div className="container-fluid">
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
