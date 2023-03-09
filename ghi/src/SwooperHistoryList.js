@@ -5,15 +5,14 @@ import { useAuthContext} from './Auth.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './SwooperHistoryList.css'
-
-
-
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 
 function SwooperHistoryList() {
   const [swoops, setSwoops] = useState([]);
   const [selectedRow, setSelectedRow] = useState(null);
   const { token } = useAuthContext();
+  const [listref] = useAutoAnimate();
 
 
   useEffect(() => {
@@ -99,10 +98,11 @@ function SwooperHistoryList() {
     <Row>
       <Col md={3} className="d-sm-block d-none" style={{ position: 'sticky', top: '0', height: '100vh', textAlign: 'left', }}>
 
+
           <Nav className="flex-column py-3" style={{ paddingLeft: "60px" }}>
             <Row>
               <NavItem>
-                <Nav.Link href="/loggedin" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <Nav.Link href="/module3-project-gamma/loggedin" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
                   <i className="bi bi-house-door-fill me-2"></i>
                   Home
                 </Nav.Link>
@@ -110,7 +110,7 @@ function SwooperHistoryList() {
             </Row>
             <Row>
               <NavItem>
-                <Nav.Link href="/profile" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <Nav.Link href="/module3-project-gamma/profile" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
                   <i className="bi bi-person-circle me-2"></i>
                   Profile
                 </Nav.Link>
@@ -118,7 +118,7 @@ function SwooperHistoryList() {
             </Row>
             <Row>
               <NavItem>
-                <Nav.Link href="/team" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <Nav.Link href="/module3-project-gamma/team" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
                   <i className="bi bi-credit-card-2-front-fill me-2"></i>
                   About us
                 </Nav.Link>
@@ -126,7 +126,7 @@ function SwooperHistoryList() {
             </Row>
             <Row>
               <NavItem>
-                <Nav.Link href="/help" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <Nav.Link href="/help" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
                   <i className="bi bi-question-circle-fill me-2"></i>
                   Help
                 </Nav.Link>
@@ -138,45 +138,50 @@ function SwooperHistoryList() {
       <Col md={6} >
         {/* Center column */}
         <Image className='pb-5'src='https://d3i4yxtzktqr9n.cloudfront.net/riders-web-v2/1460ce0fa0002866.svg' fluid/>
-        <section >
+        <section ref={listref}>
           {swoops.map((swoop) => {
             const isRowSelected = selectedRow === swoop;
             return (
               <React.Fragment key={swoop.swooper_id} >
-                <div className="my-3 border rounded-pill p-4 dog"  onClick={() => handleRowClick(swoop)}>
-                  <Row className="d-flex align-items-center justify-content-between">
-                    <Col md={3} className="text-center text-muted border-right">
-                      {swoop.trash_type}
-                    </Col>
-                    {/* <Col md={3} className="text-center border-right">
-                      {swoop.description}
-                    </Col> */}
-                    <Col md={3} className="text-center border-right">
-                      {swoop.hazards}
-                    </Col>
-                    <Col md={3} className="text-center border-right">
-                      {swoop.status === 1 ? (
-                        <Button variant="success" onClick={() => finishSwoop(swoop)}>
-                          Complete
-                        </Button>
-                      ) : (
-                        <span className="text-success">Completed</span>
-                      )}
-                    </Col>
-                  </Row>
-                </div >
-                {isRowSelected && (
-                  <div className="swoop-detail">
-                    <Row className="my-3 " >
-                      <Col md={12}>
-                        <Card className="rounded border shadow-sm">
-                          <Card.Body>
-                            <SwoopHistoryDetail id={swoop.pickup_id} />
-                          </Card.Body>
-                        </Card>
+                <div ref={listref}>
+                  <div className="my-3 border rounded-pill p-4 dog"   onClick={() => handleRowClick(swoop)}>
+                    <Row className="d-flex align-items-center justify-content-between">
+                      <Col md={3} className="text-center text-muted border-right">
+                        {swoop.trash_type}
+                      </Col>
+                      {/* <Col md={3} className="text-center border-right">
+                        {swoop.description}
+                      </Col> */}
+                      <Col md={3} className="text-center border-right">
+                        {swoop.hazards}
+                      </Col>
+                      <Col md={3} className="text-center border-right">
+                        {swoop.status === 1 ? (
+                          <Button variant="success" onClick={() => finishSwoop(swoop)}>
+                            Complete
+                          </Button>
+                        ) : (
+                          <span className="text-success">Completed</span>
+                        )}
                       </Col>
                     </Row>
+                  </div >
+                </div>
+                {isRowSelected && (
+                  <div ref={listref}>
+                    <div className="swoop-detail">
+                      <Row className="my-3 " >
+                        <Col md={12}>
+                          <Card className="rounded border shadow-sm">
+                            <Card.Body>
+                              <SwoopHistoryDetail id={swoop.pickup_id} />
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </div>
                   </div>
+
                 )}
               </React.Fragment>
             );

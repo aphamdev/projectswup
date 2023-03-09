@@ -9,6 +9,8 @@ import work from './img/work.jpg';
 import main1 from './img/main1.jpg';
 import main2 from './img/main2.jpg';
 import main3 from './img/main3.jpg';
+import './MainPageLeggedIn.css';
+
 
 function  MainPageLoggedIn() {
   const backgroundImages = [
@@ -24,6 +26,16 @@ function  MainPageLoggedIn() {
     };
     const [user, setUser] = useState([]);
     const {token} = useAuthContext();
+    const [selectedButton, setSelectedButton] = useState("sales");
+
+    const handleToggle = (selected) => {
+      setSelectedButton(selected);
+      console.log(selected)
+    };
+
+
+
+
 
     useEffect(() => {
       const fetchUserData = async () => {
@@ -72,53 +84,123 @@ return (
     }}>© 2023 SWUP Technologies Inc.</p>
     {user.is_swooper === false ? (
       <>
-      <div className="shadow-lg p-5 mb-5 bg-white"
+      <div
+        className="shadow-lg p-5 mb-5 bg-white"
         style={{
-          maxWidth: "500px",
-          marginTop: "11%",
-          marginLeft: "22.75%",
+          maxWidth: '500px',
+          marginTop: '11%',
+          marginLeft: '22.75%',
           borderRadius: '20px',
           position: 'absolute',
           top: '0',
           left: '0',
-          zIndex: '2'
-        }}>
-          <div className="card-body text-black">
+          zIndex: '2',
+        }}
+      >
+        <div className="card-body text-black">
           <div className="d-flex align-items-center mb-4">
-              <div>
+            <div>
               <h3 className="font-weight-bold mb-1">Schedule a Swoop</h3>
               <p>Schedule a convenient way for your pickup and get it done today!</p>
-              </div>
+            </div>
           </div>
-          <NavLink to="/newpickup" className="nav-link"><Button variant="dark" size="lg" block>Schedule Now</Button></NavLink>
-          </div>
+          <NavLink to="/newpickup" className="nav-link">
+            <Button variant="dark" size="lg" block>
+              Schedule Now
+            </Button>
+          </NavLink>
+        </div>
       </div>
-      <div className="shadow-lg p-5 mb-5 bg-white"
-      style={{
-          maxWidth: "500px",
-          marginTop: "11%",
-          marginLeft: "52.75%",
+      <div
+        className="shadow-lg p-5 mb-5 bg-white"
+        style={{
+          maxWidth: '500px',
+          marginTop: '11%',
+          marginLeft: '22.75%',
           borderRadius: '20px',
           position: 'absolute',
           top: '0',
           left: '0',
-          zIndex: '2'
-        }}>
-          <div className="card-body text-black">
+          zIndex: '2',
+        }}
+      >
+        <div className="card-body text-black">
           <div className="d-flex align-items-center mb-4">
-              <div>
+            <div>
               <h3 className="font-weight-bold mb-1">Join the SWUP Team</h3>
               <p>Earn money by becoming a Swooper and complete pickups.</p>
-              </div>
+            </div>
           </div>
-          <NavLink to="/swoopers/signup" className="nav-link"><Button variant="dark" size="lg" block>Sign Up Now</Button></NavLink>
-          </div>
+          <NavLink to="/swoopers/signup" className="nav-link">
+            <Button variant="dark" size="lg" block>
+              Sign Up Now
+            </Button>
+          </NavLink>
+        </div>
+      </div>
+      <div className="d-flex justify-content-center mb-5">
+        <Button onClick={handleToggle} variant="outline-dark">
+        </Button>
       </div>
       </>
 
     ) : (
       <>
-      <div className="card shadow-lg p-5 mb-5 bg-white"
+      <div class="card shadow-lg p-5 mb-5 bg-white second-div"
+        style={{
+            maxWidth: "500px",
+            marginTop: "11%",
+            marginLeft: "22.75%",
+            borderRadius: '20px',
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            zIndex: '2'
+          }}>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li>
+            <button button onClick={() => handleToggle("sales")} data-bs-toggle="button" type="button" class="btn btn-white">Get a Swoop</button>
+          </li>
+          <li>
+            <button onClick={() => handleToggle("service")} data-bs-toggle="button" type="button" class="btn btn-white">Swoops list</button>
+          </li>
+        </ul>
+        {selectedButton === "sales" && (
+          <div class="tab-pane fade show active">
+            <div className="card-body text-black">
+              <div className="d-flex align-items-center mb-4">
+                  <div>
+                  <h3 className="font-weight-bold mb-1"> Available Swoops</h3>
+                  <p>View a list of available swoops that need to get picked up today!</p>
+                  </div>
+              </div>
+              <NavLink to="/listings" className='btn btn-dark'>Get a Swoop</NavLink>
+            </div>
+          </div>
+
+        )}
+        {selectedButton === "service" && (
+            <div class="tab-pane fade show active">
+              <div className="card-body text-black">
+                <div className="d-flex align-items-center mb-4">
+                    <div>
+                      <h3 className="font-weight-bold mb-1">Current and Past Swoops</h3>
+                      <p>View your current swoops and past swoops by clicking below!</p>
+                    </div>
+                </div>
+
+                    <NavLink to="/swoopshistory" className='btn btn-dark' variant="dark" size="lg" block>Swoop History</NavLink>
+
+                </div>
+            </div>
+
+        )}
+
+
+      </div>
+
+{/* <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Swoop History</a> */}
+      {/* <div className="card shadow-lg p-5 mb-5 bg-white second-div"
         style={{
           maxWidth: "500px",
           marginTop: "11%",
@@ -139,6 +221,7 @@ return (
           <NavLink to="/listings" className="nav-link"><Button variant="dark" size="lg" block>Available Now</Button></NavLink>
           </div>
       </div>
+
       <div className="card shadow-lg p-5 mb-5 bg-white"
         style={{
           maxWidth: "500px",
@@ -159,14 +242,14 @@ return (
           </div>
           <NavLink to="/swoopshistory" className="nav-link"><Button variant="dark" size="lg" block>Swoop History</Button></NavLink>
           </div>
-      </div>
+      </div> */}
       </>
     )}
     <div>
       <ExpandingMain/>
       <Container style={{ marginTop: '50px', marginBottom: '50px'}}>
         <Row>
-          <Col md={6} className="">
+          <Col md={6} className="" style={{ marginTop: '40px'}}>
 
               <Card.Body >
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -182,7 +265,7 @@ return (
                   SWUP desires to take away that inconvenience, and help you make the world a greener place
                 </Card.Text>
               </Card.Body>
-            </Col>
+          </Col>
           <Col md={6}>
             <Image src="https://img.freepik.com/free-vector/tiny-people-reading-writing-poetry-poem-isolated-flat-vector-illustration-cartoon-characters-standing-sitting-near-open-book-ink-feather-entertainment-literature-concept_74855-13258.jpg?w=1380&t=st=1678307290~exp=1678307890~hmac=ac1896495f01b34e1fc230dfbbee9e86e282b904f7f4eee4ff8b15c69166fd92" fluid/>
           </Col>
