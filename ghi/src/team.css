@@ -109,8 +109,8 @@ ul.team-icon li a.gitlab{
 	background-color: #FC6D27;
 }
 
-ul.team-icon li a.facebook{
-	background-color: #3b5998;
+ul.team-icon li a.youtube{
+	background-color: #ff0000;
 }
 
 ul.team-icon li a.twitter{
@@ -143,4 +143,11 @@ ul.team-icon li a.twitter{
 
   .logo-container img {
     max-width: 100%; /* make the image responsive */
+  }
+
+  .card-container img {
+	width: 80px;
+	margin-left: -300px;
+	margin-left: -75%;
+	margin-top: -50px;
   }

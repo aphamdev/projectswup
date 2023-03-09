@@ -21,9 +21,10 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                     </div>
             <div class="col-sm-6 col-md-4">
-
                 <div class="team-item">
-
+                    <div className="card-container">
+                        <img src="https://cdn.discordapp.com/attachments/1058121153203417220/1083485139461476352/Untitled-2.png" alt="swup" />
+                    </div>
                       <img src="https://media.licdn.com/dms/image/D5603AQGmcGfJFeaYrg/profile-displayphoto-shrink_200_200/0/1664808696012?e=1683763200&v=beta&t=O4sHU3EbRgQ0ea8XyLHWEkm7lNVxtCPsVx6Zk5uWfPM" class="team-img" alt="pic" />
                       <h3>Christian Lee</h3>
                       <div class="team-info"><p>Co-Founder</p></div>
@@ -36,7 +37,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                           <li><a href="https://gitlab.com/chris_lee253" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://www.youtube.com/" target="_blank" rel="noreferrer" class="youtube"><i class="fa fa-youtube"></i></a></li>
 
                           <li><a href="https://www.twitter.com/" target="_blank" rel="noreferrer" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
@@ -49,6 +50,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
             <div class="col-sm-6 col-md-4">
 
                   <div class="team-item">
+                    <div className="card-container">
+                        <img src="https://cdn.discordapp.com/attachments/1058121153203417220/1083485139461476352/Untitled-2.png" alt="swup" />
+                    </div>
 
                       <img src="https://media.licdn.com/dms/image/C4E03AQH-rMrGypxpkw/profile-displayphoto-shrink_200_200/0/1646361131395?e=1683763200&v=beta&t=aCm8lIbKm4H2C9HtZbzCIK9duzGQgSNFeKu4ZbQ7Tww" class="team-img" alt="pic" />
 
@@ -66,7 +70,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                           <li><a href="https://gitlab.com/ejsamatua" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://youtube.com/clip/Ugkx9VvJKthLyiMtSGcOjoraj6Jx8NZoxLqN" target="_blank" rel="noreferrer" class="youtube"><i class="fa fa-youtube"></i></a></li>
 
                           <li><a href="https://www.twitter.com/" target="_blank" rel="noreferrer" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
@@ -78,6 +82,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
             <div class="col-sm-6 col-md-4">
 
                   <div class="team-item">
+                    <div className="card-container">
+                        <img src="https://cdn.discordapp.com/attachments/1058121153203417220/1083485139461476352/Untitled-2.png" alt="swup" />
+                    </div>
 
                       <img src="https://media.licdn.com/dms/image/C5603AQHF2ejNfRo8oQ/profile-displayphoto-shrink_200_200/0/1605582177251?e=1683763200&v=beta&t=7dtRwKivp1pJvPthNVkDEh-kbNa3Mr_9HJfoPFwz3KA" class="team-img" alt="pic" />
 
@@ -95,7 +102,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                           <li><a href="https://gitlab.com/andyhlam619" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://www.youtube.com/" target="_blank" rel="noreferrer" class="youtube"><i class="fa fa-youtube"></i></a></li>
 
                           <li><a href="https://www.twitter.com/" target="_blank" rel="noreferrer" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
@@ -107,6 +114,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
             <div class="col-sm-6 col-md-4">
 
                   <div class="team-item">
+                    <div className="card-container">
+                        <img src="https://cdn.discordapp.com/attachments/1058121153203417220/1083485139461476352/Untitled-2.png" alt="swup" />
+                    </div>
 
                       <img src="https://media.licdn.com/dms/image/C5603AQEPhIZe-Jlbmw/profile-displayphoto-shrink_200_200/0/1659547251313?e=1683763200&v=beta&t=8VA1srQxq_oJ83iYpaaoIlyBL8WgmThKKB3gqTY8bfQ" class="team-img" alt="pic" />
 
@@ -123,7 +133,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                           <li><a href="https://gitlab.com/apham.dev" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://www.youtube.com/@apdev" target="_blank" rel="noreferrer" class="youtube"><i class="fa fa-youtube"></i></a></li>
 
                           <li><a href="https://www.twitter.com/" target="_blank" rel="noreferrer" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
@@ -135,6 +145,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
             <div class="col-sm-6 col-md-4">
 
                   <div class="team-item">
+                    <div className="card-container">
+                        <img src="https://cdn.discordapp.com/attachments/1058121153203417220/1083485139461476352/Untitled-2.png" alt="swup" />
+                    </div>
 
                       <img src="https://media.licdn.com/dms/image/D5603AQFN3hngTQn1hg/profile-displayphoto-shrink_200_200/0/1676413080266?e=1683763200&v=beta&t=jpJTAq1g6GkXmbBvXz9W5H0XyAkgmO0UdEUd_SprrB0" class="team-img" alt="pic" />
 
@@ -153,7 +166,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                           <li><a href="https://gitlab.com/dynam74" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://www.youtube.com/" target="_blank" rel="noreferrer" class="youtube"><i class="fa fa-youtube"></i></a></li>
 
                           <li><a href="https://www.twitter.com/" target="_blank" rel="noreferrer" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
@@ -165,6 +178,9 @@ They worked tirelessly on the app, staying up late into the night coding and deb
             <div class="col-sm-6 col-md-4">
 
                   <div class="team-item">
+                    <div className="card-container">
+                        <img src="https://cdn.discordapp.com/attachments/1058121153203417220/1083485139461476352/Untitled-2.png" alt="swup" />
+                    </div>
 
                       <img src="https://ca.slack-edge.com/T0408JRG71B-U04N8B42P0A-13655ed5c72d-512" class="team-img" alt="pic" />
 
@@ -180,7 +196,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                           <li><a href="https://www.gitlab.com/" target="_blank" rel="noreferrer" class="gitlab"><i class="fa fa-gitlab"></i></a></li>
 
-                          <li><a href="https://www.facebook.com/" target="_blank" rel="noreferrer" class="facebook"><i class="fa fa-facebook"></i></a></li>
+                          <li><a href="https://www.youtube.com/" target="_blank" rel="noreferrer" class="youtube"><i class="fa fa-youtube"></i></a></li>
 
                           <li><a href="https://www.twitter.com/" target="_blank" rel="noreferrer" class="twitter"><i class="fa fa-twitter"></i></a></li>
 
