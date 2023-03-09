@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, Button, Container} from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'
+import { Row, Col, Card, Button, Container, Image, Nav, NavItem } from 'react-bootstrap';
 import { useAuthContext} from './Auth.js';
 import SwoopHistoryDetail from './SwoopHistoryDetail.js';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './SwooperHistoryList.css'
+
 
 
 
@@ -91,23 +95,55 @@ function SwooperHistoryList() {
  <div className="bg-white py-5">
   <Container>
     <h1 className="text-center mb-5 font-weight-bold">Your Swoops</h1>
-    <Row>
-      <Col md={2} className="d-sm-block d-none" style={{ position: 'sticky', top: '0', height: '100vh', width: '200px' }}>
-        {/* Left sidebar */}
-        <div className="p-3 bg-light border rounded">
-          <p>Left sidebar content here</p>
-        </div>
-      </Col>
-      <Col md={1}></Col>
 
-      <Col md={6} style={{ overflowY: 'auto', height: '100vh' }}>
+    <Row>
+      <Col md={3} className="d-sm-block d-none" style={{ position: 'sticky', top: '0', height: '100vh', textAlign: 'left', }}>
+
+          <Nav className="flex-column py-3" style={{ paddingLeft: "60px" }}>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/loggedin" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-house-door-fill me-2"></i>
+                  Home
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/profile" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-person-circle me-2"></i>
+                  Profile
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/team" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-credit-card-2-front-fill me-2"></i>
+                  About us
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/help" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-question-circle-fill me-2"></i>
+                  Help
+                </Nav.Link>
+              </NavItem>
+            </Row>
+          </Nav>
+
+    </Col>
+      <Col md={6} >
         {/* Center column */}
-        <section>
+        <Image className='pb-5'src='https://d3i4yxtzktqr9n.cloudfront.net/riders-web-v2/1460ce0fa0002866.svg' fluid/>
+        <section >
           {swoops.map((swoop) => {
             const isRowSelected = selectedRow === swoop;
             return (
-              <React.Fragment key={swoop.swooper_id}>
-                <div className="my-3 border rounded-pill p-4 dog" onClick={() => handleRowClick(swoop)}>
+              <React.Fragment key={swoop.swooper_id} >
+                <div className="my-3 border rounded-pill p-4 dog"  onClick={() => handleRowClick(swoop)}>
                   <Row className="d-flex align-items-center justify-content-between">
                     <Col md={3} className="text-center text-muted border-right">
                       {swoop.trash_type}
@@ -120,7 +156,7 @@ function SwooperHistoryList() {
                     </Col>
                     <Col md={3} className="text-center border-right">
                       {swoop.status === 1 ? (
-                        <Button variant="primary" onClick={() => finishSwoop(swoop)}>
+                        <Button variant="success" onClick={() => finishSwoop(swoop)}>
                           Complete
                         </Button>
                       ) : (
@@ -147,12 +183,15 @@ function SwooperHistoryList() {
           })}
         </section>
       </Col>
-
-      <Col md={1}></Col>
-      <Col md={2} className="d-md-block d-none" style={{ position: 'sticky', top: '0', height: '100vh', width: '200px' }}>
+      <Col md={3} className="d-md-block d-none" style={{ position: 'sticky', top: '0', height: '100vh' }}>
         {/* Right sidebar */}
-        <div className="p-3 bg-light border rounded">
-          <p>Right sidebar content here</p>
+        <div className="p-3">
+          <Image src='https://d3i4yxtzktqr9n.cloudfront.net/riders-web-v2/853ebe0d95a62aca.svg' fluid/>
+          <h5 className="pt-3" style={{ fontWeight: 'bold' }}>Get a Swoop in minutes</h5>
+          <p>Schedule to pick up a swoop on your browser, with the click of a button</p>
+          <NavLink className="mx-1 pt-2 nav-link" aria-current="page" to="/listings">
+            <Button variant="dark">Get a swup</Button>
+          </NavLink>
         </div>
       </Col>
     </Row>
