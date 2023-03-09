@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import logo from "./logo.png"
 
 function Services () {
     let message = `"Once upon a time, there were five random people that were working in various fields that shared a common dream: to become software engineers. \n This dream led these five individuals to HackReactor, a bootcamp that promised to turn these novices into full-fledged coders.

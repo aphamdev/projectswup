@@ -2,7 +2,6 @@ import * as Components from './components/components';
 import { useToken } from "./Auth";
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import logo from "./img/logo.png"
 
 function LogInSignUp() {
   const { login, signup } = useToken();
