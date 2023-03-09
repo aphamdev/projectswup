@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container, Row, Col, Button, Nav, Card, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card, Carousel } from 'react-bootstrap';
 import LoginInSignUp from './togglesignin'
 import main1 from './img/main1.jpg';
 import main2 from './img/main2.jpg';
@@ -66,16 +66,13 @@ function  MainPage() {
           zIndex: '2'
       }}>
       <div id="swup-ready" className="text-black">
-        <Nav className="justify-content-between mb-4">
-          <Nav.Item className='hover-highlight'>
-            <NavLink to="/login" className="nav-link font-weight-bold text-black">Schedule a Pickup</NavLink>
-          </Nav.Item>
-        <Nav.Item>
-            <NavLink to="/signup" className="nav-link font-weight-bold text-black">Become a Swooper</NavLink>
-          </Nav.Item>
-        </Nav>
         <h2 className="text-center font-weight-bold mb-4">SWUP Ready?</h2>
+        <h5 className='font-bold'>Join the SWUP Community today!</h5>
+        <br/>
+        <br/>
         <NavLink to="/signup" className="mx-1 nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal"><Button variant="dark" size="lg" block>Sign Up</Button></NavLink>
+
+
       </div>
     </div>
 

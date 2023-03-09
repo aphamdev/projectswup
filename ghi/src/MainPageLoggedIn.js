@@ -138,10 +138,6 @@ return (
           </NavLink>
         </div>
       </div>
-      <div className="d-flex justify-content-center mb-5">
-        <Button onClick={handleToggle} variant="outline-dark">
-        </Button>
-      </div>
       </>
 
     ) : (

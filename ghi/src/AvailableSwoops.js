@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { useAuthContext} from './Auth';
-import { Row, Col, Card, Button, Container } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'
+import { Row, Col, Card, Button, Container, Nav, NavItem, Image } from 'react-bootstrap';
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import available_pic from './img/work.jpg';
+import available_sidebar from './img/available_sidebar.jpg'
+import error from './img/error.jpg'
 
 function AvailableSwoops() {
 
@@ -113,14 +117,79 @@ function AvailableSwoops() {
 
 
  return (
-    <Container>
-      <h1 className="text-center mt-4 mb-4">Available Swoops</h1>
-      <div className="text-right mb-3">
-        <select value={sortBy} onChange={e => setSortBy(e.target.value)} ref={listref}>
-          <option value="weight">Sort by weight</option>
-          <option value="hazards">Sort by post number</option>
-        </select>
+  <>
+    {sortedSwoops.length === 0 ? (
+      <div>
+        <p className="errormessage" style={{ position: 'absolute', top: '40%', left: '70%', transform: 'translate(-50%, -50%)', zIndex:"2" }}>
+          There are no available Swoops to pick up,
+         check your current or past swoops&nbsp;
+          <NavLink
+            aria-current="page" to="/swoopshistory">
+            here!
+          </NavLink>
+        </p>
+        <img src={error} alt="No posts" style={{ position: 'absolute', bottom: 170, left: 0, height:"82%" }} />
       </div>
+
+    ) : (
+  <Container>
+    <h1 className="text-center mt-4 mb-4">Available Swoops</h1>
+    <Row>
+      <Col md={3} className="d-sm-block d-none" style={{ position: 'sticky', top: '0', height: '100vh', textAlign: 'left' }}>
+          <Nav className="flex-column py-3" style={{ paddingLeft: "60px" }}>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/loggedin" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-house-door-fill me-2"></i>
+                  Home
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/profile" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-person-circle me-2"></i>
+                  Profile
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/team" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-credit-card-2-front-fill me-2"></i>
+                  About us
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/help" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-question-circle-fill me-2"></i>
+                  Help
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <NavItem>
+                <Nav.Link href="/listings" className="text-black" style={{ fontSize: '1.2rem' }}>
+                  <i className="bi bi-arrow-down-circle-fill"></i>&nbsp;
+                   Filter
+                </Nav.Link>
+              </NavItem>
+            </Row>
+            <Row>
+              <div ref={listref}>
+                <select className="form-select form-select-sm" aria-label=".form-select-sm example" value={sortBy} onChange={e => setSortBy(e.target.value)} >
+                  <option value="weight">Sort by Weight</option>
+                  <option value="hazards">Sort by Post Number</option>
+                </select>
+              </div>
+            </Row>
+          </Nav>
+      </Col>
+
+      <Col md={6}>
+      <Image className='pb-5'src={available_pic} fluid/>
       <Row>
         <div ref={listref}>
         {sortedSwoops.map(swoop => (
@@ -158,7 +227,25 @@ function AvailableSwoops() {
         ))}
         </div>
       </Row>
-    </Container>
+      </Col>
+
+      <Col md={3} className="d-md-block d-none" style={{ position: 'sticky', top: '0', height: '100vh'}}>
+        {/* Right sidebar */}
+        <div className="p-2">
+          <Image src={available_sidebar} fluid />
+          <h5 className='pt-3' style={{ fontWeight: 'bold' }}>Check your Current and Past Swoops!</h5>
+          <p>Once you click accept, you can view you current swoops
+            by clicking down below!
+          </p>
+          <NavLink className="mx-1 pt-2 nav-link" aria-current='page' to='/swoopshistory'>
+            <Button variant='dark'>My Swoops</Button>
+          </NavLink>
+        </div>
+      </Col>
+    </Row>
+  </Container>
+    )
+        }</>
   );
 }
 
