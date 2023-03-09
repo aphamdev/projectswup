@@ -30,7 +30,7 @@ function  MainPage() {
                   className="d-block w-100"
                   src={image}
                   alt={`Slide ${idx}`}
-                  style={{ height: "700px", width: "100vw", objectFit: "cover"}}
+                  style={{ height: "700px", width: "100%", objectFit: "cover"}}
                 />
               </Carousel.Item>
             ))}
@@ -62,10 +62,6 @@ function  MainPage() {
             </Container>
           </div>
       </Carousel>
-
-
-
-
       <Container style={{ marginTop: '50px', marginBottom: '50px'}}>
         <Row>
           <Col>

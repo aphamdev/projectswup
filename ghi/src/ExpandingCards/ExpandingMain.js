@@ -59,7 +59,7 @@ const images = [
 return (
     <>
     <div className="pt-5 pb-5"></div>
-    <h1 style={{textAlign: "center", margin:"-37px", padding:"0px"}} className="pt-5">Explore</h1>
+    <h1 style={{textAlign: "center", margin:"-37px"}} className="pt-5">Explore</h1>
     <div className="expanding-body">
 
         <ExpandingCards data={images}/>
