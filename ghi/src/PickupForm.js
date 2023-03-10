@@ -80,13 +80,28 @@ function PickupForm(props) {
         }
     //our jsx///////////////////////////////////////////////////////////////////////////
     return (
-        <div
-        className='shadow p-5 mt-5'
+        <>
+        <img src="https://i.imgur.com/PZaNZLS.jpeg" alt="siliconValleyCore"
         style={{
-            maxWidth: "600px",
-            margin: "0 auto",
+            zIndex: '1',
+            height: "800px",
+            marginLeft: '30%',
+            top: '0',
+            left: '0',
+            position: 'absolute'
+        }}/>
+        <div
+        className='p-5 mt-5'
+        style={{
+            // background: 'white',
+            width: "800px",
             borderRadius: '15px',
-            border: '1px solid #CCCCCC'
+            // border: '1px solid #CCCCCC',
+            zIndex: '2',
+            top: '0',
+            left: '0',
+            position: 'absolute',
+            marginLeft: '5%'
         }}>
             <h1>Schedule a Pickup!</h1>
             <form onSubmit={handleSubmit} id="create-presentation-form">
@@ -134,7 +149,10 @@ function PickupForm(props) {
                         Your pick up has been scheduled!
                     </div>
                 )}
+
         </div>
+        </>
+
     )
 }
 
