@@ -137,44 +137,44 @@ function AvailableSwoops() {
     <Row>
       <Col md={3} className="d-sm-block d-none" style={{ position: 'sticky', top: '0', height: '100vh', textAlign: 'left' }}>
           <Nav className="flex-column py-3" style={{ paddingLeft: "60px" }}>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/loggedin" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/loggedin" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none', paddingBottom: '5'}}>
                   <i className="bi bi-house-door-fill me-2"></i>
                   Home
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/profile" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/profile" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-person-circle me-2"></i>
                   Profile
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/team" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/team" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-credit-card-2-front-fill me-2"></i>
                   About us
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/help" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="#" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-question-circle-fill me-2"></i>
                   Help
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2 mb-2'>
               <NavItem>
-                <Nav.Link href="/listings" className="text-black" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/listings" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-arrow-down-circle-fill"></i>&nbsp;
                    Filter
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
             <Row>

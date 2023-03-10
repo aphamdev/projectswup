@@ -100,36 +100,36 @@ function SwooperHistoryList() {
 
 
           <Nav className="flex-column py-3" style={{ paddingLeft: "60px" }}>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/module3-project-gamma/loggedin" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/loggedin" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-house-door-fill me-2"></i>
                   Home
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/module3-project-gamma/profile" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/profile" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-person-circle me-2"></i>
                   Profile
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/module3-project-gamma/team" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="/team" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-credit-card-2-front-fill me-2"></i>
                   About us
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
-            <Row>
+            <Row className='nav-link-custom py-2'>
               <NavItem>
-                <Nav.Link href="/help" className="text-black nav-link-custom" style={{ fontSize: '1.2rem' }}>
+                <NavLink to="#" className="text-black nav-link-custom" style={{ fontSize: '1.2rem', textDecoration: 'none' }}>
                   <i className="bi bi-question-circle-fill me-2"></i>
                   Help
-                </Nav.Link>
+                </NavLink>
               </NavItem>
             </Row>
           </Nav>
