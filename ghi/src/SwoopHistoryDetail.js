@@ -32,22 +32,22 @@ function SwoopHistoryDetail(id) {
             <h1 className="card-title border-0">Swoop Details</h1>
             <div className="row">
               <div className="col-md-6">
-                <p className="card-text">Trash Type: {swoop.trash_type}</p>
-                <p className="card-text">Description: {swoop.description}</p>
-                <p className="card-text">Hazards: {swoop.hazards}</p>
-                <p className="card-text">Status: {swoop.status}</p>
+                <p className="card-text"><b>Trash Type</b>: {swoop.trash_type}</p>
+
+                <p className="card-text"><b>Description</b>: {swoop.description}</p>
+                <p className="card-text"><b>Hazards</b>: {swoop.hazards}</p>
               </div>
               <div className="col-md-6">
-                <p className="card-text">Size: {swoop.size}</p>
-                <p className="card-text">Weight: {swoop.weight}</p>
+                <p className="card-text"><b>Size</b>: {swoop.size}</p>
+                <p className="card-text"><b>Weight</b>: {swoop.weight}</p>
                 <img className="card-img-top" src={swoop.picture_url} alt={swoop.description} style={{ height: "200px", width: "auto" }}/>
               </div>
             </div>
             <hr />
-            <h5 className="card-title">Customer Info</h5>
-            <p className="card-text">First Name: {swoop.first_name}</p>
-            <p className="card-text">Last Name: {swoop.last_name}</p>
-            <p className="card-text">Phone Number: {swoop.phone_number}</p>
+            <h5 className="card-title"><b>Customer Info</b></h5>
+            <p className="card-text"><b>First Name</b>: {swoop.first_name}</p>
+            <p className="card-text"><b>Last Name</b>: {swoop.last_name}</p>
+            <p className="card-text"><b>Phone Number</b>: {swoop.phone_number}</p>
           </div>
         </div>
       </div>

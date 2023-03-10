@@ -260,6 +260,17 @@ return (
                 <Card.Text style={{ fontSize: '21px' }}>
                   SWUP desires to take away that inconvenience, and help you make the world a greener place
                 </Card.Text>
+                <div className="con pt-2">
+                  <NavLink to="/team" className="nav-link">
+                    <button>
+                      <span className="circle">
+                        <span class="icon arrow"></span>
+                      </span>
+
+                      <span class="text">Learn More</span>
+                    </button>
+                  </NavLink>
+                </div>
               </Card.Body>
           </Col>
           <Col md={6}>
@@ -286,6 +297,17 @@ return (
                 <Card.Text style={{ fontSize: '21px' }}>
                   A worker, also known as a Swooper, will be able to see your posting and select it for pickup.
                 </Card.Text>
+                <div className="con pt-2">
+                  <NavLink to="/team" className="nav-link">
+                    <button>
+                      <span className="circle">
+                        <span class="icon arrow"></span>
+                      </span>
+
+                      <span class="text">Learn More</span>
+                    </button>
+                  </NavLink>
+                </div>
               </Card.Body>
 
           </Col>

@@ -1,11 +1,11 @@
 import React from 'react';
 import ExpandingCards from './ExpandingCard';
 import './MainPageLoggedIn.css';
-import swup1 from './img/swup1.jpg';
-import swup2 from './img/swup2.jpg';
-import swup3 from './img/swup3.jpg';
-import swup4 from './img/swup4.jpg';
-import swup5 from './img/swup5.jpg';
+import swup1 from './img/swup1-1.png';
+import swup2 from './img/swup2.png';
+import swup3 from './img/swup3.png';
+import swup4 from './img/swup4.png';
+import swup5 from './img/swup5.png';
 
 
 
