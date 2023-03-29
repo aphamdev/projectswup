@@ -60,7 +60,7 @@ They worked tirelessly on the app, staying up late into the night coding and deb
 
                       <div class="team-info"><p>Co-Founder</p></div>
 
-                      <p>University of San Diego 2020: BS Cognitive Science.</p>
+                      <p>University of California, San Diego 2020: BS Cognitive Science.</p>
                       <p>In his sparetime, Ezekiel enjoys catching bodies both on the dancefloor and on the Valorant battlefields.</p>
 
 

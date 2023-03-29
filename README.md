@@ -22,7 +22,7 @@ The migrations directory contains main.py, which defines an asynchronous functio
 
 ## Project Application Diagram
 
-![Swup Application Diagram](swupappdesign.png)
+![Swup Application Diagram](wireframe.png)
 
 ## Getting Started
 
@@ -67,13 +67,16 @@ Swoop-Service utilizes FastAPI that allows users to view a list of all pickups, 
 - **List of pickups** `http://localhost:3000/pickups`
     -  List view of all the pickups a customer created
 - **Detail of a pickup** `http://localhost:3000/pickups/{pickup_id}`
-    -  List view of all the pickups a customer created
+    -  List view of a pickup a customer created
 - **Create pickup** `http://localhost:3000/newpickup`
     - Allows the user to create a new pickup
 - **List of available pickups** `http://localhost:3000/listings`
     - List view of all available pickups
 - **List of Swooper History** `http://localhost:3000/swoops`
     - Gets a list of a swooper's history
+- **Detail of a Swoop** `http://localhost:3000/swoops/{pickup_id}`
+    - Gets one swoop from a swooper's history
+
 
 
 ## Swoop-Service
@@ -176,6 +179,7 @@ Returns:
     "weight": 20,
     "status": 2
   },
+]
 ```
 
 </details>
